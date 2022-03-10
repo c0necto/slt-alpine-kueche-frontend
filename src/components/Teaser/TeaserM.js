@@ -1,8 +1,7 @@
-import { Link } from "gatsby"
 import React from "react"
-import * as styles from "./Offer.module.scss"
-import Fakebutton from "~components/Button/Fakebutton"
+import { Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
+import * as styles from "./TeaserM.module.scss"
 import { artDirection } from "~utils"
 
 const Teaser = props => {
@@ -13,7 +12,7 @@ const Teaser = props => {
   )
 
   return (
-    <Link to={`${props.slug}`} className={styles.teaserOffer}>
+    <Link to={props.slug} className={styles.teaserM}>
       <figure>
         <GatsbyImage
           image={images}
@@ -21,11 +20,10 @@ const Teaser = props => {
           className={styles.image} />
       </figure>
       <div className={styles.content}>
-        <h3>{props.children}</h3>
+        <h4>{props.children}</h4>
         <div className={styles.text}>
-          ab <strong>{props.price}</strong> p.P.
+          {props.text}
         </div>
-        <Fakebutton color={'blue'} to={'/'}>Zum Angebot</Fakebutton>
       </div>
     </Link>
   )
