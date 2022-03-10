@@ -1,0 +1,4 @@
+.page-wrap {
+  margin: 0 auto;
+  @include fluid2(padding-top, $stripHeightMobile, $stripHeightDesktop);
+}

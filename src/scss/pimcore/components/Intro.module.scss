@@ -1,0 +1,12 @@
+.intro {
+  text-align: center;
+  color: $colorText;
+  p {
+    @include fluid1(font-size, 20px);
+    @include fluid1(line-height, 31px);
+    font-weight: 500;
+    &:last-child {
+      margin: 0;
+    }
+  }
+}

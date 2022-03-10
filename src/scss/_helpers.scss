@@ -1,0 +1,54 @@
+/* Basic Visibility Classes */
+
+@include everything-from(tablet) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+// SR Stuff
+// todo: implementation in html
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.sr-only-focusable {
+  &:active,
+  &:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}
+
+// Box Shadow
+
+.box-shadow {
+  box-shadow: 0 0 pxToVwMobile(30px) $colorText;
+  @include everything-from(tablet) {
+    box-shadow: 0 0 pxToVw(60px) $colorText;
+  }
+  @include everything-from(desktop) {
+    box-shadow: 0 0 60px $colorText;
+  }
+}
+
+// Text
+
+.text-right {
+  text-align: right !important;
+}
+.text-center {
+  text-align: center !important;
+}

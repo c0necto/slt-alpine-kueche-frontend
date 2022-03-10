@@ -1,0 +1,43 @@
+@import "../variables";
+@import "../mixins";
+@import "../reboot";
+@import "../typography";
+
+body {
+  @include fluid2(font-size, $font-size-base-mobile, $font-size-base);
+  @include fluid2(line-height, $line-height-base-mobile, $line-height-base);
+  font-family: $font-family-base;
+  font-weight: 400;
+  hyphens: auto;
+}
+
+::selection {
+  background: rgba($color1, 0.5);
+  color: $white;
+}
+
+// Manually import all the SCSS files
+@import "layout/Footer.module";
+@import "layout/Header.module";
+@import "layout/Language.module";
+@import "layout/Layout.module";
+@import "layout/Nav.module";
+
+@import "components/Button.module";
+@import "components/Container.module";
+@import "components/Content.module";
+@import "components/ContentArea.module";
+@import "components/Cta.module";
+@import "components/Feedback.module";
+@import "components/Gallery.module";
+@import "components/Grid.module";
+@import "components/HeaderMedia.module";
+@import "components/Headline.module";
+@import "components/Icon.module";
+@import "components/Intro.module";
+@import "components/List.module";
+@import "components/Pagination.module";
+@import "components/Quotation.module";
+@import "components/Readmore.module";
+@import "components/Slider.module";
+@import "components/TeaserL.module";

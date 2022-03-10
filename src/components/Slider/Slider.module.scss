@@ -1,0 +1,140 @@
+@import "../../global";
+
+.outer {
+  @include fluid2(margin-left, 0, -15px);
+  @include fluid2(margin-right, 0, -15px);
+  @include fluid2(margin-top, -7.5px, -15px);
+  //@include fluid2(padding-bottom, 60px, 80px);
+
+}
+
+.slide {
+  @include fluid2(padding, 7.5px, 15px);
+  @include fluid2(padding-left, $gapMobile, 15px);
+  @include fluid2(padding-right, 0, 15px);
+}
+
+
+.prev,
+.next {
+  @include fluid1(width, 40px);
+  @include fluid1(height, 40px);
+  @include fluid1(line-height, 40px);
+  @include fluid1(border-radius, 40px);
+  text-align: center;
+  background: $white;
+  appearance: none;
+  border: none;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/*.slick-slide {
+  height: 100%;
+  outline: 2px solid red;
+  & > div {
+    height: 100%;
+    outline: 5px solid orange;
+  }
+}*/
+
+.prev {
+  @include fluid1(left, -55px);
+}
+
+.arrow {
+  @include css-arrow($black, left, 9px, 2px);
+}
+
+.next {
+  left: auto !important;
+  @include fluid1(right, -55px);
+
+  .arrow {
+    @include css-arrow($black, right, 9px, 2px);
+  }
+}
+
+@include everything_from(tablet) {
+  .nojs {
+    & > div {
+      margin: 0 auto;
+      display: grid;
+    }
+  }
+  .only-one {
+    & > div {
+      max-width: 600px;
+    }
+  }
+  .only-two {
+    & > div {
+      //max-width: 600px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .only-three {
+    & > div {
+      max-width: 900px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+}
+
+@include everything_until(tablet) {
+  .only-one {
+    .slide {
+      padding-right: pxToVwMobile($gapMobile)
+    }
+  }
+}
+
+/* Dots */
+
+.outer {
+  ul {
+    margin: 0;
+    @include fluid1(margin-top, 30px);
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      @include fluid1(margin-left, 5px);
+      @include fluid1(margin-right, 5px);
+
+      button {
+        appearance: none;
+        text-indent: -9999em;
+        border: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+        background: #d1d1d1;
+        padding: 0;
+        cursor: pointer;
+        transition: background-color ease-in-out 0.33s;
+      }
+
+      &[class='slick-active'] {
+        button {
+          background: #5F5F5F;
+          cursor: default;
+        }
+      }
+    }
+  }
+}
+
+
+/* Make all slides same height */
+
+.slide {
+  height: 100%;
+  & > div { height: 100%;}
+}

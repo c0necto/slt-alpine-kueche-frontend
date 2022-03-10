@@ -1,0 +1,64 @@
+/* Events */
+
+.info-events {
+  @include everything_from(tablet) {
+    border: 1px solid #f1f1f1;
+    @include fluid1D(padding-top, 19px);
+    @include fluid1D(padding-bottom, 33px);
+    @include fluid1D(padding-left, 30px);
+    @include fluid1D(padding-right, 30px);
+  }
+  ul {
+    @include list-reset;
+    @include fluid1(margin-bottom, 15px);
+    float: left;
+  }
+  li {
+    @include fluid1(margin-bottom, 15px);
+    @include fluid1(padding-left, 25px);
+    position: relative;
+    @include fluid1(font-size, 16px);
+    @include fluid1(line-height, 25px);
+    &::before {
+      content: '';
+      @include css-arrow($colorText, right, 8px, 2.5px);
+      position: absolute;
+      @include fluid1(top, 9px);
+      left: 0;
+    }
+    b {
+      display: block;
+      font-weight: 500;
+    }
+    span {
+      font-weight: 300;
+      @include fluid1(font-size, 14px);
+    }
+  }
+  .button {
+    clear: both;
+  }
+}
+.events-content {
+  max-width: pxToVwMobile(280px);
+  margin: 0 auto;
+  @include everything_from(tablet) {
+    margin: 0;
+  }
+}
+
+/* 1 element per row */
+
+@include everything_from(desktop) {
+  .infoarea-row--1 {
+    .info-events {
+      ul {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+      }
+      li {
+        @include fluid1D(padding-right, 30px);
+      }
+    }
+  }
+}

@@ -1,0 +1,231 @@
+// Weather
+
+.weather-icon { grid-area: w-i; }
+.date-prognosis { grid-area: d-p; }
+.temperature { grid-area: temp; }
+.precipitation-wind { grid-area: p-w; }
+
+.info-weather {
+
+  text-align: center;
+  font-weight: 200;
+
+  @include everything_until(tablet) {
+    .weather-icon {
+      img {
+        height: pxToVwMobile(142px);
+        width: auto;
+        margin: 0 auto pxToVwMobile(58px);
+      }
+    }
+    .infoblock {
+      max-width: pxToVwMobile(200px);
+      margin: 0 auto;
+    }
+  }
+
+  .date-prognosis {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include fluid1(grid-gap, 10px);
+    @include fluid1(font-size, 14px);
+    @include fluid1(line-height, 25px);
+    @include fluid1(padding-bottom, 21px);
+  }
+
+  .temperature {
+    @include fluid1(font-size, 60px);
+    @include fluid1(line-height, 60px);
+    font-weight: 400;
+    sup {
+      @include fluid1(font-size, 33px);
+      @include fluid1(line-height, 60px);
+    }
+  }
+
+  .precipitation-wind {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include fluid1(grid-gap, 35px);
+    @include fluid1(font-size, 16px);
+    @include fluid1(line-height, 22px);
+    @include fluid1(padding-top, 10px);
+    @include fluid1(padding-bottom, 30px);
+    font-weight: 400;
+    text-align: left;
+    span {
+      @include fluid1(line-height, 22px);
+      @include fluid1(padding-left, 10px);
+    }
+
+  }
+  .iconfont-precipitation,
+  .iconfont-wind {
+    @include fluid1(font-size, 22px);
+    float: left;
+  }
+
+}
+
+@include everything_from(tablet) {
+
+  .info-weather {
+    background: $white;
+    border: 1px solid #F1F1F1;
+    text-align: left;
+    @include fluid1D(padding-top, 19px);
+    @include fluid1D(padding-bottom, 33px);
+    @include fluid1D(padding-left, 30px);
+    @include fluid1D(padding-right, 30px);
+    height: 100%;
+
+    .infoblock { display: contents; }
+
+    .weather-icon {
+      display: grid;
+      place-items: center;
+      //@include fluid1D(width, 270px);
+    }
+
+    .weather-content {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template:
+        'w-i d-p'
+        'w-i temp'
+        'w-i p-w'
+      ;
+    }
+
+  }
+
+}
+
+/* 1 element per row */
+
+$iconSize1rowWeather: 190px;
+$iconSize1rowTemp: 220px;
+
+@include everything_from(tablet) {
+  .infoarea-row-1 {
+
+    .weather-content {
+      .button { grid-area: w-b; }
+      grid-template-columns: pxToVw($iconSize1rowWeather) pxToVw($iconSize1rowTemp) minmax(0, 1fr) minmax(0, 1fr) auto;
+      grid-template: 'temp w-i p-w d-p w-b';
+
+    }
+    .weather-icon {
+      place-items: normal;
+      img {
+        @include fluid1D(height, 100px);
+      }
+    }
+    .temperature {
+      span {
+        @include fluid1D(height, 57px);
+      }
+    }
+    .date-prognosis,
+    .precipitation-wind {
+      display: flex;
+      padding: 0;
+      align-items: center;
+    }
+    .temperature,
+    .weather-content .button {
+      display: grid;
+       align-items: center;
+     }
+  }
+}
+
+@include everything_from(desktop) {
+  .infoarea-row-1 {
+    .weather-content {
+      grid-template-columns: $iconSize1rowWeather $iconSize1rowTemp minmax(0, 1fr) minmax(0, 1fr) auto;
+    }
+  }
+}
+
+/* 2 elements per row */
+
+$translateY2row: -5px;
+$scale2row: 1.5;
+
+@include everything_from(tablet) {
+  .infoarea-row-2 {
+    .info-weather {
+      @include fluid1D(min-height, 340px);
+      position: relative;
+    }
+    .weather-content {
+      @include fluid1D(padding-top, 15px);
+      .weather-icon {
+        @include fluid1D(width, 240px);
+        img {
+          @include fluid1D(width, 142px);
+          height: auto;
+        }
+      }
+      .date-prognosis,
+      .precipitation-wind {
+        display: flex;
+      }
+      .precipitation-wind { padding-bottom: 0; }
+      .button {
+        position: absolute;
+        @include fluid1D(left, 30px);
+        @include fluid1D(bottom, 33px);
+      }
+    }
+  }
+}
+
+/* 3 elements per row */
+
+@include everything_from(tablet) {
+  .infoarea-row-3 {
+    .info-weather {
+
+      background: yellow;
+      position: relative;
+      @include fluid1D(min-height, 350px);
+
+      .weather-content {
+        grid-template-columns: pxToVw(140px) minmax(0, 1fr);
+        grid-template:
+        'd-p d-p'
+        'temp w-i'
+        'p-w p-w'
+      ;
+        .weather-icon {
+          @include fluid1D(width, 100px);
+          place-items: normal;
+          img {
+            @include fluid1D(height, 42px);
+          }
+        }
+        .date-prognosis,
+        .precipitation-wind {
+          display: flex;
+        }
+        .button {
+          position: absolute;
+          @include fluid1D(left, 30px);
+          @include fluid1D(bottom, 33px);
+        }
+      }
+    }
+  }
+}
+@include everything_from(desktop) {
+  .infoarea-row-3 {
+    .info-weather {
+      background: orange;
+      .weather-content {
+        grid-template-columns: 140px minmax(0, 1fr);
+      }
+    }
+  }
+}

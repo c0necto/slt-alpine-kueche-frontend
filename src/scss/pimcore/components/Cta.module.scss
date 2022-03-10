@@ -1,0 +1,49 @@
+.title,
+.subtitle {
+  text-align: left;
+  span {
+    box-decoration-break: clone;
+    color: $colorText;
+    display: inline-block;
+  }
+}
+.title {
+  @include fluid2(margin-bottom, 7.5px, 15px);
+  span {
+    @include fluid2(font-size, 33px, 65px);
+    @include fluid2(line-height, 33px, 75px);
+    //@include fluid2(line-height, 45px, 88px);
+    @include fluid2(padding-top, 3px, 6px);
+    //@include fluid2(padding-bottom, 3px, 6px);
+    @include fluid2(padding-left, 8px, 12px);
+    @include fluid2(padding-right, 8px, 12px);
+    background: $white;
+    font-family: $font-family-special;
+  }
+  &.small {
+    span {
+      @include fluid2(font-size, 25px, 45px);
+      @include fluid2(line-height, 38px, 65px);
+      @include fluid2(padding-top, 3px, 6px);
+      @include fluid2(padding-bottom, 3px, 6px);
+    }
+  }
+}
+.subtitle {
+  span {
+    @include fluid2(font-size, 17px, 23px);
+    @include fluid2(line-height, 28px, 38px);
+    @include fluid1(padding-top, 5px);
+    @include fluid1(padding-bottom, 5px);
+    font-weight: 400;
+    color: $white;
+  }
+  @include everything_until(tablet) {
+    display: none;
+  }
+}
+.ctaButton {
+  float: left;
+  clear: left;
+  @include fluid2(margin-top, 7.5px, 15px);
+}

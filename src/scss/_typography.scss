@@ -1,0 +1,15 @@
+body {
+  font-family: $font-family-base;
+}
+
+.page-footer {
+  h5 {
+    @include fluid2(font-size, 16px, 20px);
+    @include fluid2(line-height, 19px, 23px);
+    @include fluid2(margin-bottom, 20px, 30px);
+  }
+}
+
+.textCenter {
+  text-align: center;
+}

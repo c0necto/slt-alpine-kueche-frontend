@@ -1,0 +1,106 @@
+.btn {
+  @include fluid1(font-size, 17px);
+  @include fluid1(line-height, 32px);
+  @include fluid1(padding-left, 20px);
+  @include fluid1(padding-right, 20px);
+  @include fluid1(padding-top, 3px);
+  @include fluid1(padding-bottom, 3px);
+  font-weight: 400;
+  background: transparent;
+  border: 1px solid $white;
+  color: $white;
+  cursor: pointer;
+  display: inline-block;
+
+  position: relative;
+  &:after {
+    content: '';
+    height: 1px;
+    position: absolute;
+    bottom: -1px;
+    left: -1px;
+    width: calc(100% + 2px);
+    background: $white;
+    transition: transform linear .44s;
+    transform: scale(0);
+    transform-origin: left;
+  }
+  &:hover {
+    &:after {
+      transform: scale(1);
+      transition: all linear .82s;
+    }
+  }
+}
+
+.arrowRight {
+  @include css-arrow($white, right, 8px, 2.5px);
+  @include fluid1(margin-right, 9.5px);
+  @include everything_until(tablet) {
+    transform: translateY(pxToVwMobile(-1px)) rotate(45deg);
+  }
+}
+
+.grey {
+  border-color: rgba(157,157,156,0.5);
+  color: $colorText;
+  .arrowRight {
+    border-color: $colorText;
+  }
+}
+
+.grey-inverted-arrow {
+  border-color: rgba(157,157,156,0.5);
+  color: $colorText;
+  font-weight: 500;
+  @include fluid1(font-size, 18px);
+  @include fluid1(padding-top, 4px);
+  @include fluid1(padding-bottom, 4px);
+  .arrowRight {
+    border-color: $colorText;
+    @include fluid1(margin-right, 5px);
+    @include css-arrow($colorText, left, 9px, 2.5px);
+    transform: translateY(pxToVwMobile(-1px)) rotate(-135deg);
+    @include everything_from(tablet) {
+      transform: translateY(pxToVw(-1px)) rotate(-135deg);
+    }
+    @include everything_from(desktop) {
+      transform: translateY(-1px) rotate(-135deg);
+    }
+  }
+  &:after {
+    background: $color1;
+  }
+}
+
+.red {
+  background: $color1;
+  border-color: $color1;
+}
+.green {
+  background: $color1;
+  border-color: $color1;
+}
+
+.blue {
+  background: $color1;
+  border-color: $color1;
+  color: $white;
+  .arrow-white {
+    border-color: $white;
+  }
+}
+
+.white {
+  background: $white;
+  color: $colorText;
+  .arrowRight {
+    border-color: $colorText;
+  }
+}
+
+.block {
+  display: block;
+  text-align: center;
+}
+

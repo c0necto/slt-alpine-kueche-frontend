@@ -1,0 +1,71 @@
+// Imagelink
+
+.info-element {
+  .info-element--imagelink {
+    display: block;
+    text-align: center;
+  }
+}
+.imagelink--image {
+  // 375x281 mobile
+  @include filled-container(74.93333%);
+  display: block;
+  @include everything_from(tablet) {
+    padding-bottom: 0;
+    height: 100%;
+    @include fluid1D(min-height, 277px);
+  }
+  img {
+    @include filled-content;
+  }
+  &::after {
+    @include pseudo(block, absolute);
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba($black, 0.4);
+    //z-index: 1;
+  }
+}
+.icon-name {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  text-align: center;
+  color: $white;
+  z-index: 1;
+  i {
+    @include fluid1(font-size, 30px);
+  }
+  span[class^=iconfont] {
+  }
+  .name {
+    text-transform: uppercase;
+    @include fluid1(font-size, 18px);
+    @include fluid1(line-height, 29px);
+  }
+}
+.imagelink--icon {
+  margin: 0 auto;
+  @include fluid1(width, 56px);
+  @include fluid1(height, 56px);
+  @include fluid1(border-radius, 56px);
+  @include fluid1(margin-bottom, 5px);
+  background: $colorYellow;
+  display: grid;
+  place-items: center;
+}
+.text-button {
+  padding-top: pxToVwMobile(30px);
+  padding-left: pxToVwMobile(48px);
+  padding-right: pxToVwMobile(48px);
+  p {
+    font-size: pxToVwMobile(16px);
+    line-height: pxToVwMobile(25px);
+  }
+  a.btn {
+    margin-top: pxToVwMobile(15px);
+  }
+}

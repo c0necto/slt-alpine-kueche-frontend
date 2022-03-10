@@ -1,0 +1,509 @@
+@use "sass:math";
+
+@mixin pseudo($display: block, $pos: absolute, $content: "") {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+@mixin responsive-ratio($x, $y, $pseudo: false) {
+  // todo: check for correct implementation of division
+  //$padding: unquote(math.div($y, $x) * 100 + "%");
+  $padding: unquote($y / $x * 100 + "%");
+
+  @if $pseudo {
+    &:before {
+      @include pseudo($pos: relative);
+      width: 100%;
+      padding-top: $padding;
+    }
+  } @else {
+    padding-top: $padding;
+  }
+}
+
+@mixin css-triangle(
+  $color,
+  $direction,
+  $size: 6px,
+  $position: absolute,
+  $round: false
+) {
+  @include pseudo($pos: $position);
+  width: 0;
+  height: 0;
+  @if $round {
+    border-radius: 3px;
+  }
+  @if $direction == down {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+    // todo: check for correct implementation of division
+    //margin-top: 0 - round(math.div($size, 2.5));
+    margin-top: 0 - round($size / 2.5);
+  } @else if $direction == up {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+    // todo: check for correct implementation of division
+    //margin-bottom: 0 - round(math.div($size, 2.5));
+    margin-bottom: 0 - round($size / 2.5);
+  } @else if $direction == right {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+    margin-right: -$size;
+  } @else if $direction == left {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+    margin-left: -$size;
+  }
+}
+
+@mixin css-arrow($color, $direction, $size: 20px, $borderWidth: 4px) {
+  display: inline-block;
+  @include fluid1(width, $size);
+  @include fluid1(height, $size);
+  @include fluid1(border-top-width, $borderWidth);
+  @include fluid1(border-right-width, $borderWidth);
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-style: solid;
+  border-color: $color;
+  @if $direction == left {
+    transform: rotate(-135deg);
+  }
+  @if $direction == right {
+    transform: rotate(45deg);
+  }
+  @if $direction == up {
+    transform: rotate(-45deg);
+  }
+  @if $direction == down {
+    transform: rotate(135deg);
+  }
+}
+
+@mixin css-arrow2(
+  $color,
+  $direction,
+  $size: 20px,
+  $size2: 20px,
+  $borderWidth: 4px,
+  $borderWidth2: 4px
+) {
+  display: inline-block;
+  @include fluid2(width, $size, $size2);
+  @include fluid2(height, $size, $size2);
+  @include fluid2(border-top-width, $borderWidth, $borderWidth2);
+  @include fluid2(border-right-width, $borderWidth, $borderWidth2);
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-style: solid;
+  border-color: $color;
+  @if $direction == left {
+    transform: rotate(-135deg);
+  }
+  @if $direction == right {
+    transform: rotate(45deg);
+  }
+  @if $direction == up {
+    transform: rotate(-45deg);
+  }
+  @if $direction == down {
+    transform: rotate(135deg);
+  }
+}
+
+/* Breakpoints */
+
+@function breakpoint-next(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map-keys($breakpoints)
+) {
+  $n: index($breakpoint-names, $name);
+  @return if(
+    $n != null and $n < length($breakpoint-names),
+    nth($breakpoint-names, $n + 1),
+    null
+  );
+}
+
+@function breakpoint-same(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map-keys($breakpoints)
+) {
+  $n: index($breakpoint-names, $name);
+  @return if(
+    $n != null and $n < length($breakpoint-names),
+    nth($breakpoint-names, $n),
+    null
+  );
+}
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+  @return if($next, breakpoint-min($next, $breakpoints) - 0.02, null);
+}
+
+@function breakpoint-max-same($name, $breakpoints: $grid-breakpoints) {
+  $next: breakpoint-same($name, $breakpoints);
+  @return if($next, breakpoint-min($next, $breakpoints) - 0.02, null);
+}
+
+/* Everything from (up from/including breakpoint) */
+
+@mixin everything_from($name, $breakpoints: $speaking-grid) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+/* Everything from (until/excluding breakpoint) */
+
+@mixin everything_until($name, $breakpoints: $speaking-grid) {
+  $max: breakpoint-max-same($name, $breakpoints);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+/* Everything between */
+
+@mixin everything_between($lower, $upper, $breakpoints: $speaking-grid) {
+  $min: breakpoint-min($lower, $breakpoints);
+  $max: breakpoint-max-same($upper, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include everything_from($lower, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include everything_until($upper, $breakpoints) {
+      @content;
+    }
+  }
+}
+
+/* Only */
+
+@mixin only($name, $breakpoints: $speaking-grid) {
+  $min: breakpoint-min($name, $breakpoints);
+  $max: breakpoint-max($name, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include everything_until($name, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include everything_until($name, $breakpoints) {
+      @content;
+    }
+  }
+}
+
+/* Units Stripping */
+
+@function strip-unit($value) {
+  // todo: check for correct implementation of division
+  //@return math.div($value, $value * 0 + 1);
+  @return ($value / ($value * 0 + 1));
+}
+
+/* to Vw - Mobile (375px) */
+
+@function pxToVwMobile($value) {
+  // todo: check for correct implementation of division
+  //@return math.div(strip-unit($value) * 100, strip-unit(375)) + vw;
+  @return ((strip-unit($value) * 100) / (strip-unit(375))) + vw;
+}
+@function pxToVwMobileStripped($value) {
+  // todo: check for correct implementation of division
+  @return strip-unit($value) * 100 / strip-unit(375);
+}
+
+/* To Vw - Tablet to Desktop (768px - 1169px) */
+
+@function pxToVw($value) {
+  //@return math.div(strip-unit($value) * 100, strip-unit($maxWidthDesktop)) + vw;
+  // todo: check for correct implementation of division
+  //@return math.div(strip-unit($value) * 100, strip-unit($maxWidthDesktop)) + vw;
+  @return ((strip-unit($value) * 100) / (strip-unit($maxWidthDesktop))) + vw;
+  //@return strip-unit($value) * 100, strip-unit($maxWidthDesktop) + vw;
+}
+
+/* Fluidity Mixins */
+
+/* fluidOne - one value - mobile vw, tablet px, desktop px */
+@mixin fluid1($property, $value) {
+  // mobile
+  #{$property}: pxToVwMobile($value);
+  // tablet and up
+  @include everything_from(tablet) {
+    #{$property}: pxToVw($value);
+  }
+  // desktop and up
+  @include everything_from(desktop) {
+    #{$property}: $value;
+  }
+}
+
+/* fluidOneDesktop - two values - tablet px, desktop px */
+@mixin fluid1D($property, $value) {
+  // tablet
+  #{$property}: pxToVw($value);
+  // desktop and up
+  @include everything_from(desktop) {
+    #{$property}: $value;
+  }
+}
+
+/* fluidTwo - two values - mobile vw, tablet px, desktop px */
+@mixin fluid2($property, $mobileValue, $upperValue) {
+  // mobile
+  #{$property}: pxToVwMobile($mobileValue);
+  // tablet
+  @include everything_from(tablet) {
+    #{$property}: pxToVw($upperValue);
+  }
+  // desktop and up
+  @include everything_from(desktop) {
+    #{$property}: $upperValue;
+  }
+}
+
+/* fluidThree - 3 values - mobile vw, tablet vw, desktop px */
+@mixin fluid3($property, $mobileValue, $tabletValue, $desktopValue) {
+  // mobile
+  #{$property}: pxToVwMobile($mobileValue);
+  // tablet
+  @include everything_from(tablet) {
+    #{$property}: pxToVw($tabletValue);
+  }
+  // desktop and up
+  @include everything_from(desktop) {
+    #{$property}: $desktopValue;
+  }
+}
+
+/* iPad Media Query */
+@mixin ipad($orientation) {
+  @supports (-webkit-touch-callout: none) {
+    @include everything_from(tablet) {
+      @if $orientation == landscape {
+        @media (orientation: landscape) {
+          @content;
+        }
+      } @else if $orientation == portrait {
+        @media (orientation: portrait) {
+          @content;
+        }
+      } @else if $orientation == both {
+        @content;
+      }
+    }
+  }
+
+}
+
+/* List Reset */
+
+@mixin list-reset {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+/* Icons */
+
+@mixin generateIconSet($icon-list) {
+  @for $i from 1 through length($icon-list) {
+    $icon-name: nth($icon-list, $i);
+    .icon.icon--#{$icon-name} {
+      background-image: svg-load("#{$icon-path}#{$icon-name}.svg");
+    }
+  }
+}
+
+@mixin generateIconSetColorVariants($icon-list, $color, $color-class) {
+  @for $i from 1 through length($icon-list) {
+    $icon-name: nth($icon-list, $i);
+
+    .icon.icon-color--#{$color-class}.icon--#{$icon-name} {
+      background-image: svg-load("#{$icon-path}#{$icon-name}.svg", fill=$color);
+    }
+  }
+}
+
+@mixin setIcon($icon-name, $color, $size: 1em) {
+  display: inline-block;
+  vertical-align: middle;
+  width: $size;
+  height: $size;
+  line-height: $size;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  background-image: svg-load("#{$icon-name}.svg", fill=$color);
+}
+
+@mixin updateIcon($icon-name, $color) {
+  background-image: svg-load("#{$icon-name}.svg", fill=$color);
+}
+
+@mixin getIcon($icon-name, $color) {
+  $icon-name: #{$icon-path}#{$icon-name};
+
+  @include updateIcon($icon-name, $color);
+}
+
+/* Filled */
+
+@mixin filled-container($percentage) {
+  width: 100%;
+  height: 0;
+  padding-bottom: $percentage;
+  position: relative;
+}
+
+@mixin filled-content() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  object-fit: cover;
+}
+
+@mixin gradient($heightMobile, $heightDesktop) {
+  &:before {
+    content: '';
+    width: 100%;
+    height: $heightMobile;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, $black 100%);
+    opacity: 0.6;
+    //max-height: 250px;
+    @include everything_from(tablet) {
+      height: $heightDesktop;
+    }
+
+  }
+}
+
+
+// _decimal.scss | MIT License | gist.github.com/terkel/4373420
+
+// Round a number to specified digits.
+//
+// @param  {Number} $number A number to round
+// @param  {Number} [$digits:0] Digits to output
+// @param  {String} [$mode:round] (round|ceil|floor) How to round a number
+// @return {Number} A rounded number
+// @example
+//     decimal-round(0.333)    => 0
+//     decimal-round(0.333, 1) => 0.3
+//     decimal-round(0.333, 2) => 0.33
+//     decimal-round(0.666)    => 1
+//     decimal-round(0.666, 1) => 0.7
+//     decimal-round(0.666, 2) => 0.67
+//
+@function decimal-round($number, $digits: 0, $mode: round) {
+  $n: 1;
+  // $number must be a number
+  @if type-of($number) != number {
+    @warn '#{ $number } is not a number.';
+    @return $number;
+  }
+  // $digits must be a unitless number
+  @if type-of($digits) != number {
+    @warn '#{ $digits } is not a number.';
+    @return $number;
+  } @else if not unitless($digits) {
+    @warn '#{ $digits } has a unit.';
+    @return $number;
+  }
+  @for $i from 1 through $digits {
+    $n: $n * 10;
+  }
+  @if $mode == round {
+    // todo: check for correct implementation of division
+    //@return math.div(round($number * $n), $n);
+    @return round($number * $n) / $n;
+  } @else if $mode == ceil {
+    // todo: check for correct implementation of division
+    // @return math.div(ceil($number * $n), $n);
+    @return ceil($number * $n) / $n;
+  } @else if $mode == floor {
+    // todo: check for correct implementation of division
+    //@return math.div(floor($number * $n), $n);
+    @return floor($number * $n) / $n;
+  } @else {
+    @warn '#{ $mode } is undefined keyword.';
+    @return $number;
+  }
+}
+
+// Ceil a number to specified digits.
+//
+// @param  {Number} $number A number to round
+// @param  {Number} [$digits:0] Digits to output
+// @return {Number} A ceiled number
+// @example
+//     decimal-ceil(0.333)    => 1
+//     decimal-ceil(0.333, 1) => 0.4
+//     decimal-ceil(0.333, 2) => 0.34
+//     decimal-ceil(0.666)    => 1
+//     decimal-ceil(0.666, 1) => 0.7
+//     decimal-ceil(0.666, 2) => 0.67
+//
+@function decimal-ceil($number, $digits: 0) {
+  @return decimal-round($number, $digits, ceil);
+}
+
+// Floor a number to specified digits.
+//
+// @param  {Number} $number A number to round
+// @param  {Number} [$digits:0] Digits to output
+// @return {Number} A floored number
+// @example
+//     decimal-floor(0.333)    => 0
+//     decimal-floor(0.333, 1) => 0.3
+//     decimal-floor(0.333, 2) => 0.33
+//     decimal-floor(0.666)    => 0
+//     decimal-floor(0.666, 1) => 0.6
+//     decimal-floor(0.666, 2) => 0.66
+//
+@function decimal-floor($number, $digits: 0) {
+  @return decimal-round($number, $digits, floor);
+}

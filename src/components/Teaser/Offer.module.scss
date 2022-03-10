@@ -1,0 +1,44 @@
+@import "src/global";
+
+/* Teaser S */
+
+.teaser-offer {
+  background: $white;
+  color: $colorText;
+  //margin-top: pxToVwMobile(15px);
+  display: block;
+
+  /*@include everything_from(tablet) {
+    margin-top: 0;
+  }*/
+  .content {
+    @include fluid1(padding, 30px);
+  }
+  h3 {
+    @include fluid2(font-size, 19px, 20px);
+    @include fluid2(line-height, 21px, 23px);
+    @include fluid2(margin-bottom, 15px, 15px);
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .text {
+    @include fluid2(font-size, 16px, 16px);
+    @include fluid2(line-height, 22px, 25px);
+    @include fluid1(margin-bottom, 15px);
+    font-weight: 300;
+  }
+
+  $imageWidth: 270;
+  $imageHeight: 202;
+  $ratio: ($imageHeight*100)/$imageWidth * 1%;
+  @include everything_until(tablet) {
+    .image {
+      @include filled-container($ratio);
+      & > * {
+        @include filled-content;
+      }
+    }
+  }
+
+}

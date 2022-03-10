@@ -1,0 +1,56 @@
+/* Buttons */
+
+.btn {
+  @include fluid1(font-size, 15px);
+  @include fluid1(line-height, 30px);
+  @include fluid1(padding-left, 20px);
+  @include fluid1(padding-right, 20px);
+  @include fluid1(padding-top, 4px);
+  @include fluid1(padding-bottom, 4px);
+  text-transform: uppercase;
+  font-weight: 400;
+  background: transparent;
+  border: 1px solid $white;
+  color: $white;
+  cursor: pointer;
+  display: inline-block;
+
+  .arrow-right {
+    @include css-arrow($white, right, 9px, 2.5px);
+    @include fluid1(margin-right, 6px);
+    @include everything_until(tablet) {
+      transform: translateY(pxToVwMobile(-1px)) rotate(45deg);
+    }
+  }
+
+  &.btn--grey {
+    border-color: rgba(157,157,156,0.5);
+    color: $colorText;
+    .arrow-right {
+      border-color: $colorText;
+    }
+  }
+
+  &.btn--green {
+    background: $colorGreen;
+    border-color: $colorGreen;
+  }
+
+  &.btn--blue {
+    background: $colorBlue;
+    border-color: $colorBlue;
+    color: $white;
+    .arrow-white {
+      border-color: $white;
+    }
+  }
+
+  &.btn--white {
+    background: $white;
+    color: $colorText;
+    .arrow-right {
+      border-color: $colorText;
+    }
+  }
+
+}

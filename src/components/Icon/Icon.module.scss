@@ -1,0 +1,357 @@
+/* Standard Icons */
+
+$iconfont-check: "\e934";
+$iconfont-euro: "\e933";
+$iconfont-filter: "\e92d";
+$iconfont-list: "\e92e";
+$iconfont-sort-alpha-asc: "\e92f";
+$iconfont-sort-alpha-desc: "\e930";
+$iconfont-tiles_large: "\e931";
+$iconfont-tiles: "\e932";
+$iconfont-story1: "\e92c";
+$iconfont-eislaufen: "\e920";
+$iconfont-kinderski: "\e921";
+$iconfont-langlaufen: "\e922";
+$iconfont-pferdeschlitten: "\e923";
+$iconfont-rodeln: "\e924";
+$iconfont-schlepplift: "\e925";
+$iconfont-schneeschuhwandern: "\e926";
+$iconfont-seilbahn: "\e927";
+$iconfont-sessellift: "\e928";
+$iconfont-skifahren: "\e929";
+$iconfont-snowboarden: "\e92a";
+$iconfont-winterwandern: "\e92b";
+$iconfont-precipitation: "\e91e";
+$iconfont-wind: "\e91f";
+$iconfont-suche: "\e917";
+$iconfont-instagram: "\e904";
+$iconfont-alpine_safety: "\e900";
+$iconfont-arrow_back: "\e901";
+$iconfont-arrow_down: "\e902";
+$iconfont-arrow_menu: "\e903";
+$iconfont-date: "\e905";
+$iconfont-events: "\e906";
+$iconfont-expand: "\e907";
+$iconfont-facebook: "\e908";
+$iconfont-feather: "\e909";
+$iconfont-gallery: "\e90a";
+$iconfont-language: "\e90b";
+$iconfont-list_item: "\e90c";
+$iconfont-livecam: "\e90d";
+$iconfont-mail: "\e90e";
+$iconfont-phone: "\e90f";
+$iconfont-play: "\e910";
+$iconfont-quote: "\e911";
+$iconfont-regionen: "\e912";
+$iconfont-search_suggestion: "\e913";
+$iconfont-seen: "\e914";
+$iconfont-shop: "\e915";
+$iconfont-story: "\e916";
+$iconfont-twitter: "\e918";
+$iconfont-unterkunft: "\e919";
+$iconfont-voice: "\e91a";
+$iconfont-weather: "\e91b";
+$iconfont-winter: "\e91c";
+$iconfont-youtube: "\e91d";
+
+$icomoon-font-family: "iconfont" !default;
+
+@font-face {
+  font-family: "#{$icomoon-font-family}";
+  src: url("#{$icomoon-font-family}.woff?a9ohi6") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.icon {
+  font-family: "#{$icomoon-font-family}" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.precipitation {
+  &:before {
+    content: $iconfont-precipitation;
+  }
+}
+.wind {
+  &:before {
+    content: $iconfont-wind;
+  }
+}
+.search {
+  &:before {
+    content: $iconfont-suche;
+  }
+}
+.instagram {
+  &:before {
+    content: $iconfont-instagram;
+  }
+}
+.safety {
+  &:before {
+    content: $iconfont-alpine_safety;
+  }
+}
+.arrowback {
+  &:before {
+    content: $iconfont-arrow_back;
+  }
+}
+.arrowdown {
+  &:before {
+    content: $iconfont-arrow_down;
+  }
+}
+.arrowmenu {
+  &:before {
+    content: $iconfont-arrow_menu;
+  }
+}
+.date {
+  &:before {
+    content: $iconfont-date;
+  }
+}
+.events {
+  &:before {
+    content: $iconfont-events;
+  }
+}
+.expand {
+  &:before {
+    content: $iconfont-expand;
+  }
+}
+.facebook {
+  &:before {
+    content: $iconfont-facebook;
+  }
+}
+.feather {
+  &:before {
+    content: $iconfont-feather;
+  }
+}
+.gallery {
+  &:before {
+    content: $iconfont-gallery;
+  }
+}
+.language {
+  &:before {
+    content: $iconfont-language;
+  }
+}
+.listitem {
+  &:before {
+    content: $iconfont-list_item;
+  }
+}
+.livecam {
+  &:before {
+    content: $iconfont-livecam;
+  }
+}
+.mail {
+  &:before {
+    content: $iconfont-mail;
+  }
+}
+.phone {
+  &:before {
+    content: $iconfont-phone;
+  }
+}
+.play {
+  &:before {
+    content: $iconfont-play;
+  }
+}
+.quote {
+  &:before {
+    content: $iconfont-quote;
+  }
+}
+.regions {
+  &:before {
+    content: $iconfont-regionen;
+  }
+}
+.suggestion {
+  &:before {
+    content: $iconfont-search_suggestion;
+  }
+}
+.lakes {
+  &:before {
+    content: $iconfont-seen;
+  }
+}
+.shop {
+  &:before {
+    content: $iconfont-shop;
+  }
+}
+.story {
+  &:before {
+    content: $iconfont-story;
+  }
+}
+.twitter {
+  &:before {
+    content: $iconfont-twitter;
+  }
+}
+.accomodation {
+  &:before {
+    content: $iconfont-unterkunft;
+  }
+}
+.voice {
+  &:before {
+    content: $iconfont-voice;
+  }
+}
+.weather {
+  &:before {
+    content: $iconfont-weather;
+  }
+}
+.winter {
+  &:before {
+    content: $iconfont-winter;
+  }
+}
+.youtube {
+  &:before {
+    content: $iconfont-youtube;
+  }
+}
+
+/* Skiatlas-Details */
+
+.eislaufen {
+  &:before {
+    content: $iconfont-eislaufen;
+    color: #939598;
+  }
+}
+.kinderski {
+  &:before {
+    content: $iconfont-kinderski;
+    color: #939598;
+  }
+}
+.langlaufen {
+  &:before {
+    content: $iconfont-langlaufen;
+    color: #939598;
+  }
+}
+.pferdeschlitten {
+  &:before {
+    content: $iconfont-pferdeschlitten;
+    color: #939598;
+  }
+}
+.rodeln {
+  &:before {
+    content: $iconfont-rodeln;
+    color: #939598;
+  }
+}
+.schlepplift {
+  &:before {
+    content: $iconfont-schlepplift;
+    color: #939598;
+  }
+}
+.schneeschuhwandern {
+  &:before {
+    content: $iconfont-schneeschuhwandern;
+    color: #939598;
+  }
+}
+.seilbahn {
+  &:before {
+    content: $iconfont-seilbahn;
+    color: #939598;
+  }
+}
+.sessellift {
+  &:before {
+    content: $iconfont-sessellift;
+    color: #939598;
+  }
+}
+.skifahren {
+  &:before {
+    content: $iconfont-skifahren;
+    color: #939598;
+  }
+}
+.snowboarden {
+  &:before {
+    content: $iconfont-snowboarden;
+    color: #939598;
+  }
+}
+.winterwandern {
+  &:before {
+    content: $iconfont-winterwandern;
+    color: #939598;
+  }
+}
+
+/* Filter Stuff */
+
+.filter {
+  &:before {
+    content: $iconfont-filter;
+  }
+}
+.list {
+  &:before {
+    content: $iconfont-list;
+  }
+}
+.sortasc {
+  &:before {
+    content: $iconfont-sort-alpha-asc;
+  }
+}
+.sortdesc {
+  &:before {
+    content: $iconfont-sort-alpha-desc;
+  }
+}
+.tiles {
+  &:before {
+    content: $iconfont-tiles;
+  }
+}
+.largetiles {
+  &:before {
+    content: $iconfont-tiles_large;
+  }
+}
+.euro {
+  &:before {
+    content: $iconfont-euro;
+    color: #5f5f5f;
+  }
+}
+.check {
+  &:before {
+    content: $iconfont-check;
+  }
+}

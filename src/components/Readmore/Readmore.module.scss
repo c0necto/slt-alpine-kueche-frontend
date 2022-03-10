@@ -1,0 +1,76 @@
+@import "src/global";
+
+.read-more { content: ''; }
+.button-container {
+  text-align: center;
+  @include fluid2(margin-bottom, 30px, 60px);
+}
+
+.readmore-button {
+  appearance: none;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  @include fluid1(line-height, 40px);
+  background: $white;
+  color: $colorText;
+  @include fluid1(padding-left, 20px);
+  @include fluid1(padding-right, 20px);
+  text-transform: uppercase;
+  @include fluid1(font-size, 15px);
+  position: relative;
+  span {
+    &.less { display: none; }
+    @include fluid1(padding-left, 18px);
+  }
+}
+
+.button-arrow {
+  @include css-arrow($colorText, down, 10px, 2px);
+  @include fluid1(margin-right, 6px);
+  position: absolute;
+  @include fluid1(left, 20px);
+  @include fluid1(top, 14px);
+  transform:  translateY(0) rotate(135deg);
+  transition: transform ease-in-out .33s;
+}
+
+.readmore-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+}
+.readmore-content-container {
+  opacity: 0;
+  transform: translateY(-10%);
+  transition: .2s ease;
+  transition-delay: 0s;
+  /*@include fluid2(padding-top, 30px, 60px);*/
+}
+
+$translateY: 4px;
+.readmore-active {
+  .button-arrow {
+    transform: translateY(pxToVwMobile($translateY)) rotate(-45deg);
+    @include everything_from(tablet) {
+      transform: translateY(pxToVw($translateY)) rotate(-45deg);
+    }
+    @include everything_from(desktop) {
+      transform: translateY($translateY) rotate(-45deg);
+    }
+  }
+  span {
+    &.more { display: none; }
+    &.less { display: inline; }
+  }
+  .readmore-content {
+    max-height: 999em;
+    transition: max-height 1s ease-in-out;
+  }
+  .readmore-content-container {
+    opacity: 1;
+    transform: translateY(0);
+    transition: .4s ease;
+    transition-delay: .45s;
+  }
+}

@@ -1,0 +1,76 @@
+.headline {
+
+  h1, h2 {
+    position: relative;
+    @include fluid2(padding-bottom, 20px, 30px);
+    font-family: $font-family-special;
+    text-align: center;
+    color: $color1;
+    span {
+      display: block;
+    }
+    .large {
+      @include fluid2(font-size, 33px, 65px);
+      @include fluid2(line-height, 35px, 75px);
+      font-weight: 400;
+    }
+    .small {
+      @include fluid2(margin-top, 15px, 15px);
+      @include fluid2(font-size, 17px, 23px);
+      @include fluid2(line-height, 20px, 27px);
+      font-family: $font-family-base;
+      font-weight: 400;
+      font-style: italic;
+      color: $colorText;
+    }
+    &:after {
+      @include pseudo(block, absolute);
+      @include fluid2(width, 170px, 390px);
+      height: 1px;
+      background: #d1d1d1;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+
+  &.uppercase {
+    .large {
+      text-transform: uppercase;
+    }
+  }
+
+  h3 {
+    font-weight: 100;
+    @include fluid2(font-size, 25px, 30px);
+    @include fluid2(line-height, 28px, 45px);
+    font-family: $font-family-special;
+    color: $color1;
+  }
+
+
+  &.large {
+    h3 {
+      @include fluid2(font-size, 25px, 30px);
+      @include fluid2(line-height, 28px, 45px);
+      font-weight: 200;
+    }
+  }
+
+  h4 {
+    font-weight: 400;
+    @include fluid2(font-size, 23px, 25px);
+    @include fluid2(line-height, 26px, 37px);
+    font-family: $font-family-special;
+    color: $color1;
+
+  }
+
+
+}
+
+
+.centered {
+  text-align: center;
+}

@@ -1,0 +1,167 @@
+.info-booking {
+
+  @include everything_from(tablet) {
+    background: #f1f1f1;
+    @include fluid1D(padding-top, 19px);
+    @include fluid1D(padding-bottom, 33px);
+    @include fluid1D(padding-left, 30px);
+    @include fluid1D(padding-right, 30px);
+    height: 100%;
+    .button {
+      text-align: right;
+    }
+  }
+
+  .date {
+    position: relative;
+    label {
+      @include fluid1(font-size, 12px);
+      @include fluid1(line-height, 12px);
+      @include fluid1(margin-bottom, 3px);
+    }
+    input {
+      display: block;
+      appearance: none;
+      border: none;
+      border-bottom: 1px solid #5f5f5f;
+      @include fluid1(font-size, 16px);
+      @include fluid1(line-height, 40px);
+      @include fluid1(padding-left, 10px);
+      @include fluid1(padding-right, 10px);
+      color: $colorText;
+      background: none;
+      width: 100%;
+      &:focus { outline: none; }
+    }
+    label.iconfont-date {
+      display: block;
+      @include fluid1(font-size, 32px);
+      position: absolute;
+      @include fluid1(right, 11px);
+      @include fluid1(bottom, 12px);
+      margin: 0;
+      @include fluid1(width, 21.43px);
+      @include fluid1(height, 17.4px);
+      @include fluid1(line-height, 17.4px);
+      &:before {
+        position: absolute;
+        top: 0;
+        @include fluid1(top, 1px);
+        @include fluid1(left, -5px);
+      }
+    }
+  }
+  .number {
+    position: relative;
+    label {
+      @include fluid1(font-size, 12px);
+      @include fluid1(line-height, 12px);
+      @include fluid1(margin-bottom, 8px);
+    }
+    input {
+      appearance: none;
+      border: none;
+      background: none;
+      text-align: center;
+      color: $colorText;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      @include fluid1(height, 40px);
+      @include fluid1(line-height, 40px);
+      @include fluid1(font-size, 25px);
+      font-weight: 400;
+      &:focus { outline: none; }
+    }
+    button {
+      appearance: none;
+      color: $colorText;
+      cursor: pointer;
+      @include fluid1(width, 40px);
+      @include fluid1(height, 40px);
+      @include fluid1(border-radius, 40px);
+      border: 1px solid rgba(157, 157, 156, 0.5);
+      background: none;
+      display: grid;
+      place-items: center;
+    }
+  }
+  .arbitration-minus,
+  .arbitration-plus  {
+    display: block;
+    @include fluid1(width, 12px);
+    @include fluid1(height, 12px);
+    min-width: 12px;
+    min-height: 12px;
+    position: relative;
+    &:before {
+      @include pseudo(block, absolute);
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      @include fluid1(height, 2px);
+      min-height: 2px;
+      background: $colorText;
+    }
+  }
+  .arbitration-plus {
+    &:after {
+      @include pseudo(block, absolute);
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      height: 100%;
+      @include fluid1(width, 2px);
+      min-width: 2px;
+      background: $colorText;
+    }
+  }
+
+  .numbers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include fluid1(grid-column-gap, 30px);
+    @include fluid1(margin-bottom, 30px);
+  }
+  .minus { float: left; position: relative; }
+  .plus { float: right; position: relative; }
+
+  @include everything_from(tablet) {
+    .dates {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      @include fluid1D(grid-column-gap, 30px);
+      @include fluid1D(margin-bottom, 25px);
+    }
+  }
+
+}
+
+@include everything_until(tablet) {
+  .booking-content {
+    width: pxToVwMobile(280px);
+    a.btn {
+      display: block;
+      text-align: center;
+    }
+    .date {
+      margin-bottom: pxToVwMobile(25px);
+    }
+  }
+}
+
+/* 1 element per row */
+
+@include everything_from(tablet) {
+  .infoarea-row--1 {
+    .booking-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+      @include fluid1D(grid-gap, 30px);
+      .dates, .numbers { margin-bottom: 0; }
+      .button { display: grid; place-items: end; }
+    }
+  }
+}

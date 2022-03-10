@@ -1,0 +1,99 @@
+@import "src/global";
+
+$brown: rgba(104, 86, 73, 1);
+
+.pagination-container {
+  display: flex;
+
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  @include fluid1(margin-top, 20px);
+  @include fluid1(margin-bottom, 40px);
+
+  &.no-margin-top {
+    @include fluid1(margin-top, 0);
+    @include fluid1(margin-bottom, 80px);
+  }
+
+
+  .pagination-item {
+
+    @include fluid1(width, 40px);
+    @include fluid1(height, 40px);
+    @include fluid1(border-radius, 40px);
+    background: $white;
+    color: $brown;
+    display: grid;
+    place-items: center;
+    @include fluid1(margin-left, 7.5px);
+    @include fluid1(margin-right, 7.5px);
+    @include fluid1(font-size, 20px);
+    transition: background ease-in-out .16s, color ease-in-out .16s;
+
+    &.dots:hover {
+      background-color: transparent;
+      cursor: default;
+      color: $white;
+    }
+
+    &:hover {
+      background-color: $brown;
+      cursor: pointer;
+      color: $white;
+    }
+
+    &.selected {
+      background: $brown;
+      color: $white;
+    }
+
+    &.arrow-container {
+      background: none;
+    }
+
+    &:hover {
+      .arrow {
+        &.left, &.right {
+          border-color: $color1;
+        }
+      }
+    }
+
+    .arrow {
+      &.left, &.right {
+        background: none;
+        transform: scale(1);
+        transition: border-color ease-in-out .16s;
+      }
+
+      &.left {
+        @include css-arrow($brown, left, 12px, 2.5px);
+        @include fluid1(margin-right, -5px);
+      }
+
+      &.right {
+        @include css-arrow($brown, right, 12px, 2.5px);
+        @include fluid1(margin-left, -5px);
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+
+      opacity: 0.5;
+
+      &:hover {
+        background-color: transparent;
+        cursor: default;
+      }
+    }
+  }
+
+  button {
+    appearance: none;
+    border: none;
+  }
+}

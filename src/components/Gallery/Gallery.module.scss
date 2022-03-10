@@ -1,0 +1,26 @@
+@import 'src/global';
+
+.gallery {
+  content: '';
+  @include fluid1(margin-bottom, 80px);
+  @include everything_until(tablet) {
+    a {
+    }
+  }
+  .image {
+    outline: 1px solid transparent;
+  }
+
+  $imageWidth: 345;
+  $imageHeight: 194;
+  $ratio: ($imageHeight*100)/$imageWidth * 1%;
+  @include everything_until(tablet) {
+    .image-s {
+      @include filled-container($ratio);
+      & > * {
+        @include filled-content;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,27 @@
+/* Social Icons */
+
+ul.social-icons {
+  @include list-reset;
+  text-align: center;
+  li {
+    display: inline-block;
+    font-size: 0;
+    @include fluid1(margin-left, 5px);
+    @include fluid1(margin-right, 5px);
+  }
+  a {
+    @include fluid1(width, 40px);
+    @include fluid1(height, 40px);
+    @include fluid1(border-radius, 40px);
+    display: grid;
+    place-items: center;
+    background: $white;
+    color: $black;
+    font-size: initial;
+    float: left;
+  }
+  i.iconfont-facebook { @include fluid1(font-size, 16px); }
+  i.iconfont-twitter { @include fluid1(font-size, 19px); }
+  i.iconfont-youtube { @include fluid1(font-size, 16px); }
+  i.iconfont-instagram { @include fluid1(font-size, 18px); }
+}

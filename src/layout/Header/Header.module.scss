@@ -1,0 +1,74 @@
+@import "../../global";
+
+.headerStrip {
+  @include fluid2(height, $stripHeightMobile, $stripHeightDesktop);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: $white;
+  transition: transform ease-in-out 0.3s;
+  box-shadow: 0 0 pxToVwMobile($stripHeightMobile) rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  hyphens: none;
+  @include everything_until(tablet) {
+    box-shadow: 0 0 pxToVw($stripHeightDesktop) rgba(0, 0, 0, 0.1);
+    transition: transform ease-in-out 0.3s, border-bottom-color ease-in-out 0.3s;
+  }
+  @include everything_from(desktop) {
+    box-shadow: 0 0 $stripHeightDesktop rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Border Bottom on mobile when menu active */
+
+@include everything_until(tablet) {
+  .headerStrip {
+    border-bottom: 1px solid transparent;
+  }
+  .headerStripNavOpen {
+    border-bottom: 1px solid $grey;
+  }
+}
+
+
+/* Extended/Retractable Behaviour */
+
+$headerIconHeight: 30px;
+.retractable {
+  transform: translateY(pxToVwMobile($stripHeightMobile * -1));
+  @include everything_from(tablet) {
+    transform: translateY(($stripHeightDesktop +$headerIconHeight) * -1);
+  }
+  @include everything_from(desktop) {
+    transform: translateY(($stripHeightDesktop + $headerIconHeight) * -1);
+  }
+}
+
+.extended {
+  transform: translateY(0);
+  @include everything_from(tablet) {
+    transform: translateY(0);
+  }
+  @include everything_from(desktop) {
+    transform: translateY(0);
+  }
+}
+
+
+/* Logo */
+
+.logo {
+  display: block;
+  @include fluid2(width, 57.59px, 125.4px);
+  @include fluid2(height, 42.01px, 91.4px);
+  @include fluid2(margin-top, 8.73px, 13.76px);
+  /*@include fluid2(margin-left, 13.87px, 82.39px);*/
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  text-indent: -9999em;
+  svg, img {
+    @include filled-content;
+  }
+}

@@ -1,0 +1,17 @@
+@import "src/scss/variables";
+@import "src/scss/mixins";
+@import "src/scss/reboot";
+@import "src/scss/typography";
+
+body {
+  @include fluid2(font-size, $font-size-base-mobile, $font-size-base);
+  @include fluid2(line-height, $line-height-base-mobile, $line-height-base);
+  font-family: $font-family-base;
+  font-weight: 400;
+  hyphens: auto;
+}
+
+::selection {
+  background: rgba($color1, 0.5);
+  color: $white;
+}

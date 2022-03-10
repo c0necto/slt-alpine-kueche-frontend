@@ -1,0 +1,206 @@
+@import "../global";
+
+.page-main {
+  @include fluid2(padding-top, 40px, 100px);
+  //background: $colorMainBackground;
+  overflow: hidden;
+}
+
+/* Post */
+
+.page-main-post {
+  @include fluid2(padding-top, 40px, 80px);
+  //background: $colorMainBackground;
+  overflow: hidden;
+}
+
+.post-content {
+  @include everything_until(tablet) {
+    padding-left: pxToVwMobile($gapMobile);
+    padding-right: pxToVwMobile($gapMobile);
+  }
+  h3 {
+    text-align: center;
+    @include fluid1(margin-bottom, 30px);
+  }
+  h4 {
+    text-align: center;
+    @include fluid2(margin-bottom, 25px, 30px);
+  }
+  p {
+    @include fluid2(margin-bottom, 30px, 60px);
+  }
+  ol {
+    list-style: none;
+    counter-reset: orderedlist;
+    @include fluid2(margin-bottom, 72.5px, 90px);
+    padding: 0;
+    @include everything_until(tablet) {
+    }
+    @include everything_from(tablet) {
+      column-count: 2;
+      @include fluid1D(column-gap, 30px);
+    }
+    li {
+      counter-increment: orderedlist;
+      @include fluid1(padding-left, 35px);
+      @include fluid1(margin-bottom, 15px);
+      position: relative;
+      &:before {
+        content: counter(orderedlist);
+        color: $white;
+        background-color: #5f5f5f;
+        display: grid;
+        place-items: center;
+        @include fluid1(width, 25px);
+        @include fluid1(height, 25px);
+        @include fluid1(border-radius, 25px);
+        @include fluid1(font-size, 15px);
+        font-weight: 500;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+  blockquote {
+    @include fluid2(margin-bottom, 63.5px, 84.5px);
+  }
+}
+
+/* Graphic Separation */
+
+.graphic-separation {
+  border-bottom: 1px solid #d1d1d1;
+  width: 100%;
+  height: 0;
+}
+
+/* Cluster */
+
+$gap: 0.78125%; // 15px von 1920
+$m: 23.697916666666667%; // 455px von 1920
+$l: 49.479166666666667% + $gap; // 950px von 1920
+$lratio: 2.09fr; // 950 zu 455 -> 2.09
+
+@include everything_from(tablet) {
+  .cluster {
+    @include fluid1(padding-left, 15px);
+    @include fluid1(padding-right, 15px);
+    padding-left: $gap;
+    padding-right: $gap;
+    display: grid;
+    grid-auto-columns: 1fr;
+    //grid-template-columns: 1fr $l 1fr;
+    grid-template-columns: 1fr $lratio 1fr;
+    grid-template-rows: 1fr 1fr;
+    @include fluid1D(gap, 15px);
+    grid-template-areas:
+    "m1 l m3"
+    "m2 l m4";
+  }
+  .cluster-teaser { grid-area: l; }
+  .m1 { grid-area: m1; }
+  .m2 { grid-area: m2; }
+  .m3 { grid-area: m3; }
+  .m4 { grid-area: m4; }
+
+  .cluster-teaser {
+
+    figure,
+    figure > div {
+      height: 100%;
+      position: relative;
+    }
+
+    a {
+      height: 100%;
+      display: block;
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+@include everything_until(tablet) {
+  .m1, .m2, .m3, .m4 {
+    margin-bottom: pxToVwMobile($gapMobile);
+  }
+  .cluster {
+    padding-left: pxToVwMobile($gapMobile);
+    padding-right: pxToVwMobile($gapMobile);
+  }
+  .cluster-teaser {
+    & > a {
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: pxToVwMobile(15px);
+      & > div > div {
+        left: pxToVwMobile(15px);
+        bottom: pxToVwMobile($gapMobile*2);
+      }
+    }
+  }
+}
+
+/* Skiatlas */
+
+.page-skiatlas {
+  background: $white;
+}
+
+
+.page-skiatlas-overview {
+  background: $white;
+  @include everything_until(tablet) {
+    padding-top: pxToVwMobile(42px);
+  }
+}
+
+/* TTG */
+
+.page-ttg {
+  @include fluid2(padding-top, 40px, 80px);
+  background: $white;
+  overflow: hidden;
+}
+
+/* Temporary */
+
+.ttg-cols {
+  @include fluid1D(grid-gap, 30px);
+  @include everything_from(tablet) {
+    display: grid;
+    grid-template-columns: pxToVw(370px) pxToVw(800px);
+  }
+  @include everything_from(desktop) {
+    grid-template-columns: 370px 800px;
+  }
+  .ttg-col {
+    display: block;
+  }
+}
+.results-count {
+  display: block;
+  @include fluid1(margin-bottom, 30px);
+}
+
+/* Temp: iframe, todo: move to own component */
+.iframe-youtube {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+.iframe {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}

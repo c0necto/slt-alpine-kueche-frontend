@@ -1,0 +1,70 @@
+@import "src/global";
+
+/* Teaser S */
+
+.teaser-s {
+
+  background: $white;
+  color: $colorText;
+  //margin-top: pxToVwMobile(15px);
+  display: block;
+  text-align: left;
+
+  @include everything_from(tablet) {
+    margin-top: 0;
+  }
+  .content {
+    @include fluid1(padding, 30px);
+
+  }
+  h4 {
+    @include fluid2(font-size, 19px, 22px);
+    @include fluid2(line-height, 21px, 25px);
+    font-weight: 400;
+    color: $color1;
+  }
+
+  .text {
+    @include fluid2(font-size, 16px, 16px);
+    @include fluid2(line-height, 22px, 25px);
+    font-weight: 300;
+  }
+
+  figure {
+    position: relative;
+    @include gradient(97px, 150px);
+    z-index: 1;
+    &:hover {
+      &:before {
+        z-index: 0;
+      }
+    }
+  }
+
+  $imageWidth: 345;
+  $imageHeight: 194;
+  $ratio: ($imageHeight*100)/$imageWidth * 1%;
+  @include everything_until(tablet) {
+    .image {
+      @include filled-container($ratio);
+      & > * {
+        @include filled-content;
+      }
+    }
+  }
+
+  // Hover, scaling is a effing performance killer
+
+  /*img[data-main-image] {
+    transform: translateZ(0) scale(1);
+    transition: opacity .25s linear,
+    transform ease-in-out .88s;
+    will-change: opacity, transform;
+  }
+  &:hover {
+    img[data-main-image] {
+      transform: scale(1.05);
+    }
+  }*/
+
+}

@@ -1,0 +1,121 @@
+/* Slider */
+
+.slider-dots {
+  text-align: center;
+
+  ul {
+    @include list-reset;
+  }
+
+  li {
+    display: inline-block;
+    @include fluid1(margin-left, 5px);
+    @include fluid1(margin-right, 5px);
+  }
+
+  a {
+    display: block;
+    @include fluid1(width, 10px);
+    @include fluid1(height, 10px);
+    @include fluid1(border-radius, 10px);
+    background: #D1D1D1;
+  }
+}
+@include everything_until(tablet) {
+  .slider-dots--tablet { display: none; }
+}
+@include everything_from(tablet) {
+  .slider-dots--mobile { display: none; }
+}
+
+
+@include everything_until(tablet) {
+
+  .slider-container {
+
+    .slider {
+      width: 100vw;
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      position: relative;
+      margin-bottom: pxToVwMobile(30px);
+    }
+
+    .desktop-slide {
+      display: contents;
+    }
+
+    .slide {
+      flex-shrink: 0;
+      height: 100%;
+      scroll-snap-align: start;
+      width: pxToVwMobile(285px);
+      padding-left: pxToVwMobile(15px);
+
+      &:last-child {
+        width: pxToVwMobile(300px);
+        padding-right: pxToVwMobile(15px);
+      }
+
+      .text-image {
+        p {
+          padding: 0 0 pxToVwMobile(15px) 0;
+        }
+      }
+
+    }
+
+  }
+
+}
+
+@include everything_from(tablet) {
+
+  .slider-container {
+
+    max-width: map-get($speaking-grid, desktop);
+    padding-left: pxToVw($gapDesktop);
+    padding-right: pxToVw($gapDesktop);
+    margin: 0 auto;
+
+    .slider {
+      width: 100%;
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .desktop-slide {
+      flex-shrink: 0;
+      /*width: 100%;
+      height: 100%;*/
+      width: 100%;
+      scroll-snap-align: start;
+
+      display: grid;
+      grid-column-gap: 30px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .slide {
+
+      .text-image {
+        p {
+          padding: 0 0 15px 0;
+        }
+      }
+
+    }
+
+  }
+
+}

@@ -1,0 +1,191 @@
+@keyframes swing-in-bottom-fwd {
+  0% {
+    transform: rotateX(100deg);
+    transform-origin: bottom;
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0);
+    transform-origin: bottom;
+    opacity: 1;
+  }
+}
+
+.content-element--infoarea {
+  input[type=radio] {
+    display: none;
+  }
+  @include everything_from(tablet) {
+    background: $white;
+    @include fluid1D(padding-top, 80px);
+    @include fluid1D(padding-bottom, 80px);
+  }
+}
+
+@include everything_until(tablet) {
+
+  .content-element--infoarea {
+    margin-bottom: 0;
+  }
+
+  // Label Group
+
+  .infoarea--labelgroup {
+    display: flex;
+    justify-content: space-between;
+    background: $white;
+    box-shadow: 0 0 pxToVwMobile(30px) rgba(0, 0, 0, 0.15);
+    padding-left: pxToVwMobile(21px);
+    padding-right: pxToVwMobile(21px);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    z-index: 1;
+    label {
+      height: pxToVwMobile(56px);
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+    i {
+      font-size: pxToVwMobile(20px);
+      color: $black;
+      margin-bottom: pxToVwMobile(2px);
+    }
+    span {
+      font-size: pxToVwMobile(11px);
+      line-height: pxToVwMobile(12px);
+      display: block;
+      font-weight: 300;
+      span {
+        padding-top: pxToVwMobile(2px);
+        transition: opacity ease-in-out .5s;
+        color: $black;
+        opacity: .4;
+      }
+    }
+  }
+
+  // Info Element
+
+  .info-element {
+    background: $white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vh;
+    height: calc(100vh - #{pxToVwMobile(56px)});
+    z-index: 200;
+    border-bottom: 1px solid #f1f1f1;
+    display: none;
+    & > label {
+      height: pxToVwMobile(56px);
+      border-bottom: 1px solid #f1f1f1;
+      width: 100vw;
+      padding-left: pxToVwMobile(16.41px);
+      color: $colorText;
+      i {
+        font-size: pxToVwMobile(35px);
+        float: left;
+        line-height: pxToVwMobile(56px);
+        margin-right: pxToVwMobile(20px);
+
+        animation: flip-in-ver-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation-delay: 0.45s;
+
+      }
+      span {
+        font-size: pxToVwMobile(18px);
+        font-weight: 400;
+        line-height: pxToVwMobile(56px);
+      }
+    }
+    .info-element--content {
+      position: absolute;
+      width: 100vw;
+      height: calc(100vh - #{pxToVwMobile(57px *2)});
+      display: grid;
+      place-items: center;
+    }
+    h3 {
+      font-size: pxToVwMobile(30px);
+      line-height: pxToVwMobile(45px);
+      margin-bottom: pxToVwMobile(30px);
+      font-weight: 300;
+      text-transform: uppercase;
+      width: 100%;
+    }
+    .info-weather,
+    .info-booking {
+      h3 {
+        display: none;
+      }
+    }
+
+  }
+
+  // Active States
+
+  $radios: 5;
+  @for $i from 1 through $radios {
+    input#element#{$i}:checked {
+      & ~ .infoarea--labelgroup {
+        label[for=element#{$i}] {
+          span {
+            span {
+              opacity: 1;
+            }
+          }
+        }
+      }
+      & ~ .container {
+        .element#{$i} {
+          display: block;
+          animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+        }
+      }
+    }
+  }
+
+}
+
+@include everything_from(tablet) {
+  .infoarea--labelgroup { display: none; }
+  .info-element {
+    & > label { display: none; }
+    h3 {
+      @include fluid1D(font-size, 30px);
+      @include fluid1D(line-height, 45px);
+      @include fluid1D(margin-bottom, 10px);
+      font-weight: 300;
+      text-transform: uppercase;
+      width: 100%;
+    }
+  }
+  .info-element--content {
+    height: 100%;
+  }
+}
+
+/* Rows */
+
+@include everything_from(tablet) {
+  .infoarea-row {
+    @include fluid1D(margin-bottom, 30px);
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .infoarea-row--2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include fluid1D(grid-column-gap, 30px);
+
+  }
+  .infoarea-row--3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    @include fluid1D(grid-column-gap, 30px);
+  }
+}

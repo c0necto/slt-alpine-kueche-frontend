@@ -1,0 +1,476 @@
+.main-nav-burger {
+  @include fluid1(width, 40px);
+  @include fluid2(height, 60px, 120px);
+  align-self: center;
+  cursor: pointer;
+  transition: all ease-in-out .15s;
+  position: absolute;
+  top: 0;
+  @include fluid2(right, 8px, 70px);
+  display: grid;
+  place-items: center;
+
+  appearance: none;
+  border: none;
+  background: none;
+  // z-index: 20001;
+  z-index: 6;
+  text-indent: -9999em;
+  opacity: 0;
+  @include everything_until(tablet) {
+    z-index: 4;
+  }
+
+  span {
+    display: block;
+    @include fluid1(width, $burgerWidth);
+    @include fluid1(height, $burgerLineHeight);
+    min-height: $burgerLineHeight;
+    background: $burgerColor;
+    position: relative;
+    transition: all ease-in-out .3s;
+
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      @include fluid1(width, $burgerWidth);
+      @include fluid1(height, $burgerLineHeight);
+      min-height: $burgerLineHeight;
+      background: $burgerColor;
+      position: absolute;
+      left: 0;
+      transition: all ease-in-out .22s;
+      opacity: 1;
+    }
+
+    &:before {
+      @include fluid1(top, $topBottomValue);
+      transform-origin: center top;
+    }
+
+    &:after {
+      @include fluid1(bottom, $topBottomValue);
+      transform-origin: center bottom;
+    }
+  }
+}
+
+.main-nav-active {
+  transition: all ease-in-out 1s;
+  opacity: 1;
+
+  span {
+    background-color: transparent;
+
+    &:before {
+      transform: translateY(pxToVwMobile($translateYBefore)) rotate($rotationBefore);
+      @include everything_from(tablet) {
+        transform: translateY(pxToVw($translateYBefore)) rotate($rotationBefore);
+      }
+      @include everything_from(desktop) {
+        transform: translateY($translateYBefore) rotate($rotationBefore);
+      }
+    }
+
+    &:after {
+      transform: translateY(pxToVwMobile($translateYAfter)) rotate($rotationAfter);
+      @include everything_from(tablet) {
+        transform: translateY(pxToVw($translateYAfter)) rotate($rotationAfter);
+      }
+      @include everything_from(desktop) {
+        transform: translateY($translateYAfter) rotate($rotationAfter);
+      }
+    }
+  }
+}
+
+/* iPad */
+
+@include ipad(portrait) {
+  .main-nav-burger {
+    span {
+      transform: scale(1.98);
+    }
+    span,
+    span:before,
+    span:after {
+      @include fluid1D(min-height, 2px);
+    }
+  }
+  .main-nav-active {
+    span {
+      &:before {
+        transform: translateY(pxToVw(6.8px)) rotate($rotationBefore);
+      }
+    }
+  }
+}
+@include ipad(landscape) {
+  .main-nav-burger {
+    span {
+      transform: scale(2);
+    }
+    span,
+    span:before,
+    span:after {
+      @include fluid1D(height, 1px);
+      @include fluid1D(min-height, 1px);
+    }
+  }
+}
+
+/**
+*
+* NAVIGATION
+*
+ */
+
+@keyframes swing-in-top-bck {
+  0% {
+    transform: rotateX(70deg);
+    transform-origin: top;
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    transform: rotateX(0deg);
+    transform-origin: top;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.nav-container {
+  overflow-y: auto;
+  background: $white;
+  width: 100%;
+  z-index: 2;
+
+  @include everything_until(tablet) {
+    height: calc(100vh - #{pxToVwMobile($stripHeightMobile)});
+  }
+  @include everything_from(tablet) {
+    height: calc(100vh - #{pxToVw($stripHeightMobile)});
+  }
+  @include everything_from(desktop) {
+    height: calc(100vh - #{$stripHeightMobile});
+  }
+
+  visibility: hidden;
+  position: fixed;
+  right: 0;
+  @include fluid2(top, $stripHeightMobile, $stripHeightDesktop);
+  transition: all ease-in-out .15s;
+
+  & > * { display: none; }
+}
+
+.nav-container-open {
+  animation: swing-in-top-bck 0.6s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+  & > * { display: block; }
+}
+
+.nav-inner-container {
+  @include everything_from(tablet) {
+    max-width: map-get($speaking-grid, desktop);
+    padding-left: pxToVw($gapDesktop);
+    padding-right: pxToVw($gapDesktop);
+    margin: 0 auto;
+  }
+  @include everything_from(desktop) {
+    padding-left: $gapDesktop;
+    padding-right: $gapDesktop;
+    //@include fluid1D(padding-top, 50px);
+  }
+}
+
+.main-nav {
+  text-align: left;
+
+  ul {
+    @include list-reset;
+    @include fluid2(padding-top, 28px, 60px);
+    @include fluid1D(padding-bottom, 150px);
+    @include ipad(both) {
+      @include fluid1D(padding-top, 100px);
+      //@include fluid1D(margin-bottom, 150px);
+    }
+
+    &.main {
+      @include everything_until(tablet) {
+        border-top: 1px solid $grey;
+      }
+    }
+
+    & > li {
+      display: block;
+      position: relative;
+      @include fluid2(padding-bottom, 25px, 20px);
+      @include fluid2(padding-left, 30px, 0);
+      @include fluid2(padding-right, 30px, 0);
+    }
+
+    .headline {
+      text-transform: uppercase;
+      color: $colorText;
+      @include fluid2(font-size, 16px, 20px);
+      font-weight: 400;
+      @include everything_from(tablet) {
+        font-weight: 300;
+        @include fluid1D(padding-bottom, 30px);
+        border-bottom: 1px solid rgba(209, 209, 209, 1);
+        @include fluid1D(margin-bottom, 30px);
+      }
+    }
+
+    i {
+      font-size: pxToVwMobile(25px);
+      margin-right: pxToVwMobile(28px);
+      float: left;
+      color: $colorMagazinBtnOutline;
+      transition: color ease-in-out .3s;
+      @include everything_from(tablet) {
+        display: none;
+      }
+    }
+
+    a, label {
+      display: block;
+      color: $colorText;
+      @include fluid2(font-size, 16px, 16px);
+      @include fluid2(line-height, 25px, 25px);
+      text-transform: uppercase;
+      font-weight: 300;
+      transition: color ease-in-out .3s;
+      @include everything_from(tablet) {
+        font-weight: 300;
+      }
+    }
+  }
+
+  // Sub Menu
+
+  .main-nav-sub {
+    @include list-reset;
+    max-height: 0;
+    overflow: hidden;
+    transition: padding-top ease-in-out .3s,
+    max-height ease-in-out .3s,
+    padding-bottom ease-in-out .3s,
+    opacity ease-in-out .3s;
+    clear: left;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    border: none;
+
+    li {
+      @include fluid2(padding-top, 10px, 0);
+      @include fluid2(padding-bottom, 10px, 10px);
+      @include fluid2(padding-left, 54px, 0);
+
+      &.active {
+        a {
+          text-decoration: underline;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+
+  // Open/close arrow
+
+  .next {
+    position: absolute;
+    right: pxToVwMobile(30px);
+    top: 0;
+    width: pxToVwMobile(25px);
+    height: pxToVwMobile(25px);
+    text-align: center;
+    transform: translateY(pxToVwMobile(-2px)) rotate(0);
+    transition: transform ease-in-out .3s;
+
+    .arrow {
+      @include css-arrow($colorText, down, 7px, 2.5px);
+    }
+  }
+
+  // Sub menu open/close animation and state
+
+  .dropdown {
+    display: none;
+  }
+
+  .dropdown:checked {
+    & ~ i,
+    & ~ a {
+      color: $color1;
+    }
+
+    & ~ .next {
+      transform: translateY(pxToVwMobile(2px)) rotate(-180deg);
+    }
+
+    & ~ .mainNavSub {
+      max-height: 1000px;
+      @include fluid2(padding-top, 27px, 0);
+      @include fluid2(padding-bottom, 15px, 0);
+      opacity: 1;
+    }
+  }
+
+  // Special Colors
+
+  li.language {
+    .dropdown:checked {
+      & ~ i,
+      & ~ a {
+        color: $color4;
+      }
+    }
+  }
+
+}
+
+/*.mainNavActive {
+  color: orange;
+}*/
+
+// Special Menus
+
+@include everything_until(tablet) {
+  .special-desktop {
+    display: none;
+  }
+}
+
+@include everything_from(tablet) {
+  .special-mobile {
+    display: none;
+  }
+  .special-desktop {
+    background-color: $grey;
+    @include fluid1D(padding-top, 90px);
+    @include fluid1D(padding-bottom, 60px);
+
+    ul {
+      @include list-reset;
+      max-width: map-get($speaking-grid, desktop);
+      @include fluid1D(padding-left, $gapDesktop);
+      @include fluid1D(padding-right, $gapDesktop);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      @include fluid1D(grid-column-gap, 30px);
+    }
+
+    .nav-image {
+      @include fluid1D(margin-right, 20px);
+      @include fluid1(width, 80px);
+      @include fluid1(height, 80px);
+    }
+
+    a {
+      display: block;
+      background: $white;
+      @include fluid1D(font-size, 16px);
+      @include fluid1D(line-height, 80px);
+      text-transform: uppercase;
+      font-weight: 500;
+      color: $colorText;
+    }
+  }
+}
+
+// Main Nav Desktop
+
+@include everything_from(tablet) {
+  .main-nav {
+
+    .main {
+
+      // Grid-areas
+
+      & > li:nth-child(1) {
+        grid-area: li-1;
+      }
+
+      & > li:nth-child(2) {
+        grid-area: li-2;
+      }
+
+      & > li:nth-child(3) {
+        grid-area: li-3;
+      }
+
+      & > li:nth-child(4) {
+        grid-area: li-4;
+      }
+
+      // Main Layout
+
+      display: grid;
+      @include fluid1D(grid-column-gap, 30px);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-areas:
+              'li-1 li-1 li-1'
+              'li-2 li-3 li-4';
+
+      // Main Menu Points
+
+      & > li > a {
+        @include fluid1D(padding-bottom, 20px);
+        border-bottom: 1px solid $colorMagazinBtnOutline;
+        @include fluid1D(margin-bottom, 30px);
+      }
+
+      // Special "Layout" for li-1
+
+      .li-1 {
+        .main-nav-sub {
+          display: grid;
+          @include fluid1D(grid-column-gap, 30px);
+          @include fluid1D(margin-bottom, 50px);
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+    }
+
+    // Sub Menu
+
+    .main-nav-sub {
+      opacity: 1;
+      max-height: unset;
+
+      a {
+        @include fluid1D(font-size, 16px);
+        @include fluid1D(line-height, 25px);
+        @include fluid1D(padding-left, 23px);
+        font-weight: 500;
+
+        &:before {
+          @include pseudo(block, absolute);
+          @include css-arrow($colorText, right, 8px, 2px);
+          left: 0;
+          @include fluid1D(top, 8px);
+        }
+      }
+
+      li {
+        &.active {
+          background: unset;
+          border-radius: unset;
+        }
+      }
+    }
+
+    // Open/close arrow
+
+    .next {
+      display: none;
+    }
+
+  }
+}

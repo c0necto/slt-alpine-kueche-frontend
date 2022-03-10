@@ -1,0 +1,68 @@
+@import "src/global";
+
+.content-area {
+  @include fluid2(padding-bottom, 60px, 80px);
+}
+
+/* Padding Variations */
+
+.top-80 {
+  @include fluid2(padding-top, 60px, 80px);
+}
+.bottom-20 {
+  @include fluid2(padding-bottom, 15px, 20px);
+}
+.bottom-30 {
+  @include fluid2(padding-bottom, 25px, 30px);
+}
+.bottom-55 {
+  @include fluid2(padding-bottom, 30px, 55px);
+}
+.bottom-60 {
+  @include fluid2(padding-bottom, 30px, 60px);
+}
+.bottom-80 {
+  @include fluid2(padding-bottom, 30px, 80px);
+}
+.top-80-grey {
+  @include fluid2(padding-top, 60px, 80px);
+  background: #F1F1F1;
+}
+.bottom-55-center {
+  @include fluid2(padding-bottom, 30px, 55px);
+  text-align: center;
+}
+
+/* Background Colors */
+
+.white { background: $white; }
+.black { background: $black; }
+.grey { background: #F1F1F1; }
+
+/* Additional Stylings */
+
+.center { text-align: center; }
+.infoarea {
+  background: $white;
+  @include everything_until(tablet) {
+    display: none;
+  }
+}
+
+/* Magazin */
+
+.content-area-magazin {
+  background: $black;
+  text-align: center;
+  @include fluid2(padding-top, 100px, 150px);
+  @include fluid2(padding-bottom, 40px, 130px);
+  h3 {
+    color: $white;
+    @include fluid2(margin-bottom, 30px, 40px);
+  }
+  /* Logo */
+
+  .logo {
+    @include fluid2(margin-bottom, 33.8px, 40px);
+  }
+}

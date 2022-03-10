@@ -1,0 +1,112 @@
+@use "sass:math";
+
+/* General Border Radius */
+$border-radius: 10px; // e.g. for teasers
+
+/* Fonts */
+
+$font-family-base: "EB Garamond", serif;
+$font-family-special: "Prata", serif;
+$font-size-base: 18px;
+$line-height-base: 27px;
+$font-size-base-mobile: 18px;
+$line-height-base-mobile: 27px;
+$font-weight-base: 400;
+$font-weight-bolder: 500;
+
+/* Colors */
+
+$black: #000000;
+$white: #ffffff;
+$grey: #f1f1f1;
+
+$colorMagazin: #1a1a1a;
+$colorMagazinBrighter: #9d9d9c;
+$colorMagazinBtnOutline: #d1d1d1;
+$colorGreen: #E53D17;
+$colorRed: #E53D17;
+$colorBlue: #E53D17;
+$colorYellow: #E53D17;
+
+$color1: $colorGreen;
+$color1dark: darken($color1, 10%);
+$color1darker: darken($color1, 20%);
+$color2: $colorBlue;
+$color3: $colorRed;
+$color4: $colorYellow;
+
+//$colorText: #5f5f5f;
+$colorText: rgba(104, 86, 73, 1);
+//$colorMainBackground: #e5e5e5;
+$colorMainBackground: #f1f1f1;
+
+$colors: (
+  color1: $color1,
+  color2: $color2,
+  color3: $color3,
+  color4: $color4,
+  colorText: $colorText,
+) !default;
+
+/* Reboot */
+
+/* General a-tag stylings */
+
+$link-decoration: none;
+$link-hover-decoration: none;
+
+/********************
+  Table
+*********************/
+
+$table-cell-padding: 10px;
+$table-caption-color: $black;
+
+/* Special Margins */
+
+$headings-margin-bottom: 0;
+$paragraph-margin-bottom: 15px;
+$label-margin-bottom: 10px;
+
+/* Grid Stuff */
+
+$speaking-grid: (
+  mobile: 0,
+  mobile_mid: 576px,
+  tablet: 768px,
+  tablet_tiny: 880px,
+  tablet_small: 992px,
+  tablet_mid: 1096px,
+  tablet_large: 1200px,
+  desktop: 1230px,
+  desktop_wide: 1630px,
+  outer: 1920,
+) !default;
+
+$maxWidthDesktop: map-get($speaking-grid, desktop);
+
+/* General Stuff */
+
+/* Gaps */
+$gapMobile: 15px;
+$gapDesktop: 30px;
+
+/* Header Strip Heights */
+$stripHeightMobile: 60px;
+$stripHeightDesktop: 120px;
+
+/* Search & Burger */
+$burgerColor: $black;
+$burgerWidth: 20px;
+$burgerLineHeight: 2px;
+$burgerDistanceBetweenLines: 4px;
+$burgerPositionTop: 17px;
+$burgerPositionRight: 15px;
+$burgerHeight: ($burgerLineHeight * 3) + ($burgerDistanceBetweenLines * 2);
+$topBottomValue: ($burgerLineHeight + $burgerDistanceBetweenLines) * -1;
+
+$translateYBefore: ($burgerHeight - $burgerLineHeight) / 2;
+$translateYAfter: $translateYBefore * -1;
+$rotation: 45deg;
+$rotationBefore: $rotation;
+$rotationAfter: $rotation * -1;

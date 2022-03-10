@@ -1,0 +1,74 @@
+@import "../../global";
+
+.teaser-video {
+  position: relative;
+  display: block;
+}
+
+.play {
+  @include fluid1(width, 56px);
+  @include fluid1(height, 56px);
+  @include fluid1(border-radius, 56px);
+  background-color: $colorGreen;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  appearance: none;
+  border: none;
+  color: $white;
+  @include fluid1(font-size, 30px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  @include gradient(31.52%, 37.31%);
+}
+
+@include everything_until(tablet) {
+  .ctaPosition {
+    display: none;
+  }
+}
+
+@include everything_from(tablet) {
+  .teaser-video {
+    span {
+      color: $white;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .ctaPosition {
+      position: absolute;
+      @include fluid1D(top, 30px);
+      @include fluid1D(left, 30px);
+
+
+      & > div:first-child {
+        span {
+          @include fluid1D(font-size, 20px);
+          @include fluid1D(line-height, 23px);
+          font-weight: 300;
+        }
+      }
+
+      & > div:last-child {
+        span {
+          @include fluid1D(font-size, 16px);
+          @include fluid1D(line-height, 25px);
+          text-transform: none;
+          font-weight: 300;
+          display: inline-block;
+          @include fluid1D(margin-top, 4px);
+        }
+      }
+    }
+  }
+}
