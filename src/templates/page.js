@@ -268,7 +268,6 @@ const IframeAreabrick = props => {
 
 const SeparatorAreabrick = props => {
     const { elements } = props
-    console.log(elements)
     const grey = elements.grey?.checked
     return (
         <ContentArea className={'noSpacing'} color={grey ? 'grey' : null}>
@@ -283,49 +282,45 @@ const TeaserSAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
     return (
-        <>
-            <ContentArea className={'top80'} color={grey ? 'grey' : null}>
-                    {elements.teasers.relations.length > 3 ? (
-                        <Container variant={'mobileFullwidth'}>
-                            <Slider noarrows>
-                                {elements.teasers.relations.map((teaser, index) => {
-                                    return (
-                                        <TeaserS
-                                            key={teaser.title + '_' + index}
-                                            title={teaser.title}
-                                            text={teaser.text}
-                                            image={teaser.image}
-                                            blank={true}
-                                            slug={teaser.slug[0]?.slug}>
-                                            {teaser.title}
-                                        </TeaserS>
-                                    )
-                                })}
-                            </Slider>
-                        </Container>
-                    ) : (
-                        <Container>
-                        <Grid cols={4}>
-                            {elements.teasers.relations.map((teaser, index) => {
-                                return (
-                                    <TeaserS
-                                        key={teaser.title + '_' + index}
-                                        title={teaser.title}
-                                        text={teaser.text}
-                                        image={teaser.image}
-                                        blank={true}
-                                        slug={teaser.slug[0]?.slug}>
-                                        {teaser.title}
-                                    </TeaserS>
-                                )
-                            })}
-                        </Grid>
-                        </Container>
-                    )}
-
-            </ContentArea>
-            <SeparatorAreabrick/>
-        </>
+        <ContentArea className={'top80'} color={grey ? 'grey' : null}>
+            {elements.teasers.relations.length > 3 ? (
+                <Container variant={'mobileFullwidth'}>
+                    <Slider noarrows>
+                        {elements.teasers.relations.map((teaser, index) => {
+                            return (
+                                <TeaserS
+                                    key={teaser.title + '_' + index}
+                                    title={teaser.title}
+                                    text={teaser.text}
+                                    image={teaser.image}
+                                    blank={true}
+                                    slug={teaser.slug[0]?.slug}>
+                                    {teaser.title}
+                                </TeaserS>
+                            )
+                        })}
+                    </Slider>
+                </Container>
+            ) : (
+                <Container>
+                <Grid cols={4}>
+                    {elements.teasers.relations.map((teaser, index) => {
+                        return (
+                            <TeaserS
+                                key={teaser.title + '_' + index}
+                                title={teaser.title}
+                                text={teaser.text}
+                                image={teaser.image}
+                                blank={true}
+                                slug={teaser.slug[0]?.slug}>
+                                {teaser.title}
+                            </TeaserS>
+                        )
+                    })}
+                </Grid>
+                </Container>
+            )}
+        </ContentArea>
     );
 };
 
@@ -333,28 +328,25 @@ const TeaserMAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
     return (
-        <>
-            <ContentArea className={'top80'} color={grey ? 'grey' : null}>
-                <Container>
-                    <Grid cols={2}>
-                        {elements.teasers.relations.map((teaser, index) => {
-                            return (
-                                <TeaserM
-                                    key={teaser.title + '_' + index}
-                                    title={teaser.title}
-                                    text={teaser.text}
-                                    image={teaser.image}
-                                    blank={true}
-                                    slug={teaser.slug[0]?.slug}>
-                                    {teaser.title}
-                                </TeaserM>
-                            )
-                        })}
-                    </Grid>
-                </Container>
-            </ContentArea>
-            <SeparatorAreabrick/>
-        </>
+        <ContentArea className={'top80'} color={grey ? 'grey' : null}>
+            <Container>
+                <Grid cols={2}>
+                    {elements.teasers.relations.map((teaser, index) => {
+                        return (
+                            <TeaserM
+                                key={teaser.title + '_' + index}
+                                title={teaser.title}
+                                text={teaser.text}
+                                image={teaser.image}
+                                blank={true}
+                                slug={teaser.slug[0]?.slug}>
+                                {teaser.title}
+                            </TeaserM>
+                        )
+                    })}
+                </Grid>
+            </Container>
+        </ContentArea>
     );
 };
 
@@ -362,28 +354,25 @@ const TeaserMVariantAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
     return (
-        <>
-            <ContentArea className={'top80'} color={grey ? 'grey' : null}>
-                <Container>
-                    <Grid cols={2}>
-                        {elements.teasers.relations.map((teaser, index) => {
-                            return (
-                                <TeaserMVariant
-                                    key={teaser.title + '_' + index}
-                                    title={teaser.title}
-                                    text={teaser.text}
-                                    image={teaser.image}
-                                    blank={true}
-                                    slug={teaser.slug[0]?.slug}>
-                                    {teaser.title}
-                                </TeaserMVariant>
-                            )
-                        })}
-                    </Grid>
-                </Container>
-            </ContentArea>
-            <SeparatorAreabrick/>
-        </>
+        <ContentArea className={'top80'} color={grey ? 'grey' : null}>
+            <Container>
+                <Grid cols={2}>
+                    {elements.teasers.relations.map((teaser, index) => {
+                        return (
+                            <TeaserMVariant
+                                key={teaser.title + '_' + index}
+                                title={teaser.title}
+                                text={teaser.text}
+                                image={teaser.image}
+                                blank={true}
+                                slug={teaser.slug[0]?.slug}>
+                                {teaser.title}
+                            </TeaserMVariant>
+                        )
+                    })}
+                </Grid>
+            </Container>
+        </ContentArea>
     );
 };
 
@@ -392,37 +381,9 @@ const TeaserLAreabrick = props => {
     const grey = elements.grey?.checked
     const teaser = elements.teaser.relations[0]
     return (
-        <>
-            <ContentArea className={'top80'} color={grey ? 'grey' : null}>
-                <Container>
-                    <TeaserL
-                        title={teaser.title}
-
-                        subtitle={'Lorem ipsum dolor sit amet...'}
-                        buttontext={'Weiterlesen'}
-                        fakebutton={true}
-
-                        text={teaser.text}
-                        image={teaser.image}
-                        blank={true}
-                        slug={teaser.slug[0]?.slug}>
-                        {teaser.title}
-                    </TeaserL>
-                </Container>
-            </ContentArea>
-            <SeparatorAreabrick/>
-        </>
-    );
-};
-
-const TeaserXLAreabrick = props => {
-    const {elements} = props
-    const grey = elements.grey?.checked
-    const teaser = elements.teaser.relations[0]
-    return (
-        <>
-            <ContentArea className={'top80'} color={grey ? 'grey' : null}>
-                <TeaserXL
+        <ContentArea className={'top80'} color={grey ? 'grey' : null}>
+            <Container>
+                <TeaserL
                     title={teaser.title}
 
                     subtitle={'Lorem ipsum dolor sit amet...'}
@@ -434,10 +395,32 @@ const TeaserXLAreabrick = props => {
                     blank={true}
                     slug={teaser.slug[0]?.slug}>
                     {teaser.title}
-                </TeaserXL>
-            </ContentArea>
-            <SeparatorAreabrick/>
-        </>
+                </TeaserL>
+            </Container>
+        </ContentArea>
+    );
+};
+
+const TeaserXLAreabrick = props => {
+    const {elements} = props
+    const grey = elements.grey?.checked
+    const teaser = elements.teaser.relations[0]
+    return (
+        <ContentArea className={'top80'} color={grey ? 'grey' : null}>
+            <TeaserXL
+                title={teaser.title}
+
+                subtitle={'Lorem ipsum dolor sit amet...'}
+                buttontext={'Weiterlesen'}
+                fakebutton={true}
+
+                text={teaser.text}
+                image={teaser.image}
+                blank={true}
+                slug={teaser.slug[0]?.slug}>
+                {teaser.title}
+            </TeaserXL>
+        </ContentArea>
     );
 };
 
