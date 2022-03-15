@@ -83,7 +83,7 @@ And the corresponding twig template in Pimcore could look like this:
 </div>
 ```
 
-Due to the way the Pimcore DataHub returns the editables (a one-dimensional list), some parsing is needed before the React components can work seamlessly. Let's construct a graphql query to get the document and focus on the areabrick. This could be our query, if we wanted the document situated at `/path/to/document`. Note that we only considered the document types (`Pimcore_document_page`) and editables (`Pimcore_document_editableInput` and `Pimcore_document_editableImage`) which we used in the example. The real query would be much larger (see `/templates/page.js` for an example) and could be extended, depending on whether you define custom editable types (see the Pimcore documentation).
+Due to the way the Pimcore DataHub returns the editables (a one-dimensional list), some parsing is needed before the React components can work seamlessly. Let's construct a graphql query to get the document and focus on the areabrick. This could be our query, if we wanted the document situated at `/path/to/document`. Note that we only considered the document types (`Pimcore_document_page`) and editables (`Pimcore_document_editableInput` and `Pimcore_document_editableImage`) which we used in the example. The real query would be much larger (see `/templates/index.js` for an example) and could be extended, depending on whether you define custom editable types (see the Pimcore documentation).
 
 ```graphql
 query DocumentById($id: Int!) {

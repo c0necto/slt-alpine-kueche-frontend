@@ -144,3 +144,98 @@ export const imageAtts = (articleName, metadata) => {
         compound: compoundTitle,
     };
 };
+
+
+/**
+ * Get direct descendants of elements in parent namespace.
+ * The namespaces include the separator.
+ * To get children of the "content" element, pass "content:" as the parent namespace.
+ * The default separator is ":" and returns direct children of the element.
+ * @param elements
+ * @param parentNamespace
+ * @returns {*}
+ */
+const getDirectChildren = (elements, parentNamespace = '') => {
+    return elements.filter(element => {
+        const name = element._editableName;
+
+        return (
+            name.indexOf(parentNamespace) === 0 &&
+            name.indexOf(':', parentNamespace.length) === -1 &&
+            name !== parentNamespace
+        );
+    });
+}
+
+/**
+ * Organize document elements into a tree structure where areablocks have a list of children.
+ * A detailed explanation of how this works can be found in the Readme file.
+ * @param elements
+ * @param namespace
+ * @returns {*}
+ */
+export const getHierarchy = (elements, namespace = '') => {
+    const parents = getDirectChildren(elements, namespace);
+
+    return parents.map(element => {
+        const name = element._editableName.substring(namespace.length);
+
+        if (element._editableType === 'areablock') {
+            // Map element.data to the corresponding element in the hierarchy
+            return {
+                ...element,
+                name,
+                data: element.data.map(child => {
+                    const childNamespace =
+                        element._editableName + ':' + child.key + '.';
+                    return {
+                        ...child,
+                        children: getHierarchy(elements, childNamespace),
+                    };
+                }),
+            };
+        }
+
+        if (element._editableType === 'block') {
+            // Map element.data to the corresponding element in the hierarchy
+            return {
+                ...element,
+                name,
+                data: element.indices.map((child, index) => {
+                    const childNamespace =
+                        element._editableName + ':' + parseInt(index + 1) + '.';
+                    return {
+                        ...child,
+                        children: getHierarchy(elements, childNamespace),
+                    };
+                }),
+            };
+        }
+
+        return {
+            ...element,
+            name,
+        };
+    });
+}
+
+export const getPageById = (id, rootDocument) => {
+    // Check the
+    if (parseInt(rootDocument.id, 10) === parseInt(id, 10)) {
+        return rootDocument;
+    }
+
+    // Look through any children
+    if (rootDocument.children?.length) {
+        for (let i = 0; i < rootDocument.children.length; i++) {
+            const child = rootDocument.children[i];
+            const page = getPageById(id, child);
+            if (page) {
+                return page;
+            }
+        }
+    }
+
+    return false;
+}
+

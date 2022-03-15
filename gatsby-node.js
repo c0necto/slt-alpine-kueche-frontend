@@ -89,7 +89,7 @@ const createIndividualDocumentPages = async (
         console.log('----');*/
         gatsbyUtilities.actions.createPage({
             path: document.fullpath,
-            component: path.resolve(`./src/templates/page.js`),
+            component: path.resolve(`./src/templates/index.js`),
             context: {
                 locale,
                 rootDocument,
@@ -383,6 +383,7 @@ exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
                 '~scss': path.resolve(__dirname, 'src/scss'),
                 '~templates': path.resolve(__dirname, 'src/templates'),
                 '~images': path.resolve(__dirname, 'src/images'),
+                '~src': path.resolve(__dirname, 'src'),
             },
         },
     });
