@@ -220,6 +220,7 @@ const TextAreabrick = props => {
 
 const IntrotextAreabrick = props => {
     const { elements } = props
+    console.log(elements)
     const grey = elements.grey.checked
 
     return (
@@ -267,6 +268,7 @@ const IframeAreabrick = props => {
 
 const SeparatorAreabrick = props => {
     const { elements } = props
+    console.log(elements)
     const grey = elements.grey.checked
     return (
         <ContentArea className={'noSpacing'} color={grey ? 'grey' : null}>
