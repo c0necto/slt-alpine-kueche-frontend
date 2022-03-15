@@ -1,6 +1,5 @@
 import React from "react"
 
-import AreabrickList from '~components/Areabricks/AreabrickList'
 import ClusterAreabrick from '~components/Areabricks/Cluster'
 import GalleryAreabrick from '~components/Areabricks/Gallery'
 import HeadlineAreabrick from '~components/Areabricks/Headline'
@@ -16,6 +15,24 @@ import TeaserSAreabrick from '~components/Areabricks/TeaserS'
 import TeaserXLAreabrick from '~components/Areabricks/TeaserXL'
 import TextAreabrick from '~components/Areabricks/Text'
 import UnknownAreabrick from '~components/Areabricks/Unknown'
+
+/**
+ * Area blocks consist of children, so we need to map them to a list of <Areabricks /> which in turn
+ * will map the children to the correct component to be rendered
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const AreabrickList = props => {
+    const { data } = props;
+
+    // Render a list of <Areabricks /> and pass all data as props
+    return (
+        <>
+            {data ? data.map(element => <Areabrick {...element} />) : null}
+        </>
+    )
+}
 
 // Defines the mapping between the 'type' property of an areabrick and the component to render
 let brickComponents = {
