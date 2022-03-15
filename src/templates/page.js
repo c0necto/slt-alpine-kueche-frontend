@@ -269,26 +269,49 @@ const SeparatorAreabrick = () => {
 
 const TeaserSAreabrick = props => {
     const {elements} = props;
+    console.log(props)
+    console.log(props.length)
     return (
         <>
             <ContentArea className={'top80'} color={'grey'}>
-                <Container>
-                    <Grid cols={4}>
-                        {elements.teasers.relations.map((teaser, index) => {
-                            return (
-                                <TeaserS
-                                    key={teaser.title + '_' + index}
-                                    title={teaser.title}
-                                    text={teaser.text}
-                                    image={teaser.image}
-                                    blank={true}
-                                    slug={teaser.slug[0]?.slug}>
-                                    {teaser.title}
-                                </TeaserS>
-                            )
-                        })}
-                    </Grid>
-                </Container>
+                    {elements.teasers.relations.length > 3 ? (
+                        <Container variant={'mobileFullwidth'}>
+                            <Slider noarrows>
+                                {elements.teasers.relations.map((teaser, index) => {
+                                    return (
+                                        <TeaserS
+                                            key={teaser.title + '_' + index}
+                                            title={teaser.title}
+                                            text={teaser.text}
+                                            image={teaser.image}
+                                            blank={true}
+                                            slug={teaser.slug[0]?.slug}>
+                                            {teaser.title}
+                                        </TeaserS>
+                                    )
+                                })}
+                            </Slider>
+                        </Container>
+                    ) : (
+                        <Container>
+                        <Grid cols={4}>
+                            {elements.teasers.relations.map((teaser, index) => {
+                                return (
+                                    <TeaserS
+                                        key={teaser.title + '_' + index}
+                                        title={teaser.title}
+                                        text={teaser.text}
+                                        image={teaser.image}
+                                        blank={true}
+                                        slug={teaser.slug[0]?.slug}>
+                                        {teaser.title}
+                                    </TeaserS>
+                                )
+                            })}
+                        </Grid>
+                        </Container>
+                    )}
+
             </ContentArea>
             <SeparatorAreabrick/>
         </>
@@ -575,6 +598,7 @@ const DefaultTemplate = props => {
                                         key={'article-slider-item-' + page.id}
                                         image={elementsByName.image}
                                         title={elementsByName.h1?.text}
+                                        slider={true}
                                         text={elementsByName.subtitle?.text}>
                                         {elementsByName.h1?.text}
                                     </TeaserS>

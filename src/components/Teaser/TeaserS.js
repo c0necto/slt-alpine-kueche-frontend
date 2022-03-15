@@ -6,6 +6,17 @@ import {artDirection} from '~utils';
 
 // todo: include slider if more than 4 items
 
+const TitleText = props => {
+    return (
+        <>
+            <h4>{props.children}</h4>
+            {props.text ? <div className={styles.text}>
+                {props.text}
+            </div> : null}
+        </>
+    )
+}
+
 const TeaserContent = props => {
 
     let images = false
@@ -13,9 +24,8 @@ const TeaserContent = props => {
         images = artDirection(
             props.image.teaserSDesktop.childImageSharp,
             props.image.teaserSMobile.childImageSharp,
-        );
+        )
     }
-    let targetUrl = 'https://www.salzburgerland.com/' + props.slug
 
     return (
         <>
@@ -36,14 +46,10 @@ const TeaserContent = props => {
                 )}
             </figure>
             <div className={styles.content}>
-                {!props.blank ? <Link to={props.slug}>
-                    <h4>{props.children}</h4>
-                </Link> : <a href={targetUrl} target={'_blank'} rel={'noreferrer'}>
-                    <h4>{props.children}</h4>
-                    {props.text ? <div className={styles.text}>
-                        {props.text}
-                    </div> : null}
-                </a>}
+                {props.slider
+                    ? <a href={props.url} target={'_blank'} rel={'noreferrer'}><TitleText {...props} /></a>
+                    : <TitleText {...props} />
+                }
             </div>
         </>
     )
@@ -52,7 +58,7 @@ const TeaserContent = props => {
 const LinkComponent = props => {
     return (
         <Link to={props.slug} className={styles.teaserS}>
-            <TeaserContent {...props} />
+            <TeaserContent {...props} url={props.slug} />
         </Link>
     )
 }
@@ -60,8 +66,16 @@ const LinkComponent = props => {
 const HrefComponent = props => {
     return (
         <a href={props.targetUrl} className={styles.teaserS} target={'_blank'} rel={'noreferrer'}>
-            <TeaserContent {...props} />
+            <TeaserContent {...props} url={props.targetUrl} />
         </a>
+    )
+}
+
+const DivComponent = props => {
+    return (
+        <div className={styles.teaserS}>
+            <TeaserContent {...props} url={props.slug} />
+        </div>
     )
 }
 
@@ -69,6 +83,8 @@ const Teaser = props => {
     let targetUrl = 'https://www.salzburgerland.com' + props.slug
     if (props.blank) {
         return <HrefComponent {...props} targetUrl={targetUrl} />
+    } else if ( props.slider ) {
+        return <DivComponent {...props} />
     } else {
         return <LinkComponent {...props} />
     }

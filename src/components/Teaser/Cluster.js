@@ -6,9 +6,9 @@ import * as styles from './Cluster.module.scss';
 /*todo: check for empty relations*/
 
 const Cluster = props => {
-    console.log(props)
+    //console.log(props)
     const teasers = props.elements.teasers.relations
-    console.log(teasers)
+    //console.log(teasers)
     return (
         <div className={styles.cluster}>
             <div className={styles.m1}>
@@ -32,17 +32,6 @@ const Cluster = props => {
                 </TeaserMVariant>
             </div>
             <div className={styles.clusterTeaser}>
-                {/*<TeaserCluster
-                    title={'Cluster-Teaser'}
-                    to={"/skiatlas"}
-                    image={props.teaserL}
-                    clusterImage={props.cluster}
-                    subtitle={"Subheadline"}
-                    buttontext={'CTA Button'}
-                    fakebutton={true}
-                    withinCluster={true}
-                />*/}
-
                 <TeaserCluster
                     title={teasers[2].title}
                     subtitle={'Lorem ipsum dolor sit amet...'}

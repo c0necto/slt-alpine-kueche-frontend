@@ -23,7 +23,8 @@ const TeaserContent = props => {
                     <GatsbyImage
                         image={images}
                         alt={props.text ? props.text : props.title}
-                        className={styles.image}/>
+                        className={styles.image}
+                    />
                 ) : (
                     <StaticImage
                         src={'../../images/placeholder.jpg'}
@@ -65,6 +66,14 @@ const HrefComponent = props => {
         <a href={props.targetUrl} className={cn(styles.teaserL, styles.noMargin)} target={'_blank'} rel={'noreferrer'}>
             <TeaserContent {...props} />
         </a>
+    )
+}
+
+const divComponent = props => {
+    return (
+        <div className={styles.teaserL}>
+            <TeaserContent {...props} />
+        </div>
     )
 }
 
