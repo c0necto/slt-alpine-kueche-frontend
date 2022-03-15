@@ -121,7 +121,7 @@ const getHierarchy = (elements, namespace = '') => {
 
 const ColsAreabrick = props => {
     const { children } = props
-    //const grey = elements.grey.checked
+    //const grey = elements.grey?.checked
 
     // Get children with column_content in their name
     const columns = children.filter(
@@ -143,7 +143,7 @@ const ColsAreabrick = props => {
 
 const GalleryAreabrick = props => {
     const { elements } = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
@@ -156,7 +156,7 @@ const GalleryAreabrick = props => {
 
 const ImageAreabrick = props => {
     const { elements } = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
     const { document } = useContext(PimcoreContext)
 
     let images = false;
@@ -191,7 +191,7 @@ const ImageAreabrick = props => {
 
 const QuoteAreabrick = props => {
     const { elements } = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
@@ -207,7 +207,7 @@ const QuoteAreabrick = props => {
 
 const TextAreabrick = props => {
     const { elements } = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
@@ -221,7 +221,7 @@ const TextAreabrick = props => {
 const IntrotextAreabrick = props => {
     const { elements } = props
     console.log(elements)
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
@@ -234,7 +234,7 @@ const IntrotextAreabrick = props => {
 
 const HeadlineAreabrick = props => {
     const { elements } = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
     return (
         <ContentArea className={'bottom30'} color={grey ? 'grey' : null}>
             <Container variant={'narrow'}>
@@ -248,7 +248,7 @@ const HeadlineAreabrick = props => {
 
 const IframeAreabrick = props => {
     const { elements } = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
             <Container>
@@ -269,7 +269,7 @@ const IframeAreabrick = props => {
 const SeparatorAreabrick = props => {
     const { elements } = props
     console.log(elements)
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
     return (
         <ContentArea className={'noSpacing'} color={grey ? 'grey' : null}>
             <Container>
@@ -281,7 +281,7 @@ const SeparatorAreabrick = props => {
 
 const TeaserSAreabrick = props => {
     const {elements} = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
     return (
         <>
             <ContentArea className={'top80'} color={grey ? 'grey' : null}>
@@ -331,7 +331,7 @@ const TeaserSAreabrick = props => {
 
 const TeaserMAreabrick = props => {
     const {elements} = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
     return (
         <>
             <ContentArea className={'top80'} color={grey ? 'grey' : null}>
@@ -360,7 +360,7 @@ const TeaserMAreabrick = props => {
 
 const TeaserMVariantAreabrick = props => {
     const {elements} = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
     return (
         <>
             <ContentArea className={'top80'} color={grey ? 'grey' : null}>
@@ -389,7 +389,7 @@ const TeaserMVariantAreabrick = props => {
 
 const TeaserLAreabrick = props => {
     const {elements} = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
     const teaser = elements.teaser.relations[0]
     return (
         <>
@@ -417,7 +417,7 @@ const TeaserLAreabrick = props => {
 
 const TeaserXLAreabrick = props => {
     const {elements} = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
     const teaser = elements.teaser.relations[0]
     return (
         <>
@@ -443,7 +443,7 @@ const TeaserXLAreabrick = props => {
 
 const ClusterAreabrick = props => {
     const { elements } = props
-    const grey = elements.grey.checked
+    const grey = elements.grey?.checked
     return (
         <ContentArea className={'top80'} color={grey ? 'grey' : null}>
             <Cluster elements={elements} />
