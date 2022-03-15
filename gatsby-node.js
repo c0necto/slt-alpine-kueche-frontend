@@ -81,12 +81,12 @@ const createIndividualDocumentPages = async (
         !(skipRootPage && document.fullpath === '/')
     ) {
         const locale = document.language ? document.language[0].text : 'de';
-        console.log('----');
+        /*console.log('----');
         console.log('fullpath', document.fullpath);
         console.log('folder', '/' + locale);
         console.log('footer', '/' + locale + '/Footer');
         console.log('id', parseInt(document.id));
-        console.log('----');
+        console.log('----');*/
         gatsbyUtilities.actions.createPage({
             path: document.fullpath,
             component: path.resolve(`./src/templates/page.js`),

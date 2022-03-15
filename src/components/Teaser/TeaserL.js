@@ -1,36 +1,39 @@
-import { Link } from 'gatsby';
+import {Link} from 'gatsby';
 import React from 'react';
 import Cta from '~components/Cta/Cta';
-import { GatsbyImage, StaticImage } from 'gatsby-plugin-image';
+import {GatsbyImage, StaticImage} from 'gatsby-plugin-image';
 import * as styles from './TeaserL.module.scss';
-import { artDirection } from '~utils';
+import {artDirection} from '~utils';
+import cn from "classnames";
 
-const Teaser = props => {
-    let images = false;
-    if (props.image?.desktop && props.image?.mobile) {
+const TeaserContent = props => {
+
+    let images = false
+    if (props.image?.teaserSMobile) {
         images = artDirection(
-            props.image.desktop.childImageSharp,
-            props.image.mobile.childImageSharp,
-        );
+            props.image.teaserSMobile.childImageSharp,
+            props.image.teaserSMobile.childImageSharp,
+        )
     }
+
     return (
-        <Link to={props.to} className={styles.teaserL}>
-            {!!images ? (
-                <figure>
+        <>
+            <figure>
+                {!!images ? (
                     <GatsbyImage
                         image={images}
-                        alt={props.title}
-                        className={styles.image}
-                    />
-                </figure>
-            ) : (
-                <figure>
+                        alt={props.text ? props.text : props.title}
+                        className={styles.image}/>
+                ) : (
                     <StaticImage
-                        src={'../../images/1170x660.png'}
+                        src={'../../images/placeholder.jpg'}
                         alt="Bitte Bild hinterlegen"
+                        width={1170}
+                        height={661}
                     />
-                </figure>
-            )}
+                )}
+            </figure>
+
             <div className={styles.content}>
                 <div className={styles.ctaPosition}>
                     <div className={styles.innerContent}>
@@ -45,8 +48,33 @@ const Teaser = props => {
                     </div>
                 </div>
             </div>
+        </>
+    )
+}
+
+const LinkComponent = props => {
+    return (
+        <Link to={props.slug} className={styles.teaserL}>
+            <TeaserContent {...props} />
         </Link>
-    );
-};
+    )
+}
+
+const HrefComponent = props => {
+    return (
+        <a href={props.targetUrl} className={cn(styles.teaserL, styles.noMargin)} target={'_blank'} rel={'noreferrer'}>
+            <TeaserContent {...props} />
+        </a>
+    )
+}
+
+const Teaser = props => {
+    let targetUrl = 'https://www.salzburgerland.com/' + props.slug
+    if (props.blank) {
+        return <HrefComponent {...props} targetUrl={targetUrl} />
+    } else {
+        return <LinkComponent {...props} />
+    }
+}
 
 export default Teaser;

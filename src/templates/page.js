@@ -11,11 +11,19 @@ import Container from '~components/Container/Container';
 import Headline from '~components/Headline/Headline';
 import Intro from '~components/Intro/Intro';
 import Button from '~components/Button/Button';
-import TeaserL from '~components/Teaser/TeaserL';
 import Pagination from '~components/Pagination/Pagination';
 
-import Slider from '~components/Slider/Slider';
+import Grid from '~components/Grid/Grid';
+
+import Cluster from '~components/Teaser/Cluster';
+import TeaserL from '~components/Teaser/TeaserL';
+import TeaserM from '~components/Teaser/TeaserM';
+import TeaserMVariant from '~components/Teaser/TeaserMVariant';
 import TeaserS from '~components/Teaser/TeaserS';
+import TeaserXL from '~components/Teaser/TeaserXL';
+import Separator from '~components/Separator/Separator';
+
+import Slider from '~components/Slider/Slider';
 
 import * as pagesStyles from '../pages/Pages.module.scss';
 import parse from 'html-react-parser';
@@ -249,6 +257,161 @@ const IframeAreabrick = props => {
     );
 };
 
+const SeparatorAreabrick = () => {
+    return (
+        <ContentArea className={'noSpacing'} color={'grey'}>
+            <Container>
+                <Separator />
+            </Container>
+        </ContentArea>
+    )
+}
+
+const TeaserSAreabrick = props => {
+    const {elements} = props;
+    return (
+        <>
+            <ContentArea className={'top80'} color={'grey'}>
+                <Container>
+                    <Grid cols={4}>
+                        {elements.teasers.relations.map((teaser, index) => {
+                            return (
+                                <TeaserS
+                                    key={teaser.title + '_' + index}
+                                    title={teaser.title}
+                                    text={teaser.text}
+                                    image={teaser.image}
+                                    blank={true}
+                                    slug={teaser.slug[0]?.slug}>
+                                    {teaser.title}
+                                </TeaserS>
+                            )
+                        })}
+                    </Grid>
+                </Container>
+            </ContentArea>
+            <SeparatorAreabrick/>
+        </>
+    );
+};
+
+const TeaserMAreabrick = props => {
+    const {elements} = props;
+    return (
+        <>
+            <ContentArea className={'top80'} color={'grey'}>
+                <Container>
+                    <Grid cols={2}>
+                        {elements.teasers.relations.map((teaser, index) => {
+                            return (
+                                <TeaserM
+                                    key={teaser.title + '_' + index}
+                                    title={teaser.title}
+                                    text={teaser.text}
+                                    image={teaser.image}
+                                    blank={true}
+                                    slug={teaser.slug[0]?.slug}>
+                                    {teaser.title}
+                                </TeaserM>
+                            )
+                        })}
+                    </Grid>
+                </Container>
+            </ContentArea>
+            <SeparatorAreabrick/>
+        </>
+    );
+};
+
+const TeaserMVariantAreabrick = props => {
+    const {elements} = props;
+    return (
+        <>
+            <ContentArea className={'top80'} color={'grey'}>
+                <Container>
+                    <Grid cols={2}>
+                        {elements.teasers.relations.map((teaser, index) => {
+                            return (
+                                <TeaserMVariant
+                                    key={teaser.title + '_' + index}
+                                    title={teaser.title}
+                                    text={teaser.text}
+                                    image={teaser.image}
+                                    blank={true}
+                                    slug={teaser.slug[0]?.slug}>
+                                    {teaser.title}
+                                </TeaserMVariant>
+                            )
+                        })}
+                    </Grid>
+                </Container>
+            </ContentArea>
+            <SeparatorAreabrick/>
+        </>
+    );
+};
+
+const TeaserLAreabrick = props => {
+    const {elements} = props;
+    const teaser = elements.teaser.relations[0]
+    return (
+        <>
+            <ContentArea className={'top80'} color={'grey'}>
+                <Container>
+                    <TeaserL
+                        title={teaser.title}
+
+                        subtitle={'Lorem ipsum dolor sit amet...'}
+                        buttontext={'Weiterlesen'}
+                        fakebutton={true}
+
+                        text={teaser.text}
+                        image={teaser.image}
+                        blank={true}
+                        slug={teaser.slug[0]?.slug}>
+                        {teaser.title}
+                    </TeaserL>
+                </Container>
+            </ContentArea>
+            <SeparatorAreabrick/>
+        </>
+    );
+};
+
+const TeaserXLAreabrick = props => {
+    const {elements} = props;
+    const teaser = elements.teaser.relations[0]
+    return (
+        <>
+            <ContentArea className={'top80'} color={'grey'}>
+                <TeaserXL
+                    title={teaser.title}
+
+                    subtitle={'Lorem ipsum dolor sit amet...'}
+                    buttontext={'Weiterlesen'}
+                    fakebutton={true}
+
+                    text={teaser.text}
+                    image={teaser.image}
+                    blank={true}
+                    slug={teaser.slug[0]?.slug}>
+                    {teaser.title}
+                </TeaserXL>
+            </ContentArea>
+            <SeparatorAreabrick/>
+        </>
+    );
+};
+
+const ClusterAreabrick = props => {
+    const { elements } = props;
+    return (
+        <ContentArea className={'top80'} color={'grey'}>
+            <Cluster elements={elements} />
+        </ContentArea>
+    );
+};
+
 const UnknownAreabrick = props => {
     const { type } = props;
 
@@ -312,7 +475,7 @@ const AreabrickList = props => {
 };
 
 // Defines the mapping between the 'type' property of an areabrick and the component to render
-const brickComponents = {
+let brickComponents = {
     areablock: AreabrickList,
     headline: HeadlineAreabrick,
     cols: ColsAreabrick,
@@ -325,11 +488,21 @@ const brickComponents = {
     unknown: UnknownAreabrick,
 };
 
+brickComponents['teaser-s'] = TeaserSAreabrick
+brickComponents['teaser-m'] = TeaserMAreabrick
+brickComponents['teaser-m-variant'] = TeaserMVariantAreabrick
+brickComponents['teaser-l'] = TeaserLAreabrick
+brickComponents['teaser-x-l'] = TeaserXLAreabrick
+brickComponents['cluster'] = ClusterAreabrick
+
+//console.log(brickComponents)
+
+
 // =========================
 // Templates
 // =========================
 const DefaultTemplate = props => {
-    const { author, content, date, h1, image, subtitle, hideDateAuthor } =
+    const { author, content, teaser, date, h1, image, subtitle, hideDateAuthor } =
         props;
     const { document, pages } = useContext(PimcoreContext);
 
@@ -379,8 +552,10 @@ const DefaultTemplate = props => {
 
                 <AreabrickList {...content} />
 
+                <AreabrickList {...teaser} />
+
                 {/* Related Articles Slider */}
-                <ContentArea className={'top80Grey'}>
+                <ContentArea className={'top80'} color={'grey'}>
                     <Container>
                         <Headline level={'h2'} title={'Verwandte Artikel'} />
                     </Container>
@@ -398,7 +573,7 @@ const DefaultTemplate = props => {
                                     <TeaserS
                                         slug={page.fullpath}
                                         key={'article-slider-item-' + page.id}
-                                        image={elementsByName.image?.image}
+                                        image={elementsByName.image}
                                         title={elementsByName.h1?.text}
                                         text={elementsByName.subtitle?.text}>
                                         {elementsByName.h1?.text}
@@ -509,7 +684,7 @@ const OverviewTemplate = props => {
                                         'homepage-article-' + page.id + '-' + i
                                     }
                                     title={elementsByName.h1?.text}
-                                    to={page.fullpath}
+                                    slug={page.fullpath}
                                     image={elementsByName.image?.image}
                                     text={elementsByName.subtitle?.text}
                                     buttontext={buttonText}
@@ -561,6 +736,7 @@ const getPageById = (id, rootDocument) => {
 };
 
 const Article = ({ pageContext, data }) => {
+
     const document = data.pimcore.getDocument;
     const pages = data.pages.getDocumentFolder;
 
@@ -595,6 +771,7 @@ const Article = ({ pageContext, data }) => {
         elementsByName[element.name] = element;
     });
 
+
     //console.log("Document:", document)
     //console.log("Template: " + template)
     //console.log("Element list:", elements)
@@ -621,6 +798,7 @@ const Article = ({ pageContext, data }) => {
     if (Object.keys(footerElementsByName).length === 0) {
         footerElementsByName = null;
     }
+
 
     return (
         <PimcoreContext.Provider value={contextValue}>
@@ -695,6 +873,28 @@ export const query = graphql`
                     metadata {
                         name
                         data
+                    }
+
+                    teaserSMobile: imageNode(field: "assetThumb") {
+                        childImageSharp {
+                            gatsbyImageData(
+                                placeholder: BLURRED
+                                formats: [AUTO, WEBP]
+                                layout: CONSTRAINED
+                                aspectRatio: 1.78
+                            )
+                        }
+                    }
+                    teaserSDesktop: imageNode(field: "assetThumb") {
+                        childImageSharp {
+                            gatsbyImageData(
+                                placeholder: BLURRED
+                                formats: [AUTO, WEBP]
+                                layout: CONSTRAINED
+                                width: 270
+                                height: 150
+                            )
+                        }
                     }
                     mobile: imageNode(field: "assetThumb") {
                         childImageSharp {
@@ -810,8 +1010,6 @@ export const query = graphql`
                     __typename
                     ... on Pimcore_asset {
                         assetThumb: fullpath(thumbnail: "cover")
-                        assetThumbWide: fullpath(thumbnail: "cover_wide")
-
                         metadata {
                             name
                             data
@@ -872,6 +1070,91 @@ export const query = graphql`
                         id
                         title
                         fullpath
+                    }
+                    ... on Pimcore_object_Teaser {
+                        title
+                        subtitle
+                        image {
+                            assetThumb: fullpath(thumbnail: "cover")
+                            teaserSMobile: imageNode(field: "assetThumb") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        aspectRatio: 1.78
+                                    )
+                                }
+                            }
+                            teaserSDesktop: imageNode(field: "assetThumb") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        width: 270
+                                        height: 150
+                                    )
+                                }
+                            }
+                            teaserMDesktop: imageNode(field: "assetThumb") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        width: 270
+                                        height: 270
+                                    )
+                                }
+                            }
+                            teaserM: imageNode(field: "assetThumb") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        width: 570
+                                        height: 270
+                                    )
+                                }
+                            }
+                            teaserXLMobile: imageNode(field: "assetThumb") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: FULL_WIDTH
+                                        aspectRatio: 0.82
+                                    )
+                                }
+                            }
+                            teaserXLDesktop: imageNode(field: "assetThumb") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: FULL_WIDTH
+                                        aspectRatio: 2.5
+                                    )
+                                }
+                            }
+                            clusterDesktop: imageNode(field: "assetThumb") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        aspectRatio: 1.37
+                                    )
+                                }
+                            }
+                            
+                        }
+                        text
+                        slug {
+                            slug
+                        }
                     }
                 }
             }

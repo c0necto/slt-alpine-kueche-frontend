@@ -1,0 +1,56 @@
+/* Teaser M */
+
+.teaser-m {
+  background: $white;
+  color: $colorText;
+  //margin-top: pxToVwMobile(15px);
+  display: block;
+
+  @include everything_from(tablet) {
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: pxToVw(270px) auto;
+    @include everything_from(desktop) {
+      grid-template-columns: 270px auto;
+    }
+  }
+
+  .content {
+    @include fluid2(padding-top, 45px, 30px);
+    @include fluid2(padding-right, 45px, 30px);
+    @include fluid2(padding-bottom, 45px, 30px);
+    @include fluid2(padding-left, 45px, 30px);
+
+    @include fluid1(padding-top, 30px);
+    @include fluid1(padding-right, 30px);
+    @include fluid1(padding-bottom, 30px);
+    @include fluid1(padding-left, 30px);
+  }
+
+  h4 {
+    @include fluid2(font-size, 19px, 20px);
+    @include fluid2(line-height, 21px, 23px);
+    @include fluid2(margin-bottom, 15px, 15px);
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .text {
+    @include fluid2(font-size, 16px, 16px);
+    @include fluid2(line-height, 22px, 25px);
+    font-weight: 300;
+  }
+
+  $imageWidth: 345;
+  $imageHeight: 194;
+  $ratio: ($imageHeight*100)/$imageWidth * 1%;
+  @include everything_until(tablet) {
+    .image {
+      @include filled-container($ratio);
+      & > * {
+        @include filled-content;
+      }
+    }
+  }
+
+}

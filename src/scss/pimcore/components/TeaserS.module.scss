@@ -1,5 +1,3 @@
-@import "src/global";
-
 /* Teaser S */
 
 .teaser-s {
@@ -28,10 +26,6 @@
     @include fluid2(font-size, 16px, 16px);
     @include fluid2(line-height, 22px, 25px);
     font-weight: 300;
-  }
-
-  h4 + .text {
-    @include fluid1(margin-top, 10px);
   }
 
   figure {

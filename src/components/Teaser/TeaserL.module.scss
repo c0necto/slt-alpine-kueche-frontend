@@ -8,7 +8,9 @@
     margin-right: pxToVwMobile($gapMobile*2 * -1);
   }
   @include fluid2(margin-bottom, 15px, 30px);
-
+  &.no-margin {
+    margin-bottom: 0;
+  }
 }
 .teaser-l {
   figure {
@@ -37,7 +39,6 @@
     }
   }
 }
-
 
 .ctaPosition {
   @include fluid2(bottom, 30px, 40px);

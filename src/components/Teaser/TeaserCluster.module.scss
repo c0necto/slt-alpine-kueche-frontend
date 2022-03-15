@@ -1,0 +1,43 @@
+@import "src/global";
+
+.teaser-l {
+  position: relative;
+  display: block;
+  @include everything_until(tablet) {
+    margin-left: pxToVwMobile($gapMobile * -1);
+    margin-right: pxToVwMobile($gapMobile * -1);
+  }
+}
+.ctaPosition {
+  @include fluid2(bottom, 30px, 40px);
+  position: absolute;
+  @include fluid2(left, 30px, 40px);
+  max-width: 80%;
+}
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  @include gradient(31.52%, 37.31%);
+}
+.innerContent {
+  position: relative;
+  @include everything_until(tablet) {
+    padding-left: pxToVwMobile($gapMobile);
+  }
+}
+.teaser-l {
+  $imageWidth: 375;
+  $imageHeight: 460;
+  $ratio: ($imageHeight*100)/$imageWidth * 1%;
+  @include everything_until(tablet) {
+    .image {
+      @include filled-container($ratio);
+      & > * {
+        @include filled-content;
+      }
+    }
+  }
+}

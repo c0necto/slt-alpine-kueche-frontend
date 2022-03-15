@@ -237,10 +237,7 @@
 }
 
 /* to Vw - Mobile (375px) */
-
 @function pxToVwMobile($value) {
-  // todo: check for correct implementation of division
-  //@return math.div(strip-unit($value) * 100, strip-unit(375)) + vw;
   @return ((strip-unit($value) * 100) / (strip-unit(375))) + vw;
 }
 @function pxToVwMobileStripped($value) {
@@ -249,13 +246,8 @@
 }
 
 /* To Vw - Tablet to Desktop (768px - 1169px) */
-
 @function pxToVw($value) {
-  //@return math.div(strip-unit($value) * 100, strip-unit($maxWidthDesktop)) + vw;
-  // todo: check for correct implementation of division
-  //@return math.div(strip-unit($value) * 100, strip-unit($maxWidthDesktop)) + vw;
   @return ((strip-unit($value) * 100) / (strip-unit($maxWidthDesktop))) + vw;
-  //@return strip-unit($value) * 100, strip-unit($maxWidthDesktop) + vw;
 }
 
 /* Fluidity Mixins */
