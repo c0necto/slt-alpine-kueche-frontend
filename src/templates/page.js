@@ -120,7 +120,8 @@ const getHierarchy = (elements, namespace = '') => {
 // =========================
 
 const ColsAreabrick = props => {
-    const { children } = props;
+    const { children } = props
+    //const grey = elements.grey.checked
 
     // Get children with column_content in their name
     const columns = children.filter(
@@ -141,10 +142,11 @@ const ColsAreabrick = props => {
 };
 
 const GalleryAreabrick = props => {
-    const { elements } = props;
+    const { elements } = props
+    const grey = elements.grey.checked
 
     return (
-        <ContentArea className={'bottom80'}>
+        <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
             <Container>
                 <Gallery nodes={elements.images.relations} />
             </Container>
@@ -153,8 +155,9 @@ const GalleryAreabrick = props => {
 };
 
 const ImageAreabrick = props => {
-    const { elements } = props;
-    const { document } = useContext(PimcoreContext);
+    const { elements } = props
+    const grey = elements.grey.checked
+    const { document } = useContext(PimcoreContext)
 
     let images = false;
     let imageMeta = false;
@@ -166,7 +169,7 @@ const ImageAreabrick = props => {
         imageMeta = imageAtts(document.title, elements.image.image.metadata);
     }
     return (
-        <ContentArea className={'bottom80'}>
+        <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
             <Container variant={'mobileFullwidth'}>
                 {!!images ? (
                     <GatsbyImage
@@ -187,10 +190,11 @@ const ImageAreabrick = props => {
 };
 
 const QuoteAreabrick = props => {
-    const { elements } = props;
+    const { elements } = props
+    const grey = elements.grey.checked
 
     return (
-        <ContentArea className={'bottom80'}>
+        <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
             <Container>
                 <Quotation
                     statement={elements.blockquote_statement?.text}
@@ -202,10 +206,11 @@ const QuoteAreabrick = props => {
 };
 
 const TextAreabrick = props => {
-    const { elements } = props;
+    const { elements } = props
+    const grey = elements.grey.checked
 
     return (
-        <ContentArea className={'bottom80'}>
+        <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
             <Container variant={'narrow'}>
                 {parse(elements?.text?.text)}
             </Container>
@@ -214,10 +219,11 @@ const TextAreabrick = props => {
 };
 
 const IntrotextAreabrick = props => {
-    const { elements } = props;
+    const { elements } = props
+    const grey = elements.grey.checked
 
     return (
-        <ContentArea className={'bottom80'}>
+        <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
             <Container variant={'narrow'}>
                 <Intro>{parse(elements?.text?.text)}</Intro>
             </Container>
@@ -226,9 +232,10 @@ const IntrotextAreabrick = props => {
 };
 
 const HeadlineAreabrick = props => {
-    const { elements } = props;
+    const { elements } = props
+    const grey = elements.grey.checked
     return (
-        <ContentArea className={'bottom30'}>
+        <ContentArea className={'bottom30'} color={grey ? 'grey' : null}>
             <Container variant={'narrow'}>
                 <Headline
                     title={parse(elements?.h3?.text)}
@@ -239,9 +246,10 @@ const HeadlineAreabrick = props => {
 };
 
 const IframeAreabrick = props => {
-    const { elements } = props;
+    const { elements } = props
+    const grey = elements.grey.checked
     return (
-        <ContentArea className={'bottom80'}>
+        <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
             <Container>
                 <div className={pagesStyles.iframeYoutube}>
                     <iframe
@@ -257,9 +265,11 @@ const IframeAreabrick = props => {
     );
 };
 
-const SeparatorAreabrick = () => {
+const SeparatorAreabrick = props => {
+    const { elements } = props
+    const grey = elements.grey.checked
     return (
-        <ContentArea className={'noSpacing'} color={'grey'}>
+        <ContentArea className={'noSpacing'} color={grey ? 'grey' : null}>
             <Container>
                 <Separator />
             </Container>
@@ -268,12 +278,11 @@ const SeparatorAreabrick = () => {
 }
 
 const TeaserSAreabrick = props => {
-    const {elements} = props;
-    console.log(props)
-    console.log(props.length)
+    const {elements} = props
+    const grey = elements.grey.checked
     return (
         <>
-            <ContentArea className={'top80'} color={'grey'}>
+            <ContentArea className={'top80'} color={grey ? 'grey' : null}>
                     {elements.teasers.relations.length > 3 ? (
                         <Container variant={'mobileFullwidth'}>
                             <Slider noarrows>
@@ -319,10 +328,11 @@ const TeaserSAreabrick = props => {
 };
 
 const TeaserMAreabrick = props => {
-    const {elements} = props;
+    const {elements} = props
+    const grey = elements.grey.checked
     return (
         <>
-            <ContentArea className={'top80'} color={'grey'}>
+            <ContentArea className={'top80'} color={grey ? 'grey' : null}>
                 <Container>
                     <Grid cols={2}>
                         {elements.teasers.relations.map((teaser, index) => {
@@ -347,10 +357,11 @@ const TeaserMAreabrick = props => {
 };
 
 const TeaserMVariantAreabrick = props => {
-    const {elements} = props;
+    const {elements} = props
+    const grey = elements.grey.checked
     return (
         <>
-            <ContentArea className={'top80'} color={'grey'}>
+            <ContentArea className={'top80'} color={grey ? 'grey' : null}>
                 <Container>
                     <Grid cols={2}>
                         {elements.teasers.relations.map((teaser, index) => {
@@ -375,11 +386,12 @@ const TeaserMVariantAreabrick = props => {
 };
 
 const TeaserLAreabrick = props => {
-    const {elements} = props;
+    const {elements} = props
+    const grey = elements.grey.checked
     const teaser = elements.teaser.relations[0]
     return (
         <>
-            <ContentArea className={'top80'} color={'grey'}>
+            <ContentArea className={'top80'} color={grey ? 'grey' : null}>
                 <Container>
                     <TeaserL
                         title={teaser.title}
@@ -402,11 +414,12 @@ const TeaserLAreabrick = props => {
 };
 
 const TeaserXLAreabrick = props => {
-    const {elements} = props;
+    const {elements} = props
+    const grey = elements.grey.checked
     const teaser = elements.teaser.relations[0]
     return (
         <>
-            <ContentArea className={'top80'} color={'grey'}>
+            <ContentArea className={'top80'} color={grey ? 'grey' : null}>
                 <TeaserXL
                     title={teaser.title}
 
@@ -427,17 +440,17 @@ const TeaserXLAreabrick = props => {
 };
 
 const ClusterAreabrick = props => {
-    const { elements } = props;
+    const { elements } = props
+    const grey = elements.grey.checked
     return (
-        <ContentArea className={'top80'} color={'grey'}>
+        <ContentArea className={'top80'} color={grey ? 'grey' : null}>
             <Cluster elements={elements} />
         </ContentArea>
     );
 };
 
 const UnknownAreabrick = props => {
-    const { type } = props;
-
+    const { type } = props
     return (
         <ContentArea className={'bottom80'}>
             <Container variant={'narrow'}>
@@ -517,6 +530,7 @@ brickComponents['teaser-m-variant'] = TeaserMVariantAreabrick
 brickComponents['teaser-l'] = TeaserLAreabrick
 brickComponents['teaser-x-l'] = TeaserXLAreabrick
 brickComponents['cluster'] = ClusterAreabrick
+brickComponents['separator'] = SeparatorAreabrick
 
 //console.log(brickComponents)
 
@@ -525,7 +539,7 @@ brickComponents['cluster'] = ClusterAreabrick
 // Templates
 // =========================
 const DefaultTemplate = props => {
-    const { author, content, teaser, date, h1, image, subtitle, hideDateAuthor } =
+    const { author, content, date, h1, image, subtitle, hideDateAuthor } =
         props;
     const { document, pages } = useContext(PimcoreContext);
 
@@ -574,8 +588,6 @@ const DefaultTemplate = props => {
                 </ContentArea>
 
                 <AreabrickList {...content} />
-
-                <AreabrickList {...teaser} />
 
                 {/* Related Articles Slider */}
                 <ContentArea className={'top80'} color={'grey'}>
