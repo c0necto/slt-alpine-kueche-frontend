@@ -9,6 +9,7 @@
   //margin-top: pxToVwMobile(15px);
   display: block;
   text-align: left;
+  height: 100%;
 
   @include everything_from(tablet) {
     margin-top: 0;
