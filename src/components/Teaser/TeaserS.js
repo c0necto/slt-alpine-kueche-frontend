@@ -4,8 +4,6 @@ import {GatsbyImage, StaticImage} from 'gatsby-plugin-image';
 import * as styles from './TeaserS.module.scss';
 import {artDirection} from '~utils';
 
-// todo: include slider if more than 4 items
-
 const TitleText = props => {
     return (
         <>
@@ -16,9 +14,17 @@ const TitleText = props => {
         </>
     )
 }
-
+const LinkedTitleText = props => {
+    return (
+        <>
+            {props.blank
+            ? <a href={props.targetUrl} target={'_blank'} rel={'noreferrer'}><TitleText {...props} /></a>
+            : <Link to={props.slug}><TitleText {...props} /></Link>
+            }
+        </>
+    )
+}
 const TeaserContent = props => {
-
     let images = false
     if (props.image?.teaserSDesktop && props.image?.teaserSMobile) {
         images = artDirection(
@@ -26,7 +32,6 @@ const TeaserContent = props => {
             props.image.teaserSMobile.childImageSharp,
         )
     }
-
     return (
         <>
             <figure>
@@ -47,7 +52,7 @@ const TeaserContent = props => {
             </figure>
             <div className={styles.content}>
                 {props.slider
-                    ? <a href={props.url} target={'_blank'} rel={'noreferrer'}><TitleText {...props} /></a>
+                    ? <LinkedTitleText {...props} />
                     : <TitleText {...props} />
                 }
             </div>
@@ -55,39 +60,43 @@ const TeaserContent = props => {
     )
 }
 
-const LinkComponent = props => {
+const Internal = props => {
     return (
         <Link to={props.slug} className={styles.teaserS}>
-            <TeaserContent {...props} url={props.slug} />
+            <TeaserContent {...props} />
         </Link>
     )
 }
 
-const HrefComponent = props => {
+const External = props => {
     return (
         <a href={props.targetUrl} className={styles.teaserS} target={'_blank'} rel={'noreferrer'}>
-            <TeaserContent {...props} url={props.targetUrl} />
+            <TeaserContent {...props} />
         </a>
     )
 }
 
-const DivComponent = props => {
+const Slider = props => {
     return (
         <div className={styles.teaserS}>
-            <TeaserContent {...props} url={props.slug} />
+            <TeaserContent {...props} />
         </div>
     )
 }
 
 const Teaser = props => {
-    let targetUrl = 'https://www.salzburgerland.com' + props.slug
-    if (props.blank) {
-        return <HrefComponent {...props} targetUrl={targetUrl} />
-    } else if ( props.slider ) {
-        return <DivComponent {...props} />
-    } else {
-        return <LinkComponent {...props} />
+    const targetUrl = 'https://www.salzburgerland.com' + props.slug
+    // standard teaser element, links to internal
+    let containerComponent = <Internal {...props} />
+    // standard teaser element, links to external
+    if ( props.blank ) {
+        containerComponent = <External {...props} targetUrl={targetUrl} />
     }
+    // slider teaser element
+    if ( props.slider ) {
+        containerComponent = <Slider {...props} targetUrl={targetUrl} />
+    }
+    return containerComponent
 }
 
 export default Teaser;

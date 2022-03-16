@@ -7,7 +7,7 @@ import TeaserS from '~components/Teaser/TeaserS'
 
 const TeaserSAreabrick = props => {
     const {elements} = props
-    const grey = elements.grey?.checked
+    //const grey = elements.grey?.checked
     return (
         <ContentArea className={'top80'} color={'grey'}>
             {elements.teasers.relations.length > 4 ? (

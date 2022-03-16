@@ -85,9 +85,10 @@ const ArticleTemplate = props => {
                                     <TeaserS
                                         slug={page.fullpath}
                                         key={'article-slider-item-' + page.id}
-                                        image={elementsByName.image}
+                                        image={elementsByName.image?.image}
                                         title={elementsByName.h1?.text}
                                         slider={true}
+                                        blank={false}
                                         text={elementsByName.subtitle?.text}>
                                         {elementsByName.h1?.text}
                                     </TeaserS>
