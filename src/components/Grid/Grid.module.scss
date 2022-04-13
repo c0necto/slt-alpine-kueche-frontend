@@ -23,8 +23,10 @@
   }
   .grid-cols-4 {
     grid-gap: pxToVw(30px);
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, calc(#{pxToVw(270px)}));
+    place-content: center;
     @include everything_from(desktop) {
+      grid-template-columns: repeat(auto-fit, 270px);
       grid-gap: 30px;
     }
   }
