@@ -32,6 +32,11 @@
   @include fluid2(padding-bottom, 30px, 55px);
   text-align: center;
 }
+.padding-top-80-margin-bottom-100 {
+
+  @include fluid2(padding-top, 60px, 80px);
+  @include fluid2(margin-bottom, 60px, 100px);
+}
 .no-spacing {
   margin: 0;
   padding: 0;

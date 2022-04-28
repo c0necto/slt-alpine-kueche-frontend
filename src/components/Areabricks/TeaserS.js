@@ -8,8 +8,11 @@ import TeaserS from '~components/Teaser/TeaserS'
 const TeaserSAreabrick = props => {
     const {elements} = props
     //const grey = elements.grey?.checked
+    if ( !elements.teasers.relations )  {
+        return false
+    }
     return (
-        <ContentArea className={'top80'} color={'grey'}>
+        <ContentArea className={'paddingTop80MarginBottom100'} color={'grey'}>
             {elements.teasers.relations.length > 4 ? (
                 <Container variant={'mobileFullwidth'}>
                     <Slider noarrows>

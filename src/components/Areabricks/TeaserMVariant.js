@@ -7,6 +7,9 @@ import TeaserMVariant from '~components/Teaser/TeaserMVariant'
 const TeaserMVariantAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
+    if ( !elements.teasers.relations )  {
+        return false
+    }
     return (
         <ContentArea className={'top80'} color={grey ? 'grey' : null}>
             <Container>

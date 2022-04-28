@@ -7,6 +7,9 @@ import TeaserM from '~components/Teaser/TeaserM'
 const TeaserMAreabrick = props => {
     const {elements} = props
     //const grey = elements.grey?.checked
+    if ( !elements.teasers.relations )  {
+        return false
+    }
     return (
         <ContentArea className={'top80'} color={'grey'}>
             <Container>
