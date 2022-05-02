@@ -19,6 +19,7 @@ const TeaserXLAreabrick = props => {
                 text={teaser.text}
                 image={teaser.image}
                 blank={true}
+                internal={teaser.internal?.path}
                 slug={teaser.slug[0]?.slug}>
                 {teaser.title}
             </TeaserXL>

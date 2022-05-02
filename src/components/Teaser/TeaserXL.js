@@ -6,7 +6,7 @@ import Cta from "~components/Cta/Cta"
 import * as styles from "./TeaserXL.module.scss"
 import {artDirection} from "~utils"
 
-const Teaser = props => {
+const TeaserContent = props => {
     let images = false
     if (props.image?.teaserXLMobile && props.image?.teaserXLDesktop) {
         images = artDirection(
@@ -14,9 +14,8 @@ const Teaser = props => {
             props.image.teaserXLMobile.childImageSharp,
         );
     }
-    let targetUrl = 'https://www.salzburgerland.com/' + props.slug
     return (
-        <a href={targetUrl} className={styles.xl} target={'_blank'} rel={'noreferrer'}>
+        <>
             <figure>
                 {!!images ? (
                     <GatsbyImage
@@ -50,8 +49,39 @@ const Teaser = props => {
                     </div>
                 </Container>
             </div>
+        </>
+    )
+}
+
+const Internal = props => {
+    let link = props.slug
+    if ( props.internal ) {
+        link = props.internal
+    }
+    return (
+        <Link to={link} className={styles.xl}>
+            <TeaserContent {...props} />
+        </Link>
+    )
+}
+
+const External = props => {
+    return (
+        <a href={props.targetUrl} className={styles.xl} target={'_blank'} rel={'noreferrer'}>
+            <TeaserContent {...props} />
         </a>
     )
+}
+
+const Teaser = props => {
+    let targetUrl = 'https://www.salzburgerland.com/' + props.slug
+    // links to internal
+    let containerComponent = <Internal {...props} />
+    // links to external
+    if ( !props.internal ) {
+        containerComponent = <External {...props} targetUrl={targetUrl} />
+    }
+    return containerComponent
 }
 
 export default Teaser
