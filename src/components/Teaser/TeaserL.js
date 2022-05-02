@@ -53,15 +53,19 @@ const TeaserContent = props => {
     )
 }
 
-const LinkComponent = props => {
+const Internal = props => {
+    let link = props.slug
+    if ( props.internal ) {
+        link = props.internal
+    }
     return (
-        <Link to={props.slug} className={styles.teaserL}>
+        <Link to={link} className={styles.teaserL}>
             <TeaserContent {...props} />
         </Link>
     )
 }
 
-const HrefComponent = props => {
+const External = props => {
     return (
         <a href={props.targetUrl} className={cn(styles.teaserL, styles.noMargin)} target={'_blank'} rel={'noreferrer'}>
             <TeaserContent {...props} />
@@ -69,21 +73,15 @@ const HrefComponent = props => {
     )
 }
 
-const divComponent = props => {
-    return (
-        <div className={styles.teaserL}>
-            <TeaserContent {...props} />
-        </div>
-    )
-}
-
 const Teaser = props => {
     let targetUrl = 'https://www.salzburgerland.com/' + props.slug
-    if (props.blank) {
-        return <HrefComponent {...props} targetUrl={targetUrl} />
-    } else {
-        return <LinkComponent {...props} />
+    // links to internal
+    let containerComponent = <Internal {...props} />
+    // links to external
+    if ( !props.internal ) {
+        containerComponent = <External {...props} targetUrl={targetUrl} />
     }
+    return containerComponent
 }
 
 export default Teaser;
