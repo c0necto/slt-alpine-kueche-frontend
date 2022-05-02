@@ -109,7 +109,7 @@ const OverviewTemplate = props => {
                                         'homepage-article-' + page.id + '-' + i
                                     }
                                     title={elementsByName.h1?.text}
-                                    slug={page.fullpath}
+                                    internal={page.fullpath}
                                     image={elementsByName.image?.image}
                                     text={elementsByName.subtitle?.text}
                                     buttontext={buttonText}
