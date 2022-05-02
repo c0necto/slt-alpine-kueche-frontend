@@ -61,8 +61,12 @@ const TeaserContent = props => {
 }
 
 const Internal = props => {
+    let link = props.slug
+    if ( props.internal ) {
+        link = props.internal
+    }
     return (
-        <Link to={props.slug} className={styles.teaserS}>
+        <Link to={link} className={styles.teaserS}>
             <TeaserContent {...props} />
         </Link>
     )
@@ -89,7 +93,7 @@ const Teaser = props => {
     // standard teaser element, links to internal
     let containerComponent = <Internal {...props} />
     // standard teaser element, links to external
-    if ( props.blank ) {
+    if ( !props.internal ) {
         containerComponent = <External {...props} targetUrl={targetUrl} />
     }
     // slider teaser element

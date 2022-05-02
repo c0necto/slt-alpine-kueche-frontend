@@ -429,6 +429,9 @@ export const query = graphql`
                         slug {
                             slug
                         }
+                        internal {
+                            path
+                        }
                     }
                 }
             }

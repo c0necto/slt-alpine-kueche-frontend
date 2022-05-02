@@ -11,6 +11,7 @@ const TeaserSAreabrick = props => {
     if ( !elements.teasers.relations )  {
         return false
     }
+
     return (
         <ContentArea className={'paddingTop80MarginBottom100'} color={'grey'}>
             {elements.teasers.relations.length > 4 ? (
@@ -25,6 +26,7 @@ const TeaserSAreabrick = props => {
                                     image={teaser.image}
                                     blank={true}
                                     slider={true}
+                                    internal={teaser.internal?.path}
                                     slug={teaser.slug[0]?.slug}>
                                     {teaser.title}
                                 </TeaserS>
@@ -43,6 +45,7 @@ const TeaserSAreabrick = props => {
                                     text={teaser.text}
                                     image={teaser.image}
                                     blank={true}
+                                    internal={teaser.internal?.path}
                                     slug={teaser.slug[0]?.slug}>
                                     {teaser.title}
                                 </TeaserS>

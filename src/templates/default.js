@@ -88,7 +88,6 @@ const ArticleTemplate = props => {
                                         image={elementsByName.image?.image}
                                         title={elementsByName.h1?.text}
                                         slider={true}
-                                        blank={false}
                                         text={elementsByName.subtitle?.text}>
                                         {elementsByName.h1?.text}
                                     </TeaserS>
