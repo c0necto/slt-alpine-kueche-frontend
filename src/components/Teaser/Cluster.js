@@ -17,6 +17,7 @@ const Cluster = props => {
                     text={teasers[0].text}
                     image={teasers[0].image}
                     blank={true}
+                    internal={teasers[0].internal?.path}
                     slug={teasers[0].slug[0]?.slug}>
                     {teasers[0].title}
                 </TeaserMVariant>
@@ -27,6 +28,7 @@ const Cluster = props => {
                     text={teasers[1].text}
                     image={teasers[1].image}
                     blank={true}
+                    internal={teasers[1].internal?.path}
                     slug={teasers[1].slug[0]?.slug}>
                     {teasers[1].title}
                 </TeaserMVariant>
@@ -40,6 +42,7 @@ const Cluster = props => {
                     text={teasers[2].text}
                     image={teasers[2].image}
                     blank={true}
+                    internal={teasers[2].internal?.path}
                     slug={teasers[2].slug[0]?.slug}>
                     {teasers[2].title}
                 </TeaserCluster>
@@ -50,6 +53,7 @@ const Cluster = props => {
                     text={teasers[3].text}
                     image={teasers[3].image}
                     blank={true}
+                    internal={teasers[3].internal?.path}
                     slug={teasers[3].slug[0]?.slug}>
                     {teasers[3].title}
                 </TeaserMVariant>
@@ -60,6 +64,7 @@ const Cluster = props => {
                     text={teasers[4].text}
                     image={teasers[4].image}
                     blank={true}
+                    internal={teasers[4].internal?.path}
                     slug={teasers[4].slug[0]?.slug}>
                     {teasers[4].title}
                 </TeaserMVariant>

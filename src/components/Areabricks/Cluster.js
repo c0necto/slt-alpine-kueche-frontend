@@ -5,7 +5,6 @@ import Cluster from '~components/Teaser/Cluster'
 const ClusterAreabrick = props => {
     const { elements } = props
     const grey = elements.grey?.checked
-    console.log(elements)
     if ( !elements.teasers.relations )  {
         return false
     }
