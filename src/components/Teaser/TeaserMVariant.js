@@ -63,7 +63,7 @@ const External = props => {
 }
 
 const Teaser = props => {
-    let targetUrl = 'https://www.salzburgerland.com/' + props.slug
+    let targetUrl = 'https://www.salzburgerland.com' + props.slug
     // links to internal
     let containerComponent = <Internal {...props} />
     // links to external
