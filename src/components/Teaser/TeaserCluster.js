@@ -3,8 +3,9 @@ import Cta from "~components/Cta/Cta"
 import {GatsbyImage, StaticImage} from "gatsby-plugin-image"
 import * as styles from "./TeaserCluster.module.scss"
 import {artDirection} from "~utils"
+import {Link} from "gatsby";
 
-const Teaser = props => {
+const TeaserContent = props => {
     let images = false
     if (props.image?.teaserSMobile && props.image?.clusterDesktop) {
         images = artDirection(
@@ -12,9 +13,8 @@ const Teaser = props => {
             props.image.teaserSMobile.childImageSharp,
         );
     }
-    let targetUrl = 'https://www.salzburgerland.com/' + props.slug
     return (
-        <a href={targetUrl} className={styles.teaserL} target={'_blank'} rel={'noreferrer'}>
+        <>
             <figure>
                 {!!images ? (
                     <GatsbyImage
@@ -44,8 +44,39 @@ const Teaser = props => {
                     </div>
                 </div>
             </div>
+        </>
+    )
+}
+
+const Internal = props => {
+    let link = props.slug
+    if ( props.internal ) {
+        link = props.internal
+    }
+    return (
+        <Link to={link} className={styles.teaserL}>
+            <TeaserContent {...props} />
+        </Link>
+    )
+}
+
+const External = props => {
+    return (
+        <a href={props.targetUrl} className={styles.teaserL} target={'_blank'} rel={'noreferrer'}>
+            <TeaserContent {...props} />
         </a>
     )
+}
+
+const Teaser = props => {
+    let targetUrl = 'https://www.salzburgerland.com/' + props.slug
+    // links to internal
+    let containerComponent = <Internal {...props} />
+    // links to external
+    if ( !props.internal ) {
+        containerComponent = <External {...props} targetUrl={targetUrl} />
+    }
+    return containerComponent
 }
 
 export default Teaser
