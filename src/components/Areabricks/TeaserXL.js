@@ -13,7 +13,6 @@ const TeaserXLAreabrick = props => {
         <ContentArea className={''} color={grey ? 'grey' : null}>
             <TeaserXL
                 title={teaser.title}
-                subtitle={'Lorem ipsum dolor sit amet...'}
                 buttontext={'Weiterlesen'}
                 fakebutton={true}
                 text={teaser.text}

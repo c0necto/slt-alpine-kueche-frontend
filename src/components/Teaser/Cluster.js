@@ -36,7 +36,6 @@ const Cluster = props => {
             <div className={styles.clusterTeaser}>
                 <TeaserCluster
                     title={teasers[2].title}
-                    subtitle={'Lorem ipsum dolor sit amet...'}
                     buttontext={'Weiterlesen'}
                     fakebutton={true}
                     text={teasers[2].text}

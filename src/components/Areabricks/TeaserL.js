@@ -16,7 +16,6 @@ const TeaserLAreabrick = props => {
             <Container>
                 <TeaserL
                     title={teaser.title}
-                    subtitle={'Lorem ipsum dolor sit amet...'}
                     buttontext={'Weiterlesen'}
                     fakebutton={true}
                     text={teaser.text}
