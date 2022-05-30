@@ -50,7 +50,6 @@ const ArticleTemplate = props => {
 
             <main className={pagesStyles.pageMain} role="main" id="main">
                 <ContentArea className={'bottom55'}>
-                    test
                     <Headline
                         level={'h1'}
                         title={h1?.text ?? ''}
