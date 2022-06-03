@@ -3,6 +3,7 @@ import React from "react"
 import ClusterAreabrick from '~components/Areabricks/Cluster'
 import GalleryAreabrick from '~components/Areabricks/Gallery'
 import HeadlineAreabrick from '~components/Areabricks/Headline'
+import HtmlAreabrick from '~components/Areabricks/Html'
 import IframeAreabrick from '~components/Areabricks/Iframe'
 import ImageAreabrick from '~components/Areabricks/Image'
 import IntrotextAreabrick from '~components/Areabricks/Introtext'
@@ -44,6 +45,7 @@ let brickComponents = {
     text: TextAreabrick,
     introtext: IntrotextAreabrick,
     iframe: IframeAreabrick,
+    html: HtmlAreabrick,
     unknown: UnknownAreabrick,
     cluster: ClusterAreabrick,
     separator: SeparatorAreabrick,
