@@ -105,5 +105,11 @@ module.exports = {
                 useLangKeyLayout: false,
             },
         },
+        {
+            resolve: 'gatsby-plugin-cookiebot',
+            options: {
+                cookiebotId: '67e059ad-1f0f-40be-a06c-ce0e05698407'
+            },
+        },
     ],
 };
