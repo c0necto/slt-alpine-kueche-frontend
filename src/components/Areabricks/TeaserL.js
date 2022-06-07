@@ -6,7 +6,7 @@ import TeaserL from '~components/Teaser/TeaserL'
 const TeaserLAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
-    console.log(elements)
+    //console.log(elements)
     if ( !elements.teaser.relations )  {
         return false
     }
