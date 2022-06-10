@@ -87,33 +87,37 @@ const createIndividualDocumentPages = async (
         console.log('footer', '/' + locale + '/Footer');
         console.log('id', parseInt(document.id));
         console.log('----');*/
-        gatsbyUtilities.actions.createPage({
-            path: document.fullpath,
-            component: path.resolve(`./src/templates/index.js`),
-            context: {
-                locale,
-                rootDocument,
-                id: parseInt(document.id),
-                fullpath: document.fullpath,
-                snippets,
-                footer: '/' + locale + '/Footer',
-                folder: '/' + locale,
-            },
-        });
+        if(process.env.NODE_ENV === 'development' || document.published) {
+            gatsbyUtilities.actions.createPage({
+                path: document.fullpath,
+                component: path.resolve(`./src/templates/index.js`),
+                context: {
+                    locale,
+                    rootDocument,
+                    id: parseInt(document.id),
+                    fullpath: document.fullpath,
+                    snippets,
+                    footer: '/' + locale + '/Footer',
+                    folder: '/' + locale,
+                },
+            });
+        }
     }
 
     // Now do the same for all children
-    return Promise.all(
-        document.children.map(
-            async page =>
-                await createIndividualDocumentPages(
-                    snippets,
-                    rootDocument,
-                    page,
-                    gatsbyUtilities,
-                ),
-        ),
-    );
+    if(process.env.NODE_ENV === 'development' || document.published) {
+        return Promise.all(
+            document.children.map(
+                async page =>
+                    await createIndividualDocumentPages(
+                        snippets,
+                        rootDocument,
+                        page,
+                        gatsbyUtilities,
+                    ),
+            ),
+        );
+    }
 };
 
 /**
@@ -151,6 +155,7 @@ async function fetchDocument(gatsbyUtilities, id) {
             fragment EmailProperties on Pimcore_document_email {
                 id
                 fullpath
+                published
                 modificationDate
                 language: properties(keys: "language") {
                     ... on Pimcore_property_text {
@@ -167,6 +172,7 @@ async function fetchDocument(gatsbyUtilities, id) {
             fragment HardlinkProperties on Pimcore_document_hardlink {
                 id
                 fullpath
+                published
                 modificationDate
                 language: properties(keys: "language") {
                     ... on Pimcore_property_text {
@@ -178,6 +184,7 @@ async function fetchDocument(gatsbyUtilities, id) {
             fragment LinkProperties on Pimcore_document_link {
                 id
                 fullpath
+                published
                 modificationDate
                 language: properties(keys: "language") {
                     ... on Pimcore_property_text {
@@ -189,6 +196,7 @@ async function fetchDocument(gatsbyUtilities, id) {
             fragment PageProperties on Pimcore_document_page {
                 id
                 fullpath
+                published
                 modificationDate
                 language: properties(keys: "language") {
                     ... on Pimcore_property_text {
@@ -200,6 +208,7 @@ async function fetchDocument(gatsbyUtilities, id) {
             fragment SnippetProperties on Pimcore_document_snippet {
                 id
                 fullpath
+                published
                 modificationDate
                 language: properties(keys: "language") {
                     ... on Pimcore_property_text {
