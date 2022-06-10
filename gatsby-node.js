@@ -87,7 +87,7 @@ const createIndividualDocumentPages = async (
         console.log('footer', '/' + locale + '/Footer');
         console.log('id', parseInt(document.id));
         console.log('----');*/
-        if(process.env.NODE_ENV === 'development' || document.published) {
+        if(process.env.SHOW_UNPUBLISHED_PAGES == 1 || document.published) {
             gatsbyUtilities.actions.createPage({
                 path: document.fullpath,
                 component: path.resolve(`./src/templates/index.js`),
