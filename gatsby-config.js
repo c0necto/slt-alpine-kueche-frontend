@@ -43,7 +43,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-react-helmet-canonical-urls`,
             options: {
-                siteUrl: `https://www.alpinekueche.com`,
+                siteUrl: `https://www.alpine-kueche.com`,
             },
         },
         {
