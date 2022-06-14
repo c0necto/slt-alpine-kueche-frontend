@@ -16,7 +16,7 @@ import TeaserS from '~components/Teaser/TeaserS'
 
 const ArticleTemplate = props => {
 
-    const { author, content, date, h1, image, hideDateAuthor } =
+    const { author, content, date, h1, subtitle, image, hideDateAuthor } =
         props;
     const { document, pages } = useContext(PimcoreContext);
 
@@ -34,7 +34,7 @@ const ArticleTemplate = props => {
     const dateFormatted = date?.formatted ? date.formatted + ' ' : '';
     const authorFormatted = author?.text ? 'by ' + author.text : '';
     const h1Desc = hideDateAuthor?.checked
-        ? null
+        ? subtitle?.text
         : dateFormatted + authorFormatted;
 
     return (
