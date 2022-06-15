@@ -2,6 +2,7 @@ const path = require(`path`);
 //const chunk = require(`lodash/chunk`)
 
 const { createRemoteFileNode } = require('gatsby-source-filesystem');
+const {graphql} = require("gatsby");
 
 // This is a simple debugging tool
 // dd() will prettily dump to the terminal and kill the process
@@ -16,6 +17,7 @@ const { createRemoteFileNode } = require('gatsby-source-filesystem');
  * See https://www.gatsbyjs.com/docs/node-apis/#createPages for more info.
  */
 exports.createPages = async gatsbyUtilities => {
+    console.log(Object.keys(gatsbyUtilities))
     const { createRedirect } = gatsbyUtilities.actions;
 
     createRedirect({
@@ -88,6 +90,7 @@ const createIndividualDocumentPages = async (
         console.log('id', parseInt(document.id));
         console.log('----');*/
         if(process.env.SHOW_UNPUBLISHED_PAGES == 1 || document.published) {
+            const pageData = await getPageData(document, locale, gatsbyUtilities);
             gatsbyUtilities.actions.createPage({
                 path: document.fullpath,
                 component: path.resolve(`./src/templates/index.js`),
@@ -96,9 +99,11 @@ const createIndividualDocumentPages = async (
                     rootDocument,
                     id: parseInt(document.id),
                     fullpath: document.fullpath,
+                    modificationDate: document.modificationDate,
                     snippets,
                     footer: '/' + locale + '/Footer',
                     folder: '/' + locale,
+                    pageData
                 },
             });
         }
@@ -119,6 +124,510 @@ const createIndividualDocumentPages = async (
         );
     }
 };
+
+async function getPageData(page, locale, gatsbyUtilities) {
+    const { cache, graphql } = gatsbyUtilities;
+
+    const cacheKey = `pimcore_page_${page.id}_${locale}`;
+    const cachedData = await cache.get(cacheKey);
+
+    const pageData = cachedData ? cachedData.pimcore.getDocument : null;
+
+    console.log("Cached data for " + page.id + ":", pageData)
+
+    if ( page.modificationDate <= pageData?.modificationDate ) {
+        console.log("Page is up to date: " + page.id);
+
+        return cachedData
+    } else {
+        console.log("Updating cache for page " + page.id);
+
+        const result = await graphql(`
+            fragment elements on Pimcore_document_page {
+                elements {
+                    __typename
+                    ... on Pimcore_document_editableAreablock {
+                        _editableType
+                        _editableName
+                        data {
+                            key
+                            type
+                            hidden
+                        }
+                    }
+                    ... on Pimcore_document_editableBlock {
+                        _editableName
+                        _editableType
+                        indices
+                    }
+                    ... on Pimcore_document_editableCheckbox {
+                        _editableName
+                        _editableType
+                        checked
+                    }
+                    ... on Pimcore_document_editableDate {
+                        _editableName
+                        _editableType
+                        timestamp
+                        formatted(format: "d.m.Y")
+                    }
+                    ... on Pimcore_document_editableEmbed {
+                        _editableName
+                        _editableType
+                        url
+                    }
+                    ... on Pimcore_document_editableInput {
+                        _editableName
+                        _editableType
+                        text
+                    }
+                    ... on Pimcore_document_editableImage {
+                        _editableName
+                        _editableType
+                        image {
+                            id
+                            filename
+                            assetThumb: fullpath(thumbnail: "cover")
+                            assetThumbWide: fullpath(thumbnail: "cover_wide")
+                            metadata {
+                                name
+                                data
+                            }
+        
+                            teaserSMobile: imageNode(field: "assetThumb") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        aspectRatio: 1.78
+                                    )
+                                }
+                            }
+                            teaserSDesktop: imageNode(field: "assetThumb") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        width: 270
+                                        height: 150
+                                    )
+                                }
+                            }
+                            mobile: imageNode(field: "assetThumb") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        aspectRatio: 1.78
+                                    )
+                                }
+                            }
+                            mobileWide: imageNode(field: "assetThumbWide") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        aspectRatio: 1.78
+                                    )
+                                }
+                            }
+                            desktop: imageNode(field: "assetThumb") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        aspectRatio: 1.77
+                                    )
+                                }
+                            }
+                            desktopWide: imageNode(field: "assetThumbWide") {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        aspectRatio: 2.95
+                                    )
+                                }
+                            }
+                            lightbox: imageNode {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        placeholder: BLURRED
+                                        formats: [AUTO, WEBP]
+                                        layout: CONSTRAINED
+                                        width: 1920
+                                        height: 1080
+                                    )
+                                }
+                            }
+                        }
+                        alt
+                    }
+                    ... on Pimcore_document_editableLink {
+                        _editableName
+                        _editableType
+                        linkData: data {
+                            internal
+                            internalType
+                            internalId
+                            path
+                            text
+                            windowTarget
+                            parameters
+                            anchor
+                            title
+                            accesskey
+                            relation
+                            tabindex
+                            class
+                            attributes
+                        }
+                    }
+                    ... on Pimcore_document_editableMultiselect {
+                        _editableName
+                        _editableType
+                        selections
+                    }
+                    ... on Pimcore_document_editableNumeric {
+                        _editableName
+                        _editableType
+                        number
+                    }
+                    ... on Pimcore_document_editablePdf {
+                        _editableName
+                        _editableType
+                        pdf {
+                            id
+                            filename
+                            fullpath
+                        }
+                    }
+                    ... on Pimcore_document_editableRelation {
+                        _editableName
+                        _editableType
+                        id
+                        type
+                        subtype
+                        relation {
+                            ... on Pimcore_document_page {
+                                elements {
+                                    __typename
+                                }
+                            }
+                        }
+                    }
+                    ... on Pimcore_document_editableRelations {
+                        _editableName
+                        _editableType
+                        relations {
+                            __typename
+                            ... on Pimcore_asset {
+                                assetThumb: fullpath(thumbnail: "cover")
+                                metadata {
+                                    name
+                                    data
+                                }
+                                mobile: imageNode(field: "assetThumb") {
+                                    childImageSharp {
+                                        gatsbyImageData(
+                                            placeholder: BLURRED
+                                            formats: [AUTO, WEBP]
+                                            layout: CONSTRAINED
+                                            aspectRatio: 1.78
+                                        )
+                                    }
+                                }
+                                mobileWide: imageNode(field: "assetThumbWide") {
+                                    childImageSharp {
+                                        gatsbyImageData(
+                                            placeholder: BLURRED
+                                            formats: [AUTO, WEBP]
+                                            layout: CONSTRAINED
+                                            aspectRatio: 1.78
+                                        )
+                                    }
+                                }
+                                desktop: imageNode(field: "assetThumb") {
+                                    childImageSharp {
+                                        gatsbyImageData(
+                                            placeholder: BLURRED
+                                            formats: [AUTO, WEBP]
+                                            layout: CONSTRAINED
+                                            aspectRatio: 1.77
+                                        )
+                                    }
+                                }
+                                desktopWide: imageNode(field: "assetThumbWide") {
+                                    childImageSharp {
+                                        gatsbyImageData(
+                                            placeholder: BLURRED
+                                            formats: [AUTO, WEBP]
+                                            layout: CONSTRAINED
+                                            aspectRatio: 2.95
+                                        )
+                                    }
+                                }
+                                lightbox: imageNode {
+                                    childImageSharp {
+                                        gatsbyImageData(
+                                            placeholder: BLURRED
+                                            formats: [AUTO, WEBP]
+                                            layout: CONSTRAINED
+                                            width: 1920
+                                            height: 1080
+                                        )
+                                    }
+                                }
+                            }
+                            ... on Pimcore_document_page {
+                                id
+                                title
+                                fullpath
+                            }
+                            ... on Pimcore_object_Teaser {
+                                title
+                                subtitle
+                                image {
+                                    assetThumb: fullpath(thumbnail: "cover")
+                                    teaserSMobile: imageNode(field: "assetThumb") {
+                                        childImageSharp {
+                                            gatsbyImageData(
+                                                placeholder: BLURRED
+                                                formats: [AUTO, WEBP]
+                                                layout: CONSTRAINED
+                                                aspectRatio: 1.78
+                                            )
+                                        }
+                                    }
+                                    teaserSDesktop: imageNode(field: "assetThumb") {
+                                        childImageSharp {
+                                            gatsbyImageData(
+                                                placeholder: BLURRED
+                                                formats: [AUTO, WEBP]
+                                                layout: CONSTRAINED
+                                                width: 270
+                                                height: 150
+                                            )
+                                        }
+                                    }
+                                    teaserMDesktop: imageNode(field: "assetThumb") {
+                                        childImageSharp {
+                                            gatsbyImageData(
+                                                placeholder: BLURRED
+                                                formats: [AUTO, WEBP]
+                                                layout: CONSTRAINED
+                                                width: 270
+                                                height: 270
+                                            )
+                                        }
+                                    }
+                                    teaserM: imageNode(field: "assetThumb") {
+                                        childImageSharp {
+                                            gatsbyImageData(
+                                                placeholder: BLURRED
+                                                formats: [AUTO, WEBP]
+                                                layout: CONSTRAINED
+                                                width: 570
+                                                height: 270
+                                            )
+                                        }
+                                    }
+                                    teaserXLMobile: imageNode(field: "assetThumb") {
+                                        childImageSharp {
+                                            gatsbyImageData(
+                                                placeholder: BLURRED
+                                                formats: [AUTO, WEBP]
+                                                layout: FULL_WIDTH
+                                                aspectRatio: 0.82
+                                            )
+                                        }
+                                    }
+                                    teaserXLDesktop: imageNode(field: "assetThumb") {
+                                        childImageSharp {
+                                            gatsbyImageData(
+                                                placeholder: BLURRED
+                                                formats: [AUTO, WEBP]
+                                                layout: FULL_WIDTH
+                                                aspectRatio: 2.5
+                                            )
+                                        }
+                                    }
+                                    clusterDesktop: imageNode(field: "assetThumb") {
+                                        childImageSharp {
+                                            gatsbyImageData(
+                                                placeholder: BLURRED
+                                                formats: [AUTO, WEBP]
+                                                layout: CONSTRAINED
+                                                aspectRatio: 1.37
+                                            )
+                                        }
+                                    }
+                                    
+                                }
+                                text
+                                slug {
+                                    slug
+                                }
+                                internal {
+                                    path
+                                }
+                            }
+                        }
+                    }
+                    ... on Pimcore_document_editableSelect {
+                        _editableName
+                        _editableType
+                        text
+                    }
+                    ... on Pimcore_document_editableTextarea {
+                        _editableName
+                        _editableType
+                        text
+                    }
+                    ... on Pimcore_document_editableWysiwyg {
+                        _editableName
+                        _editableType
+                        text
+                    }
+                    ... on Pimcore_document_editableVideo {
+                        _editableName
+                        _editableType
+                        id
+                        type
+                        title
+                        description
+                        posterAsset {
+                            id
+                            filename
+                            fullpath
+                        }
+                        videoAsset {
+                            id
+                            filename
+                            fullpath
+                        }
+                    }
+                }
+            }
+            fragment footerElements on Pimcore_document_snippet {
+                elements {
+                    ... on Pimcore_document_editableInput {
+                        _editableName
+                        _editableType
+                        text
+                    }
+        
+                    ... on Pimcore_document_editableTextarea {
+                        _editableName
+                        _editableType
+                        text
+                    }
+        
+                    ... on Pimcore_document_editableBlock {
+                        _editableName
+                        _editableType
+                        indices
+                    }
+        
+                    ... on Pimcore_document_editableLink {
+                        _editableName
+                        _editableType
+                        linkData: data {
+                            internal
+                            internalType
+                            internalId
+                            path
+                            text
+                            windowTarget
+                            parameters
+                            anchor
+                            title
+                            accesskey
+                            relation
+                            tabindex
+                            class
+                            attributes
+                        }
+                    }
+                }
+            }
+        
+            query DocumentById($id: Int!, $footer: String!, $folder: String!) {
+                pimcore {
+                    getDocument(id: $id) {
+                        __typename
+                        ... on Pimcore_document_page {
+                            id
+                            modificationDate
+                            title
+                            description
+                            controller
+        
+                            page_title: title
+                            page_description: description
+                            page_language: properties(keys: "language") {
+                                ... on Pimcore_property_text {
+                                    text
+                                }
+                            }
+                            page_navigation_name: properties(keys: "navigation_name") {
+                                ... on Pimcore_property_text {
+                                    text
+                                }
+                            }
+                            parent {
+                                ... on Pimcore_document_page {
+                                    fullpath
+                                }
+                            }
+        
+                            ...elements
+                        }
+                    }
+                }
+        
+                pages: pimcore {
+                    getDocumentFolder(fullpath: $folder) {
+                        children {
+                            ... on Pimcore_document_page {
+                                id
+                                fullpath
+                                title
+                                ...elements
+                            }
+                        }
+                    }
+                }
+        
+                footer: pimcore {
+                    getDocument(fullpath: $footer) {
+                        __typename
+                        ... on Pimcore_document_snippet {
+                            id
+                            fullpath
+                            title
+                            ...footerElements
+                        }
+                    }
+                }
+            }
+        `, {
+            id: page.id,
+            folder: '/' + locale,
+            footer: '/' + locale + '/footer',
+        })
+
+        await cache.set(cacheKey, result);
+
+        return result
+    }
+}
 
 /**
  * This function creates a simple list of all the pages

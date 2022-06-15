@@ -134,6 +134,48 @@ const Index = ({ pageContext, data }) => {
 export default Index;
 
 export const query = graphql`
+    fragment footerElements on Pimcore_document_snippet {
+        elements {
+            ... on Pimcore_document_editableInput {
+                _editableName
+                _editableType
+                text
+            }
+    
+            ... on Pimcore_document_editableTextarea {
+                _editableName
+                _editableType
+                text
+            }
+    
+            ... on Pimcore_document_editableBlock {
+                _editableName
+                _editableType
+                indices
+            }
+    
+            ... on Pimcore_document_editableLink {
+                _editableName
+                _editableType
+                linkData: data {
+                    internal
+                    internalType
+                    internalId
+                    path
+                    text
+                    windowTarget
+                    parameters
+                    anchor
+                    title
+                    accesskey
+                    relation
+                    tabindex
+                    class
+                    attributes
+                }
+            }
+        }
+    }
     query {
         footer: pimcore {
             getDocument(fullpath: "/de/Footer") {
