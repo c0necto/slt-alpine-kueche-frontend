@@ -130,9 +130,9 @@ async function getPageData(page, locale, gatsbyUtilities) {
     const cacheKey = `pimcore_page_${page.id}_${locale}`;
     const cachedData = await cache.get(cacheKey);
 
+    gatsbyUtilities.reporter.info("Cached data for " + page.id + ":" + JSON.stringify(Object.keys(cachedData)))
     const pageData = cachedData ? cachedData.pimcore.getDocument : null;
 
-    gatsbyUtilities.reporter.info("Cached data for " + page.id + ":", pageData)
 
     if ( page.modificationDate <= pageData?.modificationDate ) {
         gatsbyUtilities.reporter.info("Page is up to date: " + page.id);
@@ -622,11 +622,11 @@ async function getPageData(page, locale, gatsbyUtilities) {
             footer: '/' + locale + '/footer',
         })
 
-        if(!result.errors) {
-            await cache.set(cacheKey, result);
+        if(!result.errors && result.data) {
+            await cache.set(cacheKey, result.data);
         }
 
-        return result
+        return result.data
     }
 }
 
