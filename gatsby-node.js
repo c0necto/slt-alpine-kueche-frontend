@@ -130,7 +130,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
     const cacheKey = `pimcore_page_${page.id}_${locale}`;
     const cachedData = await cache.get(cacheKey);
 
-    gatsbyUtilities.reporter.info("Cached data for " + page.id + ":" + JSON.stringify(Object.keys(cachedData)))
+    gatsbyUtilities.reporter.info("Cached data for " + page.id + ":" + JSON.stringify(Object.keys(cachedData ?? [])))
     const pageData = cachedData ? cachedData.pimcore.getDocument : null;
 
 
