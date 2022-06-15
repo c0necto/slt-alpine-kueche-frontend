@@ -18,8 +18,12 @@ const index = (props) => {
     const { pageData, rootDocument, snippets, modificationDate } = pageContext
     console.log(Object.keys(pageData))
 
-    const document = pageData.pimcore.getDocument
-    const pages = pageData.pages.getDocumentFolder
+    const document = pageData.pimcore?.getDocument
+    const pages = pageData.pages?.getDocumentFolder
+    if(!document) {
+        console.error("Could not find document " + pageContext.id)
+        return null
+    }
 
     console.log("Mod date: " + document.id + ': ' + modificationDate)
 
