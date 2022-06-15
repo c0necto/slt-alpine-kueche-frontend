@@ -135,7 +135,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
 
 
     if ( page.modificationDate <= pageData?.modificationDate ) {
-        gatsbyUtilities.reporter.info("Page is up to date: " + page.id);
+        gatsbyUtilities.reporter.info("Page is up to date: " + page.id + " (" + page.modificationDate + " <= " + pageData?.modificationDate + ")");
 
         return cachedData
     } else {
