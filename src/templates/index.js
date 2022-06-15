@@ -13,13 +13,16 @@ const templateComponents = {
     default: ArticleTemplate,
 }
 
-const index = ({ pageContext }) => {
+const index = (props) => {
+    const { pageContext } = props
     const { pageData, rootDocument, snippets, modificationDate } = pageContext
+    console.log(Object.keys(pageData))
 
     const document = pageData.pimcore.getDocument
     const pages = pageData.pages.getDocumentFolder
 
     console.log("Mod date: " + document.id + ': ' + modificationDate)
+
 
     const contextValue = { document, pages, rootDocument, snippets }
 
