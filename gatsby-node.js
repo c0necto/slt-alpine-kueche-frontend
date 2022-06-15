@@ -17,7 +17,6 @@ const {graphql} = require("gatsby");
  * See https://www.gatsbyjs.com/docs/node-apis/#createPages for more info.
  */
 exports.createPages = async gatsbyUtilities => {
-    console.log(Object.keys(gatsbyUtilities))
     const { createRedirect } = gatsbyUtilities.actions;
 
     createRedirect({
@@ -133,14 +132,14 @@ async function getPageData(page, locale, gatsbyUtilities) {
 
     const pageData = cachedData ? cachedData.pimcore.getDocument : null;
 
-    console.log("Cached data for " + page.id + ":", pageData)
+    gatsbyUtilities.reporter.info("Cached data for " + page.id + ":", pageData)
 
     if ( page.modificationDate <= pageData?.modificationDate ) {
-        console.log("Page is up to date: " + page.id);
+        gatsbyUtilities.reporter.info("Page is up to date: " + page.id);
 
         return cachedData
     } else {
-        console.log("Updating cache for page " + page.id);
+        gatsbyUtilities.reporter.info("Updating cache for page " + page.id);
 
         const result = await graphql(`
             fragment elements on Pimcore_document_page {
@@ -618,12 +617,14 @@ async function getPageData(page, locale, gatsbyUtilities) {
                 }
             }
         `, {
-            id: page.id,
+            id: parseInt(page.id, 10),
             folder: '/' + locale,
             footer: '/' + locale + '/footer',
         })
 
-        await cache.set(cacheKey, result);
+        if(!result.errors) {
+            await cache.set(cacheKey, result);
+        }
 
         return result
     }
