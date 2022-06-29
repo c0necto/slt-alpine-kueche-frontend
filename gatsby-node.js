@@ -619,7 +619,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
         `, {
             id: parseInt(page.id, 10),
             folder: '/' + locale,
-            footer: '/' + locale + '/footer',
+            footer: '/' + locale + '/Footer',
         })
 
         if(!result.errors && result.data) {
