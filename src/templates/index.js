@@ -16,7 +16,7 @@ const templateComponents = {
 const index = (props) => {
     const { pageContext } = props
     const { pageData, rootDocument, snippets, modificationDate } = pageContext
-    console.log(Object.keys(pageData))
+    //console.log(Object.keys(pageData))
 
     const document = pageData.pimcore?.getDocument
     const pages = pageData.pages?.getDocumentFolder
