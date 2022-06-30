@@ -35,6 +35,9 @@
     @include everything_from(tablet) {
       height: 0;
       padding-bottom: 56.25%;
+      .gatsby-image-wrapper {
+        position: absolute;
+      }
     }
 
 
