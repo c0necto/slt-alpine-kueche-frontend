@@ -19,7 +19,10 @@
 
 .portal {
 
-  max-height: calc(100vh - #{pxToVwMobile($stripHeightMobile)});
+  //max-height: calc(100vh - #{pxToVwMobile($stripHeightMobile)});
+  @include everything_until(tablet) {
+    height: 109.33333vw;
+  }
   @include everything_from(tablet) {;
     max-height: calc(100vh - #{pxToVw($stripHeightDesktop)});
   }
@@ -28,8 +31,11 @@
   }
 
   .media {
-    height: 0;
-    padding-bottom: 56.25%;
+    @include everything_from(tablet) {
+      height: 0;
+      padding-bottom: 56.25%;
+    }
+
 
     /*position: absolute;
     inset: 0;
