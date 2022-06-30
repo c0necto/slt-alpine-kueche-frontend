@@ -33,8 +33,8 @@
 
   .media {
     @include everything_from(tablet) {
-      height: 0;
-      padding-bottom: 56.25%;
+      /*height: 0;
+      padding-bottom: 56.25%;*/
       .gatsby-image-wrapper {
         // todo: why is this necessary?
         //position: absolute !important;
