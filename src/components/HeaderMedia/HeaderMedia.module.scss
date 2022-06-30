@@ -4,7 +4,7 @@
 
 .headermedia {
   position: relative;
-  /*overflow: hidden;*/
+  overflow: hidden;
   z-index: 1;
   @include everything_until(tablet) {
     height: pxToVwMobile(192px);
