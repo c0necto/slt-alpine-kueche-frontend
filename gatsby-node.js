@@ -239,7 +239,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
                                     gatsbyImageData(
                                         placeholder: BLURRED
                                         formats: [AUTO, WEBP]
-                                        layout: FULLWIDTH
+                                        layout: CONSTRAINED
                                         aspectRatio: 1.77
                                     )
                                 }
