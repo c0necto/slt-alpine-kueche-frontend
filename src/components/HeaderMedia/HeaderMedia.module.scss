@@ -5,23 +5,50 @@
 .headermedia {
   overflow: hidden;
   position: relative;
+  z-index: 1;
   @include everything_until(tablet) {
     height: pxToVwMobile(192px);
+    min-height: pxToVwMobile(192px);
   }
   @include everything_from(tablet) {
-    @include fluid1(height, 650px);
+    height: 56.25vw;
   }
-  z-index: 1;
+  max-height: 650px;
+
 }
 
 .portal {
-  overflow: hidden;
-  @include everything_until(tablet) {
+
+  max-height: calc(100vh - #{pxToVwMobile($stripHeightMobile)});
+  @include everything_from(tablet) {;
+    max-height: calc(100vh - #{pxToVw($stripHeightDesktop)});
+  }
+  @include everything_from(desktop) {
+    max-height: calc(100vh - #{$stripHeightDesktop});
+  }
+
+  .media {
+    height: 0;
+    padding-bottom: 56.25%;
+
+    /*position: absolute;
+    inset: 0;
+    max-height: calc(100vh - #{pxToVwMobile($stripHeightMobile)});
+    @include everything_from(tablet) {;
+      max-height: calc(100vh - #{pxToVw($stripHeightDesktop)});
+    }
+    @include everything_from(desktop) {
+      max-height: calc(100vh - #{$stripHeightDesktop});
+    }*/
+  }
+
+  /*@include everything_until(tablet) {
     height: pxToVwMobile(410px);
   }
   @include everything_from(tablet) {
     @include fluid1(height, 650px);
-  }
+  }*/
+
 }
 
 /* Image */

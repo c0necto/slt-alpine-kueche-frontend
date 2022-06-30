@@ -253,6 +253,16 @@
 /* Fluidity Mixins */
 
 /* fluidOne - one value - mobile vw, tablet px, desktop px */
+@mixin fluidAll($property, $value) {
+  // mobile
+  #{$property}: pxToVwMobile($value);
+  // tablet and up
+  @include everything_from(tablet) {
+    #{$property}: pxToVw($value);
+  }
+}
+
+/* fluidOne - one value - mobile vw, tablet px, desktop px */
 @mixin fluid1($property, $value) {
   // mobile
   #{$property}: pxToVwMobile($value);
