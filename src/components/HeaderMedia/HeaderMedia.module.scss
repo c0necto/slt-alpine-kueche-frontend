@@ -22,6 +22,7 @@
   //max-height: calc(100vh - #{pxToVwMobile($stripHeightMobile)});
   @include everything_until(tablet) {
     height: 109.33333vw;
+    max-height: 109.33333vw;
   }
   @include everything_from(tablet) {;
     max-height: calc(100vh - #{pxToVw($stripHeightDesktop)});
