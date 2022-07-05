@@ -97,6 +97,7 @@ const createIndividualDocumentPages = async (
                     locale,
                     rootDocument,
                     id: parseInt(document.id),
+                    isPreview: process.env.SHOW_UNPUBLISHED_PAGES == 1,
                     fullpath: document.fullpath,
                     modificationDate: document.modificationDate,
                     snippets,
@@ -109,7 +110,7 @@ const createIndividualDocumentPages = async (
     }
 
     // Now do the same for all children
-    if(process.env.NODE_ENV === 'development' || document.published) {
+    if(process.env.NODE_ENV === 'development' || process.env.SHOW_UNPUBLISHED_PAGES == 1 || document.published) {
         return Promise.all(
             document.children.map(
                 async page =>
@@ -139,8 +140,6 @@ async function getPageData(page, locale, gatsbyUtilities) {
 
         return cachedData
     } else {
-        gatsbyUtilities.reporter.info("Updating cache for page " + page.id);
-
         const result = await graphql(`
             fragment elements on Pimcore_document_page {
                 elements {
@@ -557,9 +556,9 @@ async function getPageData(page, locale, gatsbyUtilities) {
                 }
             }
         
-            query DocumentById($id: Int!, $footer: String!, $folder: String!) {
+            query DocumentById($id: Int!, $footer: String!, $folder: String!, $unpublished: Boolean) {
                 pimcore {
-                    getDocument(id: $id) {
+                    getDocument(id: $id, unpublished: $unpublished) {
                         __typename
                         ... on Pimcore_document_page {
                             id
@@ -605,7 +604,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
                 }
         
                 footer: pimcore {
-                    getDocument(fullpath: $footer) {
+                    getDocument(fullpath: $footer, unpublished: $unpublished) {
                         __typename
                         ... on Pimcore_document_snippet {
                             id
@@ -618,12 +617,16 @@ async function getPageData(page, locale, gatsbyUtilities) {
             }
         `, {
             id: parseInt(page.id, 10),
+            unpublished: page.isPreview,
             folder: '/' + locale,
             footer: '/' + locale + '/footer',
         })
 
         if(!result.errors && result.data) {
             await cache.set(cacheKey, result.data);
+            gatsbyUtilities.reporter.info("Updated cache for page " + page.id + " at " + page.modificationDate);
+        } else {
+            gatsbyUtilities.reporter.error("Error updating cache for page " + page.id + " at " + page.modificationDate + ": " + JSON.stringify(result.errors))
         }
 
         return result.data
