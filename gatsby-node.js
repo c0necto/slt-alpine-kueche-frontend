@@ -356,7 +356,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
                                         gatsbyImageData(
                                             placeholder: BLURRED
                                             formats: [AUTO, WEBP]
-                                            layout: CONSTRAINED
+                                            layout: FULL_WIDTH
                                             aspectRatio: 1.77
                                         )
                                     }
@@ -619,7 +619,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
             id: parseInt(page.id, 10),
             unpublished: page.isPreview,
             folder: '/' + locale,
-            footer: '/' + locale + '/footer',
+            footer: '/' + locale + '/Footer',
         })
 
         if(!result.errors && result.data) {
