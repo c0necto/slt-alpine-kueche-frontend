@@ -65,7 +65,7 @@ const Cluster = props => {
                     </TeaserMVariant>
                 </div>
             )}
-            {teaser[4] && (
+            {teasers[4] && (
                 <div className={styles.m4}>
                     <TeaserMVariant
                         title={teasers[4].title}
