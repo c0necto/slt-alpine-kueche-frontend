@@ -135,12 +135,12 @@ async function getPageData(page, locale, gatsbyUtilities) {
     const pageData = cachedData ? cachedData?.pimcore?.getDocument : null;
 
 
-    if ( process.env.NODE_ENV !== 'development' && page.modificationDate <= pageData?.modificationDate ) {
+    if ( process.env.SHOW_UNPUBLISHED_PAGES != 1 && page.modificationDate <= pageData?.modificationDate ) {
         gatsbyUtilities.reporter.info("Page is up to date: " + page.id + " (" + page.modificationDate + " <= " + pageData?.modificationDate + ")");
 
         return cachedData
     } else {
-        if( process.env.NODE_ENV === 'development' ) {
+        if( process.env.SHOW_UNPUBLISHED_PAGES == 1 ) {
             gatsbyUtilities.reporter.info("Skipping cache for page " + page.id);
         }
         const result = await graphql(`
