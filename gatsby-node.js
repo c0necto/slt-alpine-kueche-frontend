@@ -620,7 +620,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
             }
         `, {
             id: parseInt(page.id, 10),
-            unpublished: page.isPreview,
+            unpublished: process.env.SHOW_UNPUBLISHED_PAGES == 1,
             folder: '/' + locale,
             footer: '/' + locale + '/Footer',
         })
@@ -733,9 +733,9 @@ async function fetchDocument(gatsbyUtilities, id) {
                 }
             }
 
-            query DocumentsQuery($id: Int!) {
+            query DocumentsQuery($id: Int!, $unpublished: Boolean) {
                 pimcore {
-                    getDocument(id: $id) {
+                    getDocument(id: $id, unpublished: $unpublished) {
                         __typename
                         ...EmailProperties
                         ...HardlinkProperties
@@ -801,7 +801,7 @@ async function fetchDocument(gatsbyUtilities, id) {
                 }
             }
         `,
-        { id },
+        { id, unpublished: process.env.SHOW_UNPUBLISHED_PAGES == 1 },
     );
 
     if (graphqlResult.errors) {
