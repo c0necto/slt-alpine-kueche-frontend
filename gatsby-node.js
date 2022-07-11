@@ -128,7 +128,7 @@ const createIndividualDocumentPages = async (
 async function getPageData(page, locale, gatsbyUtilities) {
     const { cache, graphql } = gatsbyUtilities;
 
-    const cacheKey = `pimcore_page_${page.id}_${locale}_${process.env.NODE_ENV}`;
+    const cacheKey = `pimcore_page_${page.id}_${locale}_${process.env.SHOW_UNPUBLISHED_PAGES}`;
     const cachedData = await cache.get(cacheKey);
 
     gatsbyUtilities.reporter.info("Cached data for " + page.id + ":" + JSON.stringify(Object.keys(cachedData ?? [])))
