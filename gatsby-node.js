@@ -128,18 +128,21 @@ const createIndividualDocumentPages = async (
 async function getPageData(page, locale, gatsbyUtilities) {
     const { cache, graphql } = gatsbyUtilities;
 
-    const cacheKey = `pimcore_page_${page.id}_${locale}`;
+    const cacheKey = `pimcore_page_${page.id}_${locale}_${process.env.NODE_ENV}`;
     const cachedData = await cache.get(cacheKey);
 
     gatsbyUtilities.reporter.info("Cached data for " + page.id + ":" + JSON.stringify(Object.keys(cachedData ?? [])))
-    const pageData = cachedData ? cachedData.pimcore.getDocument : null;
+    const pageData = cachedData ? cachedData?.pimcore?.getDocument : null;
 
 
-    if ( page.modificationDate <= pageData?.modificationDate ) {
+    if ( process.env.NODE_ENV !== 'development' && page.modificationDate <= pageData?.modificationDate ) {
         gatsbyUtilities.reporter.info("Page is up to date: " + page.id + " (" + page.modificationDate + " <= " + pageData?.modificationDate + ")");
 
         return cachedData
     } else {
+        if( process.env.NODE_ENV === 'development' ) {
+            gatsbyUtilities.reporter.info("Skipping cache for page " + page.id);
+        }
         const result = await graphql(`
             fragment elements on Pimcore_document_page {
                 elements {
