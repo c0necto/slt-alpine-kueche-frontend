@@ -145,7 +145,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
         }
         const result = await graphql(`
             fragment elements on Pimcore_document_page {
-                elements {
+                elements(unpublished: $unpublished) {
                     __typename
                     ... on Pimcore_document_editableAreablock {
                         _editableType
@@ -517,7 +517,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
                 }
             }
             fragment footerElements on Pimcore_document_snippet {
-                elements {
+                elements(unpublished: $unpublished) {
                     ... on Pimcore_document_editableInput {
                         _editableName
                         _editableType
