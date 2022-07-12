@@ -33,6 +33,7 @@ exports.createPages = async gatsbyUtilities => {
         fromPath: '/anmeldung',
         exactPath: true,
         isPermanent: true,
+        redirectInBrowser: true,
         toPath: '/de/anmeldung',
     })
 
