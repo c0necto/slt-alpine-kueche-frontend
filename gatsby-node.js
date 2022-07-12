@@ -600,7 +600,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
                                 id
                                 fullpath
                                 title
-                                fragment elements on Pimcore_document_page {
+                                ...on Pimcore_document_page {
                                     elements {
                                         __typename
                                         ... on Pimcore_document_editableAreablock {
