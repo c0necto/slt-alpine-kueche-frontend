@@ -518,7 +518,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
             }
             
             fragment publishedElements on Pimcore_document_page {
-                elements(unpublished: $unpublished) {
+                elements {
                     __typename
                     ... on Pimcore_document_editableAreablock {
                         _editableType
