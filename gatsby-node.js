@@ -19,6 +19,7 @@ const {graphql} = require("gatsby");
 exports.createPages = async gatsbyUtilities => {
     const { createRedirect } = gatsbyUtilities.actions;
 
+    // Redirect from / to /de
     createRedirect({
         fromPath: '/',
         exactPath: true,
@@ -26,6 +27,14 @@ exports.createPages = async gatsbyUtilities => {
         redirectInBrowser: true,
         toPath: '/de',
     });
+
+    // Redirect from /anmeldung to /de/anmeldung
+    createRedirect({
+        fromPath: '/anmeldung',
+        exactPath: true,
+        isPermanent: true,
+        toPath: '/de/anmeldung',
+    })
 
     // Query our documents from the GraphQL server
     const rootDocument = await fetchDocument(gatsbyUtilities, 1);
