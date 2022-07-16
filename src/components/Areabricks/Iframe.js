@@ -45,6 +45,7 @@ const IframeAreabrick = props => {
                     </div>
                     : <div className={styles.iframeWrapper}>
                         <iframe
+                            loading={'lazy'}
                             className={styles.iframe}
                             title={elements?.iframe_url?.text}
                             src={elements?.iframe_url?.text}
