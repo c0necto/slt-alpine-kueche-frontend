@@ -189,18 +189,3 @@ $lratio: 2.09fr; // 950 zu 455 -> 2.09
   display: block;
   @include fluid1(margin-bottom, 30px);
 }
-
-/* Temp: iframe, todo: move to own component */
-.iframe-youtube {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
-}
-.iframe {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-}

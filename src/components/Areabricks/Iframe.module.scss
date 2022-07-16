@@ -1,0 +1,33 @@
+@import 'src/global';
+
+/* iFrame */
+
+/* Iframe only classes */
+
+.iframe-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+.iframe {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* Youtube classes */
+
+.iframe-youtube-wrapper {
+  .yt-wrapper {
+    &:before {
+      height: 100px;
+    }
+  }
+  .playbutton {
+    border: none;
+    cursor: pointer;
+  }
+}
