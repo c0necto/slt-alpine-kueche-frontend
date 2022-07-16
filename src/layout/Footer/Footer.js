@@ -98,6 +98,7 @@ const Footer = props => {
                                     href="https://www.salzburgerland.com"
                                     className={styles.sltLogo}>
                                     <img
+                                        loading={'lazy'}
                                         src={svg}
                                         width={100}
                                         height={45}
