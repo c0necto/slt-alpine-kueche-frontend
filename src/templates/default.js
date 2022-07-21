@@ -50,11 +50,13 @@ const ArticleTemplate = props => {
 
             <main className={pagesStyles.pageMain} role="main" id="main">
                 <ContentArea className={'bottom55'}>
-                    <Headline
-                        level={'h1'}
-                        title={h1?.text ?? ''}
-                        description={h1Desc}
-                    />
+                    <Container>
+                        <Headline
+                            level={'h1'}
+                            title={h1?.text ?? ''}
+                            description={h1Desc}
+                        />
+                    </Container>
                 </ContentArea>
                 <ContentArea className={'bottom55Center'}>
                     <Button
