@@ -34,6 +34,7 @@ const IframeAreabrick = props => {
                             src={elements?.iframe_url?.text}
                             height={elements?.iframe_height?.text}
                             width="100%"
+                            allowFullScreen={true}
                             frameBorder="0"></iframe>
                     </div>
                     /*<div className={styles.iframeYoutubeWrapper}>
