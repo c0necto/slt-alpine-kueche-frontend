@@ -5,8 +5,6 @@ import { artDirection } from '~utils';
 import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox';
 import * as styles from './Gallery.module.scss';
 
-// todo: change alt attribute
-
 const Gallery = props => {
     const cols = 3;
     return (
@@ -15,6 +13,14 @@ const Gallery = props => {
                 <SRLWrapper>
                     <Grid cols={cols}>
                         {props.nodes.map((node, key) => {
+                            let altText = '';
+                            if (node.metadata) {
+                                if (node.metadata[0]) {
+                                    if ( node.metadata[0].data) {
+                                        altText = node.metadata[0].data
+                                    }
+                                }
+                            }
                             const lightbox =
                                 node.lightbox.childImageSharp
                                     .gatsbyImageData.images.fallback.src;
@@ -27,7 +33,7 @@ const Gallery = props => {
                                     <GatsbyImage
                                         className={styles.imageS}
                                         image={images}
-                                        alt={'alt'}
+                                        alt={altText}
                                         key={key}
                                     />
                                 </a>
