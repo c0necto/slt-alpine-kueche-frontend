@@ -2,6 +2,8 @@
 
 .headline {
 
+  hyphens: none;
+
   h1, h2 {
     position: relative;
     @include fluid2(padding-bottom, 20px, 30px);

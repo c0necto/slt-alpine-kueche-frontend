@@ -21,6 +21,7 @@
     @include fluid2(padding-right, 8px, 12px);
     background: $white;
     font-family: $font-family-special;
+    hyphens: none;
   }
   &.small {
     span {
