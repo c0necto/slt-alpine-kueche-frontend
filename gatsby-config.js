@@ -116,5 +116,13 @@ module.exports = {
                 pluginDebug: true, // Optional. Debug mode for plugin development. Defaults to false.
             },
         },
+        {
+            resolve: 'gatsby-plugin-google-marketing-platform',
+            options: {
+                tagmanager: {
+                    id: 'GTM-T6HVCHW'
+                }
+            },
+        }
     ],
 };

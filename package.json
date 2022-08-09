@@ -11,6 +11,7 @@
     "gatsby": "^3.10.2",
     "gatsby-plugin-cookiebot": "^1.0.3",
     "gatsby-plugin-gatsby-cloud": "^3.2.1",
+    "gatsby-plugin-google-marketing-platform": "^0.2.0",
     "gatsby-plugin-i18n": "^1.0.1",
     "gatsby-plugin-image": "^1.10.1",
     "gatsby-plugin-manifest": "^3.10.0",
