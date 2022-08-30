@@ -15,8 +15,10 @@ const IframeAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
 
-    const [cookies, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
+    const [cookies, setCookie] = useCookies(['agreedtoyoutube']);
     const [accepted, setAccepted] = useState(cookies.agreedtoyoutube)
+
+    console.log(accepted)
 
     const handleClick = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
@@ -33,11 +35,51 @@ const IframeAreabrick = props => {
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
-            {isYoutube ?
-                <Container>
-                    {accepted
+            <Container>
+                <div className={styles.iframeWrapper}>
+                    {isYoutube
                         ?
                         <div className={styles.youtubeRatio}>
+                            {accepted
+                                ?
+                                <iframe
+                                    loading={'lazy'}
+                                    className={styles.iframe}
+                                    title={elements?.iframe_url?.text}
+                                    src={elements?.iframe_url?.text}
+                                    height={elements?.iframe_height?.text}
+                                    width="100%"
+                                    frameBorder="0"></iframe>
+                                :
+                                <div>
+                                    <LiteYouTubeEmbed
+                                        id={videoId}
+                                        adNetwork={true} // Default true, to preconnect or not to doubleclick addresses called by YouTube iframe (the adnetwork from Google)
+                                        params="" // any params you want to pass to the URL, assume we already had '&' and pass your parameters string
+                                        playlist={false} // Use  true when your ID be from a playlist
+                                        playlistCoverId="L2vS_050c-M" // The ids for playlists did not bring the cover in a pattern to render so you'll need pick up a video from the playlist (or in fact, whatever id) and use to render the cover. There's a programmatic way to get the cover from YouTube API v3 but the aim of this component is do not make any another call and reduce requests and bandwidth usage as much as possibe
+                                        poster="maxresdefault" // Defines the image size to call on first render as poster image. Possible values are "default","mqdefault",  "hqdefault", "sddefault" and "maxresdefault". Default value for this prop is "hqdefault". Please be aware that "sddefault" and "maxresdefault", high resolution images are not always avaialble for every video. See: https://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
+                                        title="YouTube Embed" // a11y, always provide a title for iFrames: https://dequeuniversity.com/tips/provide-iframe-titles Help the web be accessible ;)
+                                        noCookie={true} //Default false, connect to YouTube via the Privacy-Enhanced Mode using https://www.youtube-nocookie.com
+                                        activeClass='lyt-activated' // Default as "lyt-activated", gives control to wrapper once clicked
+                                        iframeClass="" // Default none, gives control to add a class to iframe element itself
+                                        playerClass={cn('lty-playbtn', styles.playbutton)} // Default as "lty-playbtn" to control player button styles
+                                        wrapperClass={cn('yt-lite', styles.notAccepted)} // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
+                                        onIframeAdded={() => {
+                                            handleClick()
+                                        }}
+                                    />
+                                    <div className={styles.notice}>
+                                    Sie können die Anzeige dieses Elements über den Button aktivieren. Durch die
+                                    Aktivierung der Einbindung tauscht der Browser Daten mit den jeweiligen Anbietern
+                                    aus. Die aktuelle Seite hat keinen Zugriff oder Einfluss auf die Inhalte, Art,
+                                    Speicherung und Verarbeitung dieser Daten.
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        :
+                        <div>
                             <iframe
                                 loading={'lazy'}
                                 className={styles.iframe}
@@ -47,49 +89,9 @@ const IframeAreabrick = props => {
                                 width="100%"
                                 frameBorder="0"></iframe>
                         </div>
-                        :
-                        <div className={styles.iframeWrapper}>
-                            <LiteYouTubeEmbed
-                                id={videoId}
-                                adNetwork={true} // Default true, to preconnect or not to doubleclick addresses called by YouTube iframe (the adnetwork from Google)
-                                params="" // any params you want to pass to the URL, assume we already had '&' and pass your parameters string
-                                playlist={false} // Use  true when your ID be from a playlist
-                                playlistCoverId="L2vS_050c-M" // The ids for playlists did not bring the cover in a pattern to render so you'll need pick up a video from the playlist (or in fact, whatever id) and use to render the cover. There's a programmatic way to get the cover from YouTube API v3 but the aim of this component is do not make any another call and reduce requests and bandwidth usage as much as possibe
-                                poster="maxresdefault" // Defines the image size to call on first render as poster image. Possible values are "default","mqdefault",  "hqdefault", "sddefault" and "maxresdefault". Default value for this prop is "hqdefault". Please be aware that "sddefault" and "maxresdefault", high resolution images are not always avaialble for every video. See: https://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
-                                title="YouTube Embed" // a11y, always provide a title for iFrames: https://dequeuniversity.com/tips/provide-iframe-titles Help the web be accessible ;)
-                                noCookie={true} //Default false, connect to YouTube via the Privacy-Enhanced Mode using https://www.youtube-nocookie.com
-                                activeClass='lyt-activated' // Default as "lyt-activated", gives control to wrapper once clicked
-                                iframeClass="" // Default none, gives control to add a class to iframe element itself
-                                playerClass={cn('lty-playbtn', styles.playbutton)} // Default as "lty-playbtn" to control player button styles
-                                wrapperClass={cn('yt-lite', styles.ytWrapper)} // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
-                                onIframeAdded={() => {
-                                    handleClick()
-                                }}
-                            />
-                            <div className={styles.notice}>
-                                Sie können die Anzeige dieses Elements über den Button aktivieren. Durch die
-                                Aktivierung der Einbindung tauscht der Browser Daten mit den jeweiligen Anbietern
-                                aus.
-                                Die aktuelle Seite hat keinen Zugriff oder Einfluss auf die Inhalte, Art,
-                                Speicherung und Verarbeitung dieser Daten.
-                            </div>
-                        </div>
                     }
-                </Container>
-                :
-                <Container>
-                    <div className={styles.iframeWrapper}>
-                        <iframe
-                            loading={'lazy'}
-                            className={styles.iframe}
-                            title={elements?.iframe_url?.text}
-                            src={elements?.iframe_url?.text}
-                            height={elements?.iframe_height?.text}
-                            width="100%"
-                            frameBorder="0"></iframe>
-                    </div>
-                </Container>
-            }
+                </div>
+            </Container>
         </ContentArea>
     )
 }
