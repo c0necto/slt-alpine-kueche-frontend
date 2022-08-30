@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import ContentArea from '~components/ContentArea/ContentArea'
 import Container from '~components/Container/Container'
 import cn from "classnames"
@@ -7,6 +7,8 @@ import * as styles from "./Iframe.module.scss"
 // https://www.npmjs.com/package/react-lite-youtube-embed
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
+
+// https://www.npmjs.com/package/react-cookie
 import {useCookies} from "react-cookie"
 
 const IframeAreabrick = props => {
@@ -14,10 +16,19 @@ const IframeAreabrick = props => {
     const grey = elements.grey?.checked
 
     const [cookies, setCookie] = useCookies()
+    const [ready, setReady] = React.useState(styles.notready)
 
-    const closeNotice = () => {
+ /*   const closeNotice = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
+
+    }*/
+
+    const handleCookie = () => {
+        setCookie("agreedtoyoutube", true, {
+            path: "/"
+        });
     }
+
 
     const youtubeParser = url => {
         const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
@@ -29,15 +40,11 @@ const IframeAreabrick = props => {
     // check if elements.iframe_url.text contains 'youtube'
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
-    console.log(cookies)
-    console.log(cookies.agreedtoyoutube)
-    console.log(isYoutube)
-
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
             <Container>
                 {isYoutube ?
-                    <div>
+                    <div className={cookies.agreedtoyoutube ? styles.ready : null}>
                         {cookies.agreedtoyoutube
                             ?
                             <div className={styles.youtubeRatio}>
@@ -66,7 +73,7 @@ const IframeAreabrick = props => {
                                     playerClass={cn('lty-playbtn', styles.playbutton)} // Default as "lty-playbtn" to control player button styles
                                     wrapperClass={cn('yt-lite', styles.ytWrapper)} // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
                                     onIframeAdded={() => {
-                                        closeNotice()
+                                        handleCookie()
                                     }}
                                 />
                                 <div className={styles.notice}>
