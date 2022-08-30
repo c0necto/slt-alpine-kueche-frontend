@@ -15,8 +15,11 @@ const IframeAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
 
+    const [accepted, setAccepted] = useState(localStorage.getItem('agreedtoyoutube'))
+
     const handleClick = () => {
         localStorage.setItem("agreedtoyoutube", true)
+        setAccepted(true)
     }
 
     const youtubeParser = url => {
@@ -28,15 +31,13 @@ const IframeAreabrick = props => {
 
     // check if elements.iframe_url.text contains 'youtube'
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
-    console.log('localStorage: ', localStorage.getItem("agreedtoyoutube"))
+    console.log('accepted: ', accepted)
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
             {isYoutube ?
                 <Container>
-
-
-                    {localStorage.getItem("agreedtoyoutube")
+                    {accepted
                         ?
                         <div className={styles.youtubeRatio}>
                             <iframe
