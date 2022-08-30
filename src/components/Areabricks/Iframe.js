@@ -15,11 +15,12 @@ const IframeAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
 
-    const [accepted, setAccepted] = useState(localStorage.getItem('agreedtoyoutube'))
+    const [cookies, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
+    const [accepted, setAccepted] = useState(cookies.agreedtoyoutube)
 
     const handleClick = () => {
         localStorage.setItem("agreedtoyoutube", true)
-        setAccepted(true)
+        setCookie("agreedtoyoutube", true, {path: "/"})
     }
 
     const youtubeParser = url => {
@@ -28,10 +29,7 @@ const IframeAreabrick = props => {
         return (match && match[7].length === 11) ? match[7] : false;
     }
     const videoId = youtubeParser(elements.iframe_url?.text)
-
-    // check if elements.iframe_url.text contains 'youtube'
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
-    //console.log('accepted: ', accepted)
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
