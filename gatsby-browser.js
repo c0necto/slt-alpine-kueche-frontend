@@ -10,6 +10,7 @@ import '@fontsource/eb-garamond/500.css';
 import '@fontsource/prata';
 
 import React from 'react';
+import { CookiesProvider } from "react-cookie";
 
 import SimpleReactLightbox from 'simple-react-lightbox';
 // USE THE IMPORT BELOW INSTEAD IF YOU ARE USING THE PRO VERSION
@@ -17,5 +18,7 @@ import SimpleReactLightbox from 'simple-react-lightbox';
 
 // eslint-disable-next-line react/prop-types
 export const wrapRootElement = ({ element }) => (
-    <SimpleReactLightbox>{element}</SimpleReactLightbox>
-);
+    <CookiesProvider>
+        <SimpleReactLightbox>{element}</SimpleReactLightbox>
+    </CookiesProvider>
+)
