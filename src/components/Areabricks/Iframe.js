@@ -28,6 +28,9 @@ const IframeAreabrick = props => {
 
     // check if elements.iframe_url.text contains 'youtube'
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
+
+    console.log(elements.iframe_url?.text)
+    console.log(isYoutube)
     console.log(cookies.agreedtoyoutube)
 
     return (
