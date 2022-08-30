@@ -31,7 +31,7 @@ const IframeAreabrick = props => {
 
     // check if elements.iframe_url.text contains 'youtube'
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
-    console.log('accepted: ', accepted)
+    //console.log('accepted: ', accepted)
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
