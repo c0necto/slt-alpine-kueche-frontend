@@ -39,6 +39,7 @@ const IframeAreabrick = props => {
 
     // check if elements.iframe_url.text contains 'youtube'
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
+    console.log(cookies.agreedtoyoutube)
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
