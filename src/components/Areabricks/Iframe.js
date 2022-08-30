@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import ContentArea from '~components/ContentArea/ContentArea'
 import Container from '~components/Container/Container'
 import cn from "classnames"
@@ -11,6 +11,8 @@ import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
 const IframeAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
+
+    const [notice, setNotice] = useState(true)
 
     const youtubeParser = url => {
         const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
@@ -39,11 +41,24 @@ const IframeAreabrick = props => {
                             title="YouTube Embed" // a11y, always provide a title for iFrames: https://dequeuniversity.com/tips/provide-iframe-titles Help the web be accessible ;)
                             noCookie={true} //Default false, connect to YouTube via the Privacy-Enhanced Mode using https://www.youtube-nocookie.com
 
-                            activeClass="lyt-activated" // Default as "lyt-activated", gives control to wrapper once clicked
+                            activeClass={styles.lytActivated} // Default as "lyt-activated", gives control to wrapper once clicked
                             iframeClass="" // Default none, gives control to add a class to iframe element itself
                             playerClass={cn('lty-playbtn', styles.playbutton)} // Default as "lty-playbtn" to control player button styles
                             wrapperClass={cn('yt-lite', styles.ytWrapper)} // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
+                            onIframeAdded={() => {
+                                console.log('test123')
+                                setNotice(!notice)
+                            }}
                         />
+                        {notice &&
+                            <div className={styles.notice}>
+                                Sie können die Anzeige dieses Elements über den Play-Button aktivieren. Durch die
+                                Aktivierung der Einbindung tauscht der Browser Daten mit den jeweiligen Anbietern aus.
+                                Die
+                                aktuelle Seite hat keinen Zugriff oder Einfluss auf die Inhalte, Art, Speicherung und
+                                Verarbeitung dieser Daten.
+                            </div>
+                        }
                     </div>
                     : <div className={styles.iframeWrapper}>
                         <iframe

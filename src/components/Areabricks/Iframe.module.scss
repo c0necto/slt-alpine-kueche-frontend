@@ -34,6 +34,7 @@
 /* Youtube classes */
 
 .iframe-youtube-wrapper {
+  position: relative;
   .yt-wrapper {
     &:before {
       height: 100px;
@@ -43,4 +44,24 @@
     border: none;
     cursor: pointer;
   }
+}
+
+.notice {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 860px;
+  z-index: 1;
+  padding: 10px 20px;
+  background: rgba($black, 0.5);
+  color: $white;
+  text-align: left;
+}
+
+.lyt-activated + .notice,
+.lyt-activated ~ .notice {
+  display: none;
+}
+.playbutton {
+  border: 10px solid red !important;
 }
