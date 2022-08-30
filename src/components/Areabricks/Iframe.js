@@ -30,6 +30,7 @@ const IframeAreabrick = props => {
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
     console.log(cookies)
+    console.log(cookies.agreedtoyoutube)
     console.log(isYoutube)
     console.log(cookies.agreedtoyoutube)
 
@@ -88,7 +89,8 @@ const IframeAreabrick = props => {
                             height={elements?.iframe_height?.text}
                             width="100%"
                             frameBorder="0"></iframe>
-                    </div>}
+                    </div>
+                }
             </Container>
         </ContentArea>
     )
