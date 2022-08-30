@@ -33,6 +33,10 @@
 
 /* Youtube classes */
 
+.iframe-youtube-wrapper .playbutton {
+  opacity: 1;
+}
+
 .iframe-youtube-wrapper {
   position: relative;
   .yt-wrapper {
@@ -48,7 +52,8 @@
     background: $color1 !important;
     border-color: $color1 !important;
     border-radius: 0 !important;
-    opacity: 1 !important;
+    /*opacity: 1 !important;*/
+    opacity: 1;
     @include fluid1(font-size, 17px);
     @include fluid1(line-height, 32px);
     @include fluid1(padding-left, 20px);
@@ -89,6 +94,12 @@
   }
 }
 
+.yt-wrapper {
+  &.lyt-activated {
+    outline: 100px solid red !important;
+  }
+}
+
 .notice {
   position: absolute;
   left: 0;
@@ -100,3 +111,25 @@
   color: $white;
   text-align: left;
 }
+/*
+
+.is-active {
+  border: 20px solid orange;
+}
+.lty-actived {
+  outline: 20px solid green;
+}
+
+.lty-activated {
+  .lty-playbtn {
+    display: none;
+  }
+}
+
+.iframe-youtube-wrapper {
+  .yt-lite.lty-activated > .lty-playbtn,
+  .yt-lite.lty-activated > .playbutton {
+    opacity: 0 !important;
+    display: none !important;
+  }
+}*/
