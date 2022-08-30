@@ -32,7 +32,6 @@ const IframeAreabrick = props => {
     console.log(cookies)
     console.log(cookies.agreedtoyoutube)
     console.log(isYoutube)
-    console.log(cookies.agreedtoyoutube)
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
