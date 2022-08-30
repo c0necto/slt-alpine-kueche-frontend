@@ -7,8 +7,8 @@
 .iframe-wrapper {
   position: relative;
   width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
+  /*height: 0;
+  padding-bottom: 56.25%;*/
 }
 .iframe {
   /*position: absolute;
@@ -17,7 +17,8 @@
   top: 0;
   left: 0;*/
 }
-.youtube-ratio {
+.youtube-ratio,
+.iframe-youtube-wrapper {
   position: relative;
   width: 100%;
   height: 0;
