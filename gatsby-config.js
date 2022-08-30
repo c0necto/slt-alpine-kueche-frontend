@@ -105,14 +105,14 @@ module.exports = {
                 useLangKeyLayout: false,
             },
         },
-        /*{
+        {
             resolve: 'gatsby-plugin-google-marketing-platform',
             options: {
                 tagmanager: {
                     id: 'GTM-T6HVCHW'
                 }
             },
-        },*/
+        },
 
         // todo: update to gatsby4 before using this plugin
         /*{
