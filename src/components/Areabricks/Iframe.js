@@ -26,18 +26,7 @@ const IframeAreabrick = props => {
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
             <Container>
                 {isYoutube ?
-                    <div className={styles.youtubeRatio}>
-                        <iframe
-                            loading={'lazy'}
-                            className={styles.iframe}
-                            title={elements?.iframe_url?.text}
-                            src={elements?.iframe_url?.text}
-                            height={elements?.iframe_height?.text}
-                            width="100%"
-                            allowFullScreen={true}
-                            frameBorder="0"></iframe>
-                    </div>
-                    /*<div className={styles.iframeYoutubeWrapper}>
+                    <div className={styles.iframeYoutubeWrapper}>
                         <LiteYouTubeEmbed
                             id={videoId}
                             adNetwork={true} // Default true, to preconnect or not to doubleclick addresses called by YouTube iframe (the adnetwork from Google)
@@ -53,7 +42,7 @@ const IframeAreabrick = props => {
                             playerClass={cn('lty-playbtn', styles.playbutton)} // Default as "lty-playbtn" to control player button styles
                             wrapperClass={cn('yt-lite', styles.ytWrapper)} // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
                         />
-                    </div>*/
+                    </div>
                     : <div className={styles.iframeWrapper}>
                         <iframe
                             loading={'lazy'}
