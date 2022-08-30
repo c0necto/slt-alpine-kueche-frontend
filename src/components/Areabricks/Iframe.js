@@ -20,11 +20,9 @@ const IframeAreabrick = props => {
         return (match && match[7].length === 11) ? match[7] : false;
     }
     const videoId = youtubeParser(elements.iframe_url?.text)
-    console.log(videoId)
 
     // check if elements.iframe_url.text contains 'youtube'
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
-    console.log(isYoutube)
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>

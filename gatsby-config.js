@@ -12,7 +12,7 @@ module.exports = {
     siteMetadata: {
         title: `Alpine Küche`,
         siteUrl: `https://www.alpine-kueche.com`,
-        description: `xxx, Österreich`,
+        description: ``,
     },
     plugins: [
         `gatsby-plugin-image`,
