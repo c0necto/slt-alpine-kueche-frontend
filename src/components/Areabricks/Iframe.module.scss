@@ -110,26 +110,10 @@
   background: rgba($black, 0.5);
   color: $white;
   text-align: left;
-}
-/*
 
-.is-active {
-  border: 20px solid orange;
-}
-.lty-actived {
-  outline: 20px solid green;
-}
-
-.lty-activated {
-  .lty-playbtn {
-    display: none;
+  @include everything_until(tablet) {
+    position: revert;
+    left: revert;
+    top: revert;
   }
 }
-
-.iframe-youtube-wrapper {
-  .yt-lite.lty-activated > .lty-playbtn,
-  .yt-lite.lty-activated > .playbutton {
-    opacity: 0 !important;
-    display: none !important;
-  }
-}*/
