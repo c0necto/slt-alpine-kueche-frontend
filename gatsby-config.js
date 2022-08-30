@@ -113,6 +113,7 @@ module.exports = {
                 }
             },
         },
+
         // todo: update to gatsby4 before using this plugin
         /*{
             resolve: "gatsby-plugin-google-tagmanager",
