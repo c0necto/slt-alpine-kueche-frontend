@@ -50,7 +50,7 @@ const IframeAreabrick = props => {
                                 frameBorder="0"></iframe>
                         </div>
                         :
-                        <div className={styles.iframeYoutubeWrapper}>
+                        <div className={styles.iframeWrapper}>
                             <LiteYouTubeEmbed
                                 id={videoId}
                                 adNetwork={true} // Default true, to preconnect or not to doubleclick addresses called by YouTube iframe (the adnetwork from Google)
