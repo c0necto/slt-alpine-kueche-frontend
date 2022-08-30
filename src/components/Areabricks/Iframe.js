@@ -19,8 +19,8 @@ const IframeAreabrick = props => {
     const [accepted, setAccepted] = useState(cookies.agreedtoyoutube)
 
     const handleClick = () => {
-        localStorage.setItem("agreedtoyoutube", true)
         setCookie("agreedtoyoutube", true, {path: "/"})
+        setAccepted(true)
     }
 
     const youtubeParser = url => {
