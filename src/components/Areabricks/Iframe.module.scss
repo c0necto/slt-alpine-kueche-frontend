@@ -43,6 +43,11 @@
   .playbutton {
     border: none;
     cursor: pointer;
+    /*&:after {
+      content: 'Video abspielen';
+      color: $white;
+      white-space: nowrap;
+    }*/
   }
 }
 
@@ -56,12 +61,4 @@
   background: rgba($black, 0.5);
   color: $white;
   text-align: left;
-}
-
-.lyt-activated + .notice,
-.lyt-activated ~ .notice {
-  display: none;
-}
-.playbutton {
-  border: 10px solid red !important;
 }
