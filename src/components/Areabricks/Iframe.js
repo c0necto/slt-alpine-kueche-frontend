@@ -35,8 +35,20 @@ const IframeAreabrick = props => {
             <Container>
                 {isYoutube ?
                     <div>
-                        {!cookies.agreedtoyoutube
-                            ? <div className={styles.iframeYoutubeWrapper}>
+                        {cookies.agreedtoyoutube
+                            ?
+                            <div className={styles.youtubeRatio}>
+                                <iframe
+                                    loading={'lazy'}
+                                    className={styles.iframe}
+                                    title={elements?.iframe_url?.text}
+                                    src={elements?.iframe_url?.text}
+                                    height={elements?.iframe_height?.text}
+                                    width="100%"
+                                    frameBorder="0"></iframe>
+                            </div>
+                            :
+                            <div className={styles.iframeYoutubeWrapper}>
                                 <LiteYouTubeEmbed
                                     id={videoId}
                                     adNetwork={true} // Default true, to preconnect or not to doubleclick addresses called by YouTube iframe (the adnetwork from Google)
@@ -61,16 +73,6 @@ const IframeAreabrick = props => {
                                     Die aktuelle Seite hat keinen Zugriff oder Einfluss auf die Inhalte, Art,
                                     Speicherung und Verarbeitung dieser Daten.
                                 </div>
-                            </div>
-                            : <div className={styles.youtubeRatio}>
-                                <iframe
-                                    loading={'lazy'}
-                                    className={styles.iframe}
-                                    title={elements?.iframe_url?.text}
-                                    src={elements?.iframe_url?.text}
-                                    height={elements?.iframe_height?.text}
-                                    width="100%"
-                                    frameBorder="0"></iframe>
                             </div>
                         }
                     </div>
