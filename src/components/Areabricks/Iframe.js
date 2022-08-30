@@ -6,7 +6,9 @@ import * as styles from "./Iframe.module.scss"
 
 // https://www.npmjs.com/package/react-lite-youtube-embed
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
-import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
+//import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
+
+import './Iframe.LiteYouTubeEmbed.css'
 
 // https://www.npmjs.com/package/react-cookie
 import {useCookies} from "react-cookie"
@@ -17,8 +19,6 @@ const IframeAreabrick = props => {
 
     const [cookies, setCookie] = useCookies(['agreedtoyoutube']);
     const [accepted, setAccepted] = useState(cookies.agreedtoyoutube)
-
-    console.log(accepted)
 
     const handleClick = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
@@ -39,19 +39,19 @@ const IframeAreabrick = props => {
                 <div className={styles.iframeWrapper}>
                     {isYoutube
                         ?
-                        <div className={styles.youtubeRatio}>
-                            {accepted
-                                ?
-                                <iframe
-                                    loading={'lazy'}
-                                    className={styles.iframe}
-                                    title={elements?.iframe_url?.text}
-                                    src={elements?.iframe_url?.text}
-                                    height={elements?.iframe_height?.text}
-                                    width="100%"
-                                    frameBorder="0"></iframe>
-                                :
-                                <div>
+                        <div>
+                            <div className={styles.youtubeRatio}>
+                                {accepted
+                                    ?
+                                    <iframe
+                                        loading={'lazy'}
+                                        className={styles.iframe}
+                                        title={elements?.iframe_url?.text}
+                                        src={elements?.iframe_url?.text}
+                                        height={elements?.iframe_height?.text}
+                                        width="100%"
+                                        frameBorder="0"></iframe>
+                                    :
                                     <LiteYouTubeEmbed
                                         id={videoId}
                                         adNetwork={true} // Default true, to preconnect or not to doubleclick addresses called by YouTube iframe (the adnetwork from Google)
@@ -69,13 +69,17 @@ const IframeAreabrick = props => {
                                             handleClick()
                                         }}
                                     />
-                                    <div className={styles.notice}>
+                                }
+                            </div>
+                            {!accepted
+                                ?
+                                <div className={styles.notice}>
                                     Sie können die Anzeige dieses Elements über den Button aktivieren. Durch die
                                     Aktivierung der Einbindung tauscht der Browser Daten mit den jeweiligen Anbietern
                                     aus. Die aktuelle Seite hat keinen Zugriff oder Einfluss auf die Inhalte, Art,
                                     Speicherung und Verarbeitung dieser Daten.
-                                    </div>
                                 </div>
+                                : null
                             }
                         </div>
                         :

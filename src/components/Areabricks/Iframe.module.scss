@@ -7,7 +7,7 @@
   width: 100%;
 }
 .youtube-ratio {
-  @include everything_from(tablet) {
+
     position: relative;
     width: 100%;
     height: 0;
@@ -20,7 +20,7 @@
       top: 0;
       left: 0;
     }
-  }
+
 }
 
 
@@ -30,15 +30,19 @@
 
 /* Youtube classes */
 
+.yt-lite:before {
+  display: none;
+}
+
 .iframe-wrapper {
   .playbutton {
     opacity: 1;
   }
-  .yt-wrapper {
+  /*.yt-wrapper {
     &:before {
       height: 100px;
     }
-  }
+  }*/
   .playbutton {
     border: none !important;
     cursor: pointer !important;
