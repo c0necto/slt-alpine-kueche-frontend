@@ -24,10 +24,15 @@ const IframeAreabrick = props => {
     }*/
 
     const handleCookie = () => {
-        setCookie("agreedtoyoutube", true, {
+        /*setCookie("agreedtoyoutube", true, {
             path: "/"
-        });
+        });*/
+        // set local Storage variable 'agreedtoyoutube' to true
+        localStorage.setItem("agreedtoyoutube", true)
     }
+
+    // if local storage variable 'agreedtoyoutube' is true, set ready to true
+
 
 
     const youtubeParser = url => {
@@ -39,14 +44,14 @@ const IframeAreabrick = props => {
 
     // check if elements.iframe_url.text contains 'youtube'
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
-    console.log(cookies.agreedtoyoutube)
+    console.log('localStorage: ', localStorage.getItem("agreedtoyoutube"))
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
             <Container>
                 {isYoutube ?
-                    <div className={cookies.agreedtoyoutube ? styles.ready : null}>
-                        {cookies.agreedtoyoutube
+                    <div>
+                        {localStorage.getItem("agreedtoyoutube")
                             ?
                             <div className={styles.youtubeRatio}>
                                 <iframe
