@@ -1,5 +1,5 @@
 import React from "react";
-export const BasicContext = React.createContext();
+export const BasicContext = React.createContext(false);
 
 export default (props) => {
     const [marketing, setMarketing] = React.useState(false);

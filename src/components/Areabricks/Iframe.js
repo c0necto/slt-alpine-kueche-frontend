@@ -85,7 +85,7 @@ const IframeAreabrick = props => {
                                         activeClass='lyt-activated' // Default as "lyt-activated", gives control to wrapper once clicked
                                         iframeClass="" // Default none, gives control to add a class to iframe element itself
                                         playerClass={cn('lty-playbtn', styles.playbutton)} // Default as "lty-playbtn" to control player button styles
-                                        wrapperClass={cn('yt-lite', styles.notAccepted)} // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
+                                        wrapperClass='yt-lite' // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
                                         onIframeAdded={() => {
                                             handleClick()
                                         }}

@@ -16,11 +16,11 @@ import BasicContext from "./src/context/CookieContext";
 
 export const wrapRootElement = ({element}) => {
     return (
-        /*<BasicContext>*/
+        <BasicContext>
             <CookiesProvider>
                 <SimpleReactLightbox>{element}</SimpleReactLightbox>
             </CookiesProvider>
-        /*</BasicContext>*/
+        </BasicContext>
     )
 }
 
