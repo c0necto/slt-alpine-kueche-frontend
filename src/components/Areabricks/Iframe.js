@@ -37,9 +37,10 @@ const IframeAreabrick = props => {
     const isBrowser = () => typeof window !== "undefined"
     if ( isBrowser() ) {
         if (typeof window.Cookiebot !== "undefined") {
+
             ['CookiebotOnAccept', 'CookiebotOnDecline', 'CookiebotOnLoad'].forEach(event => {
                 window.addEventListener(event, ev => {
-                    console.log('CookiebotOnAccept', ev)
+                    //console.log('CookiebotOnAccept', ev)
                     if (window.Cookiebot.consent.marketing)
                     {
                         handleClick()
@@ -47,9 +48,10 @@ const IframeAreabrick = props => {
                         removeCookie("agreedtoyoutube")
                         setMarketing(false)
                     }
-                    ev.preventDefault()
+                    //ev.preventDefault()
                 }, false)
             })
+
             /*window.addEventListener('CookiebotOnAccept', 'CookiebotOnDecline', 'CookiebotOnLoad', ev => {
                 console.log('CookiebotOnAccept', ev)
                 if (window.Cookiebot.consent.marketing)
