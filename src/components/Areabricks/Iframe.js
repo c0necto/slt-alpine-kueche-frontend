@@ -21,6 +21,12 @@ const IframeAreabrick = props => {
 
     const [, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
     const [marketing, setMarketing] = useContext(CookieContext);
+
+    // if cookie 'agreedtoyoutube' is set, set marketing to true
+    if (setCookie.agreedtoyoutube) {
+        setMarketing(true)
+    }
+
     const [notice, setNotice] = useState(true);
 
     const enableYoutube = () => {
@@ -63,6 +69,8 @@ const IframeAreabrick = props => {
             }
         }
     }
+
+    console.log(marketing)
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
