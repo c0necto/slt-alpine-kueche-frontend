@@ -23,6 +23,7 @@ const IframeAreabrick = props => {
     const [marketing, setMarketing] = useContext(CookieContext);
 
     if (cookies.agreedtoyoutube) {
+        console.log('agreedtoyoutube cookie is set');
         setMarketing(true)
     }
 
