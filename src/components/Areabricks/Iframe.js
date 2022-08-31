@@ -22,22 +22,16 @@ const IframeAreabrick = props => {
     const [cookies, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
     const [marketing, setMarketing] = useContext(CookieContext);
 
-    // if cookie 'agreedtoyoutube' is set, set marketing to true
-    console.log('agreedtoyoutube: ', cookies.agreedtoyoutube)
     if (cookies.agreedtoyoutube) {
         setMarketing(true)
     }
 
-    //const [notice, setNotice] = useState(true);
-
     const enableYoutube = () => {
-        console.log('enableYoutube')
         setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
     }
 
     const disableYoutube = () => {
-        console.log('disableYoutube')
         removeCookie("agreedtoyoutube")
         setMarketing(false)
     }
@@ -62,18 +56,10 @@ const IframeAreabrick = props => {
                     } else {
                         disableYoutube()
                     }
-                    //ev.preventDefault()
                 }, false)
             })
-            /*if ( window.Cookiebot.consent.marketing) {
-                enableYoutube()
-            } else {
-                disableYoutube()
-            }*/
         }
     }
-
-    console.log(marketing)
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
