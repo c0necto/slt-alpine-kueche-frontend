@@ -20,13 +20,15 @@ const IframeAreabrick = props => {
     const grey = elements.grey?.checked
 
     const [cookies, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
+    const [access, setAccess] = useState(false);
     const [marketing, setMarketing] = useContext(CookieContext);
 
     const handleClick = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
-        console.log('hallo?')
-        console.log(marketing)
+        if ( marketing ) {
+            setAccess(true)
+        }
     }
 
     const youtubeParser = url => {
@@ -50,27 +52,17 @@ const IframeAreabrick = props => {
                     } else {
                         removeCookie("agreedtoyoutube")
                         setMarketing(false)
+                        setAccess(false)
                     }
                     //ev.preventDefault()
                 }, false)
             })
-
-            /*window.addEventListener('CookiebotOnAccept', 'CookiebotOnDecline', 'CookiebotOnLoad', ev => {
-                console.log('CookiebotOnAccept', ev)
-                if (window.Cookiebot.consent.marketing)
-                {
-                    handleClick()
-                } else {
-                    removeCookie("agreedtoyoutube")
-                    setMarketing(false)
-                }
-                ev.preventDefault()
-            }, false);*/
             if ( window.Cookiebot.consent.marketing) {
                 handleClick()
             } else {
                 removeCookie("agreedtoyoutube")
                 setMarketing(false)
+                setAccess(false)
             }
         }
     }
@@ -84,7 +76,7 @@ const IframeAreabrick = props => {
                         ?
                         <div>
                             <div className={styles.youtubeRatio}>
-                                {marketing
+                                {access
                                     ?
                                     <iframe
                                         loading={'lazy'}
@@ -115,7 +107,7 @@ const IframeAreabrick = props => {
                                     />
                                 }
                             </div>
-                            {!marketing
+                            {!access
                                 ?
                                 <div className={styles.notice}>
                                     Sie können die Anzeige dieses Elements über den Button aktivieren. Durch die
