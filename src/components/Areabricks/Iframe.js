@@ -19,16 +19,16 @@ const IframeAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
 
-    const [cookies, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
-    const [access, setAccess] = useState(false);
+    const [, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
     const [marketing, setMarketing] = useContext(CookieContext);
 
-    const handleClick = () => {
+    const enableYoutube = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
-        if ( marketing ) {
-            setAccess(true)
-        }
+    }
+    const disableYoutube = () => {
+        removeCookie("agreedtoyoutube")
+        setMarketing(false)
     }
 
     const youtubeParser = url => {
@@ -45,24 +45,19 @@ const IframeAreabrick = props => {
 
             ['CookiebotOnAccept', 'CookiebotOnDecline', 'CookiebotOnLoad'].forEach(event => {
                 window.addEventListener(event, ev => {
-                    //console.log('CookiebotOnAccept', ev)
                     if (window.Cookiebot.consent.marketing)
                     {
-                        handleClick()
+                        enableYoutube()
                     } else {
-                        removeCookie("agreedtoyoutube")
-                        setMarketing(false)
-                        setAccess(false)
+                        disableYoutube()
                     }
                     //ev.preventDefault()
                 }, false)
             })
             if ( window.Cookiebot.consent.marketing) {
-                handleClick()
+                enableYoutube()
             } else {
-                removeCookie("agreedtoyoutube")
-                setMarketing(false)
-                setAccess(false)
+                disableYoutube()
             }
         }
     }
@@ -76,7 +71,7 @@ const IframeAreabrick = props => {
                         ?
                         <div>
                             <div className={styles.youtubeRatio}>
-                                {access
+                                {marketing
                                     ?
                                     <iframe
                                         loading={'lazy'}
@@ -101,13 +96,13 @@ const IframeAreabrick = props => {
                                         playerClass={cn('lty-playbtn', styles.playbutton)} // Default as "lty-playbtn" to control player button styles
                                         wrapperClass='yt-lite' // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
                                         onIframeAdded={() => {
-                                            handleClick()
+                                            enableYoutube()
                                             console.log('wtf')
                                         }}
                                     />
                                 }
                             </div>
-                            {!access
+                            {!marketing
                                 ?
                                 <div className={styles.notice}>
                                     Sie können die Anzeige dieses Elements über den Button aktivieren. Durch die
