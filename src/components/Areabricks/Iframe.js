@@ -62,11 +62,11 @@ const IframeAreabrick = props => {
                     //ev.preventDefault()
                 }, false)
             })
-            if ( window.Cookiebot.consent.marketing) {
+            /*if ( window.Cookiebot.consent.marketing) {
                 enableYoutube()
             } else {
                 disableYoutube()
-            }
+            }*/
         }
     }
 
