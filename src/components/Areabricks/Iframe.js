@@ -37,7 +37,20 @@ const IframeAreabrick = props => {
     const isBrowser = () => typeof window !== "undefined"
     if ( isBrowser() ) {
         if (typeof window.Cookiebot !== "undefined") {
-            window.addEventListener('CookiebotOnAccept', 'CookiebotOnDecline', 'CookiebotOnLoad', ev => {
+            ['CookiebotOnAccept', 'CookiebotOnDecline', 'CookiebotOnLoad'].forEach(event => {
+                window.addEventListener(event, () => {
+                    console.log('CookiebotOnAccept', ev)
+                    if (window.Cookiebot.consent.marketing)
+                    {
+                        handleClick()
+                    } else {
+                        removeCookie("agreedtoyoutube")
+                        setMarketing(false)
+                    }
+                    ev.preventDefault()
+                }, false)
+            })
+            /*window.addEventListener('CookiebotOnAccept', 'CookiebotOnDecline', 'CookiebotOnLoad', ev => {
                 console.log('CookiebotOnAccept', ev)
                 if (window.Cookiebot.consent.marketing)
                 {
@@ -47,7 +60,7 @@ const IframeAreabrick = props => {
                     setMarketing(false)
                 }
                 ev.preventDefault()
-            }, false);
+            }, false);*/
             if ( window.Cookiebot.consent.marketing) {
                 handleClick()
             } else {
