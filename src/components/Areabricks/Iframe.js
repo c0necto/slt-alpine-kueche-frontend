@@ -59,6 +59,14 @@ const IframeAreabrick = props => {
         // if Cookiebot is defined
         if (typeof window.Cookiebot !== "undefined") {
             console.log(window.Cookiebot.consent.marketing)
+
+            window.addEventListener('CookiebotOnAccept', function (e) {
+                if (Cookiebot.consent.marketing)
+                {
+                    console.log("blub")
+                }
+            }, false);
+
             if ( window.Cookiebot.consent.marketing) {
                 handleClick()
             }
