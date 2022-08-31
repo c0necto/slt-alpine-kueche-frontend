@@ -132,8 +132,8 @@ module.exports = {
             options: {
                 cookiebotId: '67e059ad-1f0f-40be-a06c-ce0e05698407',
                 manualMode: false, // Optional. Turns on Cookiebot's manual mode. Defaults to false.
-                blockGtm: true, //  Optional. Skip blocking of GTM. Defaults to true if manualMode is set to true.
-                includeInDevelopment: true, // Optional. Enables plugin in development. Will cause gatsby-plugin-google-tagmanager to thrown an error when pushing to dataLayer. Defaults to false.
+                blockGtm: false, //  Optional. Skip blocking of GTM. Defaults to true if manualMode is set to true.
+                includeInDevelopment: false, // Optional. Enables plugin in development. Will cause gatsby-plugin-google-tagmanager to thrown an error when pushing to dataLayer. Defaults to false.
             },
         }
     ],
