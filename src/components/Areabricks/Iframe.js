@@ -63,7 +63,7 @@ const IframeAreabrick = props => {
             window.addEventListener('CookiebotOnAccept', function (e) {
                 if (window.Cookiebot.consent.marketing)
                 {
-                    console.log("blub")
+                    handleClick()
                 }
             }, false);
 
