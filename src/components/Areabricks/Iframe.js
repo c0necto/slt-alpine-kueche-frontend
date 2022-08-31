@@ -7,13 +7,11 @@ import * as styles from "./Iframe.module.scss"
 // https://www.npmjs.com/package/react-lite-youtube-embed
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 //import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
-
 import './Iframe.LiteYouTubeEmbed.css'
 
 // https://www.npmjs.com/package/react-cookie
 import {useCookies} from "react-cookie"
 
-//import Context from "../../context/CookieContext"
 import { BasicContext } from "../../context/CookieContext";
 
 const IframeAreabrick = props => {
@@ -28,7 +26,7 @@ const IframeAreabrick = props => {
 
     console.log(cookies.agreedtoyoutube)
 
-    const [, setMarketing] = React.useContext(BasicContext);
+    const [, setMarketing] = useContext(BasicContext);
 
     const handleClick = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
@@ -46,20 +44,14 @@ const IframeAreabrick = props => {
 
     const isBrowser = () => typeof window !== "undefined";
     if ( isBrowser() ) {
-        // if Cookiebot is defined
         if (typeof window.Cookiebot !== "undefined") {
-            console.log(window.Cookiebot.consent.marketing)
-
             window.addEventListener('CookiebotOnAccept', function (e) {
                 if (window.Cookiebot.consent.marketing)
                 {
                     handleClick()
-                    // marketingSet = true
                 }
             }, false);
-
             if ( window.Cookiebot.consent.marketing) {
-                // marketingSet = true
                 handleClick()
             }
         }
