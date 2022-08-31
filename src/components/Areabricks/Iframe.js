@@ -65,13 +65,24 @@ const IframeAreabrick = props => {
             */
                 window.addEventListener('CookiebotOnConsentReady', ev => {
                     console.log('window.Cookiebot.consent.marketing: ', window.Cookiebot.consent.marketing)
-                    if ( window.Cookiebot.consent.marketing ) {
+                    if ( cookies.agreedtoyoutube ) {
+                        // JA
+                        if ( !window.Cookiesbot.consent.marketing ) {
+                            disableYoutube()
+                        }
+                    } else {
+                        // NEIN
+                        if ( !window.Cookiesbot.consent.marketing ) {
+                            enableYoutube()
+                        }
+                    }
+                    /*if ( window.Cookiebot.consent.marketing ) {
                         enableYoutube()
                     } else {
-                        /*if (!cookies.agreedtoyoutube) {*/
+                        /!*if (!cookies.agreedtoyoutube) {*!/
                         disableYoutube()
-                        /*}*/
-                    }
+                        /!*}*!/
+                    }*/
                 })
 
 
