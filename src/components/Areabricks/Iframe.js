@@ -20,7 +20,7 @@ const IframeAreabrick = props => {
     const grey = elements.grey?.checked
 
     const [cookies, setCookie] = useCookies(['agreedtoyoutube']);
-    const [accepted, setAccepted] = useState(cookies.agreedtoyoutube)
+    //const [accepted, setAccepted] = useState(cookies.agreedtoyoutube)
 
     const [marketing, setMarketing] = useContext(BasicContext);
 
@@ -62,7 +62,7 @@ const IframeAreabrick = props => {
                         ?
                         <div>
                             <div className={styles.youtubeRatio}>
-                                {accepted
+                                {marketing
                                     ?
                                     <iframe
                                         loading={'lazy'}
@@ -92,7 +92,7 @@ const IframeAreabrick = props => {
                                     />
                                 }
                             </div>
-                            {!accepted
+                            {!marketing
                                 ?
                                 <div className={styles.notice}>
                                     Sie können die Anzeige dieses Elements über den Button aktivieren. Durch die
