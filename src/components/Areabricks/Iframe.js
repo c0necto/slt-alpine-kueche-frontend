@@ -27,16 +27,28 @@ const IframeAreabrick = props => {
         setMarketing(true)
     }
 
+    const isBrowser = () => typeof window !== "undefined"
     const enableYoutube = () => {
         console.log('enableyoutube')
         setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
+        if ( isBrowser() ) {
+            if (typeof window.Cookiebot !== "undefined") {
+                window.Cookiebot.consent.marketing = true
+            }
+        }
     }
 
     const disableYoutube = () => {
         console.log('disableyoutube')
         removeCookie("agreedtoyoutube")
         setMarketing(false)
+
+        if ( isBrowser() ) {
+            if (typeof window.Cookiebot !== "undefined") {
+                window.Cookiebot.consent.marketing = false
+            }
+        }
     }
 
     const youtubeParser = url => {
@@ -47,7 +59,6 @@ const IframeAreabrick = props => {
     const videoId = youtubeParser(elements.iframe_url?.text)
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
-    const isBrowser = () => typeof window !== "undefined"
     if ( isBrowser() ) {
         if (typeof window.Cookiebot !== "undefined") {
 
