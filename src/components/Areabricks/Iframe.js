@@ -69,12 +69,7 @@ const IframeAreabrick = props => {
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
-            <div className="cookieconsent-optin-marketing">
-                This content is only visible when the visitor has consented to marketing cookies.
-            </div>
-            <div className="cookieconsent-optout-marketing">
-                This content is only visible when the visitor has consented to marketing cookies.
-            </div>
+
             <Container>
                 <div className={styles.iframeWrapper}>
                     {isYoutube
