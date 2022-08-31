@@ -49,7 +49,6 @@ const IframeAreabrick = props => {
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
     if ( isBrowser() ) {
-        window.addEventListener('DOMContentLoaded', ev => {
         if (typeof window.Cookiebot !== "undefined") {
 
             /*['CookiebotOnTagsExecuted',/!*'CookiebotOnAccept', 'CookiebotOnDecline'*!/].forEach(event => {
@@ -80,7 +79,6 @@ const IframeAreabrick = props => {
                 disableYoutube()
             })*/
         }
-        })
     }
 
     return (
