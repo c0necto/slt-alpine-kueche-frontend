@@ -29,6 +29,11 @@
   display: none;
 }
 
+button.test {
+  position: relative;
+  z-index: 99;
+}
+
 .iframe-wrapper {
   .playbutton {
     opacity: 1;

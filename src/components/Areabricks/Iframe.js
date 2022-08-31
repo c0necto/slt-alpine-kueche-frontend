@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react"
+import React, {useContext} from "react"
 import ContentArea from '~components/ContentArea/ContentArea'
 import Container from '~components/Container/Container'
 import cn from "classnames"
@@ -10,7 +10,7 @@ import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import './Iframe.LiteYouTubeEmbed.css'
 
 // https://www.npmjs.com/package/react-cookie
-import {useCookies} from "react-cookie"
+//import {useCookies} from "react-cookie"
 
 import { CookieContext } from "../../context/CookieContext";
 
@@ -19,15 +19,16 @@ const IframeAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
 
-    const [, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
+    //const [, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
     const [marketing, setMarketing] = useContext(CookieContext);
 
     const enableYoutube = () => {
-        setCookie("agreedtoyoutube", true, {path: "/"})
+        //setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
     }
+
     const disableYoutube = () => {
-        removeCookie("agreedtoyoutube")
+        //removeCookie("agreedtoyoutube")
         setMarketing(false)
     }
 
@@ -96,8 +97,8 @@ const IframeAreabrick = props => {
                                         playerClass={cn('lty-playbtn', styles.playbutton)} // Default as "lty-playbtn" to control player button styles
                                         wrapperClass='yt-lite' // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
                                         onIframeAdded={() => {
-                                            enableYoutube()
-                                            console.log('wtf')
+                                            //enableYoutube()
+                                            //setMarketing(true)
                                         }}
                                     />
                                 }
