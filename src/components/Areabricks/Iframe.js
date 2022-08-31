@@ -19,12 +19,12 @@ const IframeAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
 
-    const [, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
+    const [cookies, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
     const [marketing, setMarketing] = useContext(CookieContext);
 
     // if cookie 'agreedtoyoutube' is set, set marketing to true
     console.log('agreedtoyoutube: ', setCookie.agreedtoyoutube)
-    if (setCookie.agreedtoyoutube) {
+    if (cookies.agreedtoyoutube) {
         setMarketing(true)
     }
 
