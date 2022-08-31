@@ -20,6 +20,8 @@ const IframeAreabrick = props => {
     const [cookies, setCookie] = useCookies(['agreedtoyoutube']);
     const [accepted, setAccepted] = useState(cookies.agreedtoyoutube)
 
+    console.log(cookies.agreedtoyoutube)
+
     const handleClick = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
         setAccepted(true)
@@ -33,8 +35,46 @@ const IframeAreabrick = props => {
     const videoId = youtubeParser(elements.iframe_url?.text)
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
+    // get cookiebot settings
+    const apikey = 'bytXdHNTZ3cvSDUyUzFPdHdRN0J1aGV1SjJuVzVFOEhCb3NNQjNLRGUzcWR1a3VWYnFYYkhBPT0='
+    const culture = 'default'
+    const serial = '67e059ad-1f0f-40be-a06c-ce0e05698407'
+    const domain = 'alpine-kueche.com'
+    const domainpath = '/'
+
+    // get current date in YYYYMMDD
+    const sd = new Date()
+    // convert startdate to YYYYMMDD
+    const startdate = sd.getFullYear() + ("0" + (sd.getMonth() + 1)).slice(-2) + ("0" + sd.getDate()).slice(-2)
+    // add 1 year
+    const ed = new Date()
+    // convert enddate to YYYYMMDD
+    const enddate = ed.getFullYear() + ("0" + (ed.getMonth() + 1)).slice(-2) + ("0" + ed.getDate()).slice(-2)
+
+    const cookieInfo = `https://consent.cookiebot.com/api/v1/${apikey}/json/domaingroup/${serial}/${culture}/domain/${domain}/cookies`
+    const consentData = `https://consent.cookiebot.com/api/v1/${apikey}/json/domaingroup/${serial}/domain/${domain}/(${domainpath}/)consent/stats?startdate=${startdate}&enddate=${enddate}`
+
+    const isBrowser = () => typeof window !== "undefined";
+    if ( isBrowser() ) {
+        // if Cookiebot is defined
+        if (typeof window.Cookiebot !== "undefined") {
+            console.log(window.Cookiebot.consent.marketing)
+            if ( window.Cookiebot.consent.marketing) {
+                handleClick()
+            }
+        }
+    }
+
+
+
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
+            <div className="cookieconsent-optin-marketing">
+                This content is only visible when the visitor has consented to marketing cookies.
+            </div>
+            <div className="cookieconsent-optout-marketing">
+                This content is only visible when the visitor has consented to marketing cookies.
+            </div>
             <Container>
                 <div className={styles.iframeWrapper}>
                     {isYoutube
