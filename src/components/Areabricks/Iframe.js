@@ -67,17 +67,21 @@ const IframeAreabrick = props => {
                     console.log('window.Cookiebot.consent.marketing: ', window.Cookiebot.consent.marketing)
                     console.log('cookies.agreedtoyoutube: ', cookies.agreedtoyoutube)
                     if ( cookies.agreedtoyoutube ) {
+
                         // COOKIE GESETZT
                         console.log('COOKIE GESETZT')
                         if ( !window.Cookiebot.consent.marketing ) {
-                            //disableYoutube()
+                            disableYoutube()
                         }
+
                     } else {
+
                         // COOKIE NICHT GESETZT
                         console.log('COOKIE NICHT GESETZT')
                         if ( window.Cookiebot.consent.marketing ) {
                             enableYoutube()
                         }
+
                     }
                     /*if ( window.Cookiebot.consent.marketing ) {
                         enableYoutube()
