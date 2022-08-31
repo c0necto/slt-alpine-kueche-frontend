@@ -33,12 +33,14 @@ const IframeAreabrick = props => {
         console.log('enableYoutube')
         setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
+        setNotice(false)
     }
 
     const disableYoutube = () => {
         console.log('disableYoutube')
         removeCookie("agreedtoyoutube")
         setMarketing(false)
+        setNotice(true)
     }
 
     const youtubeParser = url => {
@@ -116,7 +118,7 @@ const IframeAreabrick = props => {
                                     />
                                 }
                             </div>
-                            {marketing
+                            {notice
                                 ?
                                 <div className={styles.notice}>
                                     Sie können die Anzeige dieses Elements über den Button aktivieren. Durch die
