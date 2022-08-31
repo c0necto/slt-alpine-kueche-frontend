@@ -19,7 +19,7 @@ const IframeAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
 
-    const [cookies, setCookie] = useCookies(['agreedtoyoutube']);
+    const [cookies, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
     const [marketing, setMarketing] = useContext(CookieContext);
     const handleClick = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
@@ -34,17 +34,23 @@ const IframeAreabrick = props => {
     const videoId = youtubeParser(elements.iframe_url?.text)
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
-    const isBrowser = () => typeof window !== "undefined";
+    const isBrowser = () => typeof window !== "undefined"
     if ( isBrowser() ) {
         if (typeof window.Cookiebot !== "undefined") {
             window.addEventListener('CookiebotOnAccept', function (e) {
                 if (window.Cookiebot.consent.marketing)
                 {
                     handleClick()
+                } else {
+                    removeCookie("agreedtoyoutube")
+                    setMarketing(false)
                 }
             }, false);
             if ( window.Cookiebot.consent.marketing) {
                 handleClick()
+            } else {
+                removeCookie("agreedtoyoutube")
+                setMarketing(false)
             }
         }
     }
