@@ -11,52 +11,16 @@ import '@fontsource/prata';
 
 import React from 'react';
 import { CookiesProvider } from "react-cookie";
-// https://www.npmjs.com/package/react-cookie
-import {useCookies} from "react-cookie"
-
 import SimpleReactLightbox from 'simple-react-lightbox';
-// USE THE IMPORT BELOW INSTEAD IF YOU ARE USING THE PRO VERSION
-// import SimpleReactLightbox from 'simple-react-lightbox-pro'
-
-// eslint-disable-next-line react/prop-types
-/*export const wrapRootElement = ({ element }) => (
-    <CookiesProvider>
-        <SimpleReactLightbox>{element}</SimpleReactLightbox>
-    </CookiesProvider>
-)*/
+import BasicContext from "./src/context/CookieContext";
 
 export const wrapRootElement = ({element}) => {
-
-    // const [cookies, setCookie] = useCookies(['agreedtoyoutube']);
-
-    const handleClick = () => {
-        // setCookie("agreedtoyoutube", true, {path: "/"})
-        console.log("cookie set")
-    }
-
-    const isBrowser = () => typeof window !== "undefined";
-    if ( isBrowser() ) {
-        // if Cookiebot is defined
-        if (typeof window.Cookiebot !== "undefined") {
-            console.log(window.Cookiebot.consent.marketing)
-
-            window.addEventListener('CookiebotOnAccept', function (e) {
-                if (window.Cookiebot.consent.marketing)
-                {
-                    handleClick()
-                }
-            }, false);
-
-            if ( window.Cookiebot.consent.marketing) {
-                handleClick()
-            }
-        }
-    }
-
     return (
-        <CookiesProvider>
-            <SimpleReactLightbox>{element}</SimpleReactLightbox>
-        </CookiesProvider>
+        <BasicContext>
+            <CookiesProvider>
+                <SimpleReactLightbox>{element}</SimpleReactLightbox>
+            </CookiesProvider>
+        </BasicContext>
     )
 }
 

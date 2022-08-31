@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useContext} from "react"
 import ContentArea from '~components/ContentArea/ContentArea'
 import Container from '~components/Container/Container'
 import cn from "classnames"
@@ -13,7 +13,13 @@ import './Iframe.LiteYouTubeEmbed.css'
 // https://www.npmjs.com/package/react-cookie
 import {useCookies} from "react-cookie"
 
+//import Context from "../../context/CookieContext"
+import { BasicContext } from "../../context/CookieContext";
+
 const IframeAreabrick = props => {
+
+    //const value = useContext(Context);
+
     const {elements} = props
     const grey = elements.grey?.checked
 
@@ -22,9 +28,12 @@ const IframeAreabrick = props => {
 
     console.log(cookies.agreedtoyoutube)
 
+    const [, setMarketing] = React.useContext(BasicContext);
+
     const handleClick = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
         setAccepted(true)
+        setMarketing(true)
     }
 
     const youtubeParser = url => {
@@ -35,28 +44,26 @@ const IframeAreabrick = props => {
     const videoId = youtubeParser(elements.iframe_url?.text)
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
-    // get cookiebot settings
-    const apikey = 'bytXdHNTZ3cvSDUyUzFPdHdRN0J1aGV1SjJuVzVFOEhCb3NNQjNLRGUzcWR1a3VWYnFYYkhBPT0='
-    const culture = 'default'
-    const serial = '67e059ad-1f0f-40be-a06c-ce0e05698407'
-    const domain = 'alpine-kueche.com'
-    const domainpath = '/'
+    const isBrowser = () => typeof window !== "undefined";
+    if ( isBrowser() ) {
+        // if Cookiebot is defined
+        if (typeof window.Cookiebot !== "undefined") {
+            console.log(window.Cookiebot.consent.marketing)
 
-    // get current date in YYYYMMDD
-    const sd = new Date()
-    // convert startdate to YYYYMMDD
-    const startdate = sd.getFullYear() + ("0" + (sd.getMonth() + 1)).slice(-2) + ("0" + sd.getDate()).slice(-2)
-    // add 1 year
-    const ed = new Date()
-    // convert enddate to YYYYMMDD
-    const enddate = ed.getFullYear() + ("0" + (ed.getMonth() + 1)).slice(-2) + ("0" + ed.getDate()).slice(-2)
+            window.addEventListener('CookiebotOnAccept', function (e) {
+                if (window.Cookiebot.consent.marketing)
+                {
+                    handleClick()
+                    // marketingSet = true
+                }
+            }, false);
 
-    const cookieInfo = `https://consent.cookiebot.com/api/v1/${apikey}/json/domaingroup/${serial}/${culture}/domain/${domain}/cookies`
-    const consentData = `https://consent.cookiebot.com/api/v1/${apikey}/json/domaingroup/${serial}/domain/${domain}/(${domainpath}/)consent/stats?startdate=${startdate}&enddate=${enddate}`
-
-
-
-
+            if ( window.Cookiebot.consent.marketing) {
+                // marketingSet = true
+                handleClick()
+            }
+        }
+    }
 
     return (
         <ContentArea className={'bottom80'} color={grey ? 'grey' : null}>
