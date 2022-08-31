@@ -28,7 +28,11 @@ const IframeAreabrick = props => {
         setCookie("agreedtoyoutube", true, {path: "/"})
         //setAccepted(true)
         setMarketing(true)
+
+        console.log(marketing)
     }
+
+    console.log(marketing)
 
     const youtubeParser = url => {
         const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
