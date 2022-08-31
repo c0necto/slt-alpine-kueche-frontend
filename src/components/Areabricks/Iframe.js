@@ -27,20 +27,16 @@ const IframeAreabrick = props => {
         setMarketing(true)
     }
 
-    const [notice, setNotice] = useState(true);
+    //const [notice, setNotice] = useState(true);
 
     const enableYoutube = () => {
-        console.log('enableYoutube')
         setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
-        setNotice(false)
     }
 
     const disableYoutube = () => {
-        console.log('disableYoutube')
         removeCookie("agreedtoyoutube")
         setMarketing(false)
-        setNotice(true)
     }
 
     const youtubeParser = url => {
