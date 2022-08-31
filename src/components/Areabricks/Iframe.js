@@ -70,7 +70,7 @@ const IframeAreabrick = props => {
                         // COOKIE GESETZT
                         console.log('COOKIE GESETZT')
                         if ( !window.Cookiebot.consent.marketing ) {
-                            disableYoutube()
+                            //disableYoutube()
                         }
                     } else {
                         // COOKIE NICHT GESETZT
