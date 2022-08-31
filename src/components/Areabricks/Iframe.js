@@ -25,8 +25,8 @@ const IframeAreabrick = props => {
     const [marketing, setMarketing] = useContext(BasicContext);
 
     const handleClick = () => {
-        setCookie("agreedtoyoutube", true, {path: "/"})
-        setAccepted(true)
+        //setCookie("agreedtoyoutube", true, {path: "/"})
+        //setAccepted(true)
         setMarketing(true)
     }
 
