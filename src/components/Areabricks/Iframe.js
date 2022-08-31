@@ -23,7 +23,7 @@ const IframeAreabrick = props => {
     const [marketing, setMarketing] = useContext(CookieContext);
 
     // if cookie 'agreedtoyoutube' is set, set marketing to true
-    console.log('agreedtoyoutube: ', setCookie.agreedtoyoutube)
+    console.log('agreedtoyoutube: ', cookies.agreedtoyoutube)
     if (cookies.agreedtoyoutube) {
         setMarketing(true)
     }
@@ -31,11 +31,13 @@ const IframeAreabrick = props => {
     //const [notice, setNotice] = useState(true);
 
     const enableYoutube = () => {
+        console.log('enableYoutube')
         setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
     }
 
     const disableYoutube = () => {
+        console.log('disableYoutube')
         removeCookie("agreedtoyoutube")
         setMarketing(false)
     }
