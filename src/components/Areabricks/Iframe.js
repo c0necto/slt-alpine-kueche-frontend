@@ -67,12 +67,12 @@ const IframeAreabrick = props => {
                     console.log('window.Cookiebot.consent.marketing: ', window.Cookiebot.consent.marketing)
                     if ( cookies.agreedtoyoutube ) {
                         // JA
-                        if ( !window.Cookiesbot.consent.marketing ) {
+                        if ( !window.Cookiebot.consent.marketing ) {
                             disableYoutube()
                         }
                     } else {
                         // NEIN
-                        if ( !window.Cookiesbot.consent.marketing ) {
+                        if ( !window.Cookiebot.consent.marketing ) {
                             enableYoutube()
                         }
                     }
