@@ -53,6 +53,7 @@ const IframeAreabrick = props => {
 
             ['CookiebotOnAccept', 'CookiebotOnDecline'].forEach(event => {
                 window.addEventListener(event, ev => {
+                    console.log(event)
                     if (window.Cookiebot.consent.marketing)
                     {
                         enableYoutube()
