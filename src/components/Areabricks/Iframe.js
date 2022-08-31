@@ -114,7 +114,9 @@ const IframeAreabrick = props => {
                                     Sie können die Anzeige dieses Elements über den Button aktivieren. Durch die
                                     Aktivierung der Einbindung tauscht der Browser Daten mit den jeweiligen Anbietern
                                     aus. Die aktuelle Seite hat keinen Zugriff oder Einfluss auf die Inhalte, Art,
-                                    Speicherung und Verarbeitung dieser Daten.
+                                    Speicherung und Verarbeitung dieser Daten. Durch den Klick auf den Button erlauben
+                                    Sie das Cookie agreetoyutube, Sie können dieses Cookie unter den
+                                    Datenschutzeinstellungen wiederrufen.
                                 </div>
                                 : null
                             }
