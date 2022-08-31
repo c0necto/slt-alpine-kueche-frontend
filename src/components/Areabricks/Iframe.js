@@ -114,7 +114,7 @@ const IframeAreabrick = props => {
                                     />
                                 }
                             </div>
-                            {notice
+                            {marketing
                                 ?
                                 <div className={styles.notice}>
                                     Sie können die Anzeige dieses Elements über den Button aktivieren. Durch die
