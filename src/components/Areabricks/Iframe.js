@@ -107,6 +107,7 @@ const IframeAreabrick = props => {
                                         wrapperClass='yt-lite' // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
                                         onIframeAdded={() => {
                                             handleClick()
+                                            console.log('wtf')
                                         }}
                                     />
                                 }
