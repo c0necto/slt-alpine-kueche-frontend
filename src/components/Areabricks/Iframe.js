@@ -51,7 +51,7 @@ const IframeAreabrick = props => {
     if ( isBrowser() ) {
         if (typeof window.Cookiebot !== "undefined") {
 
-            ['CookiebotOnTagsExecuted',/*'CookiebotOnAccept', 'CookiebotOnDecline'*/].forEach(event => {
+            /*['CookiebotOnTagsExecuted',/!*'CookiebotOnAccept', 'CookiebotOnDecline'*!/].forEach(event => {
                 window.addEventListener(event, ev => {
                     console.log(event)
                     console.log('-----')
@@ -61,6 +61,14 @@ const IframeAreabrick = props => {
                         disableYoutube()
                     }
                 }, false)
+            })
+            */
+            window.addEventListener('CookiebotOnAccept', ev => {
+                enableYoutube()
+            })
+
+            window.addEventListener('CookiebotOnDecline', ev => {
+                disableYoutube()
             })
         }
     }
