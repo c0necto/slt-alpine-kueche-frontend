@@ -108,15 +108,15 @@ const IframeAreabrick = props => {
                                         playerClass={cn('lty-playbtn', styles.playbutton)} // Default as "lty-playbtn" to control player button styles
                                         wrapperClass='yt-lite' // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
                                         onIframeAdded={() => {
-                                            //enableYoutube()
+                                            enableYoutube()
                                             //setMarketing(true)
-                                            setCookie("agreedtoyoutube", true, {path: "/"})
-                                            setNotice(!notice)
+                                            //setCookie("agreedtoyoutube", true, {path: "/"})
+                                            //setNotice(!notice)
                                         }}
                                     />
                                 }
                             </div>
-                            {notice
+                            {marketing
                                 ?
                                 <div className={styles.notice}>
                                     Sie können die Anzeige dieses Elements über den Button aktivieren. Durch die
