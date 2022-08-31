@@ -1,4 +1,4 @@
-import React, {useContext} from "react"
+import React, {useContext, useState} from "react"
 import ContentArea from '~components/ContentArea/ContentArea'
 import Container from '~components/Container/Container'
 import cn from "classnames"
@@ -10,7 +10,7 @@ import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import './Iframe.LiteYouTubeEmbed.css'
 
 // https://www.npmjs.com/package/react-cookie
-//import {useCookies} from "react-cookie"
+import {useCookies} from "react-cookie"
 
 import { CookieContext } from "../../context/CookieContext";
 
@@ -19,16 +19,17 @@ const IframeAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
 
-    //const [, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
+    const [, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
     const [marketing, setMarketing] = useContext(CookieContext);
+    const [notice, setNotice] = useState(true);
 
     const enableYoutube = () => {
-        //setCookie("agreedtoyoutube", true, {path: "/"})
+        setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
     }
 
     const disableYoutube = () => {
-        //removeCookie("agreedtoyoutube")
+        removeCookie("agreedtoyoutube")
         setMarketing(false)
     }
 
@@ -99,11 +100,13 @@ const IframeAreabrick = props => {
                                         onIframeAdded={() => {
                                             //enableYoutube()
                                             //setMarketing(true)
+                                            setCookie("agreedtoyoutube", true, {path: "/"})
+                                            setNotice(!notice)
                                         }}
                                     />
                                 }
                             </div>
-                            {!marketing
+                            {notice
                                 ?
                                 <div className={styles.notice}>
                                     Sie können die Anzeige dieses Elements über den Button aktivieren. Durch die
