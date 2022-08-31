@@ -21,9 +21,12 @@ const IframeAreabrick = props => {
 
     const [cookies, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
     const [marketing, setMarketing] = useContext(CookieContext);
+
     const handleClick = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
+        console.log('hallo?')
+        console.log(marketing)
     }
 
     const youtubeParser = url => {
