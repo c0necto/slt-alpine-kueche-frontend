@@ -16,17 +16,13 @@ import { BasicContext } from "../../context/CookieContext";
 
 const IframeAreabrick = props => {
 
-    //const value = useContext(Context);
-
     const {elements} = props
     const grey = elements.grey?.checked
 
     const [cookies, setCookie] = useCookies(['agreedtoyoutube']);
     const [accepted, setAccepted] = useState(cookies.agreedtoyoutube)
 
-    console.log(cookies.agreedtoyoutube)
-
-    const [, setMarketing] = useContext(BasicContext);
+    const [marketing, setMarketing] = useContext(BasicContext);
 
     const handleClick = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
