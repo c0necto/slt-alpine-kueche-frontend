@@ -32,23 +32,12 @@ const IframeAreabrick = props => {
         console.log('enableyoutube')
         setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
-        /*if ( isBrowser() ) {
-            if (typeof window.Cookiebot !== "undefined") {
-                window.Cookiebot.consent.marketing = true
-            }
-        }*/
     }
 
     const disableYoutube = () => {
         console.log('disableyoutube')
         removeCookie("agreedtoyoutube")
         setMarketing(false)
-
-        /*if ( isBrowser() ) {
-            if (typeof window.Cookiebot !== "undefined") {
-                window.Cookiebot.consent.marketing = false
-            }
-        }*/
     }
 
     const youtubeParser = url => {
@@ -79,9 +68,9 @@ const IframeAreabrick = props => {
                 if ( window.Cookiebot.consent.marketing ) {
                     enableYoutube()
                 } else {
-                    if (!cookies.agreedtoyoutube) {
+                    /*if (!cookies.agreedtoyoutube) {*/
                         disableYoutube()
-                    }
+                    /*}*/
                 }
             })
 
