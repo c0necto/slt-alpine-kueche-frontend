@@ -23,6 +23,15 @@ export const wrapRootElement = ({ element }) => (
     </CookiesProvider>
 )
 
+// https://www.npmjs.com/package/react-cookie
+import {useCookies} from "react-cookie"
+const [cookies, setCookie] = useCookies(['agreedtoyoutube']);
+
+const handleClick = () => {
+    setCookie("agreedtoyoutube", true, {path: "/"})
+    console.log("cookie set")
+}
+
 const isBrowser = () => typeof window !== "undefined";
 if ( isBrowser() ) {
     // if Cookiebot is defined
