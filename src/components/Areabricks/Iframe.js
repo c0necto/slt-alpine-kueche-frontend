@@ -51,7 +51,7 @@ const IframeAreabrick = props => {
     if ( isBrowser() ) {
         if (typeof window.Cookiebot !== "undefined") {
 
-            ['CookiebotOnAccept', 'CookiebotOnDecline'].forEach(event => {
+            ['CookiebotOnConsentReady',/*'CookiebotOnAccept', 'CookiebotOnDecline'*/].forEach(event => {
                 window.addEventListener(event, ev => {
                     console.log(event)
                     if (window.Cookiebot.consent.marketing)
