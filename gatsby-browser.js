@@ -22,3 +22,22 @@ export const wrapRootElement = ({ element }) => (
         <SimpleReactLightbox>{element}</SimpleReactLightbox>
     </CookiesProvider>
 )
+
+const isBrowser = () => typeof window !== "undefined";
+if ( isBrowser() ) {
+    // if Cookiebot is defined
+    if (typeof window.Cookiebot !== "undefined") {
+        console.log(window.Cookiebot.consent.marketing)
+
+        window.addEventListener('CookiebotOnAccept', function (e) {
+            if (window.Cookiebot.consent.marketing)
+            {
+                handleClick()
+            }
+        }, false);
+
+        if ( window.Cookiebot.consent.marketing) {
+            handleClick()
+        }
+    }
+}

@@ -54,24 +54,7 @@ const IframeAreabrick = props => {
     const cookieInfo = `https://consent.cookiebot.com/api/v1/${apikey}/json/domaingroup/${serial}/${culture}/domain/${domain}/cookies`
     const consentData = `https://consent.cookiebot.com/api/v1/${apikey}/json/domaingroup/${serial}/domain/${domain}/(${domainpath}/)consent/stats?startdate=${startdate}&enddate=${enddate}`
 
-    const isBrowser = () => typeof window !== "undefined";
-    if ( isBrowser() ) {
-        // if Cookiebot is defined
-        if (typeof window.Cookiebot !== "undefined") {
-            console.log(window.Cookiebot.consent.marketing)
 
-            window.addEventListener('CookiebotOnAccept', function (e) {
-                if (window.Cookiebot.consent.marketing)
-                {
-                    handleClick()
-                }
-            }, false);
-
-            if ( window.Cookiebot.consent.marketing) {
-                handleClick()
-            }
-        }
-    }
 
 
 
