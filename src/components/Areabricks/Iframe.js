@@ -72,6 +72,8 @@ const IframeAreabrick = props => {
                         console.log('COOKIE GESETZT')
                         if ( !window.Cookiebot.consent.marketing ) {
                             disableYoutube()
+                        } else {
+                            enableYoutube()
                         }
 
                     } else {
@@ -80,6 +82,8 @@ const IframeAreabrick = props => {
                         console.log('COOKIE NICHT GESETZT')
                         if ( window.Cookiebot.consent.marketing ) {
                             enableYoutube()
+                        } else {
+                            disableYoutube()
                         }
 
                     }
