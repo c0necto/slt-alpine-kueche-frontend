@@ -49,6 +49,7 @@ const IframeAreabrick = props => {
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
     if ( isBrowser() ) {
+        window.addEventListener('DOMContentLoaded', ev => {
         if (typeof window.Cookiebot !== "undefined") {
 
             /*['CookiebotOnTagsExecuted',/!*'CookiebotOnAccept', 'CookiebotOnDecline'*!/].forEach(event => {
@@ -63,7 +64,6 @@ const IframeAreabrick = props => {
                 }, false)
             })
             */
-            window.addEventListener('DOMContentLoaded', ev => {
                 window.addEventListener('CookiebotOnConsentReady', ev => {
                     console.log('window.Cookiebot.consent.marketing: ', window.Cookiebot.consent.marketing)
                     if ( window.Cookiebot.consent.marketing ) {
@@ -74,13 +74,13 @@ const IframeAreabrick = props => {
                         /*}*/
                     }
                 })
-            })
 
 
             /*window.addEventListener('CookiebotOnDecline', ev => {
                 disableYoutube()
             })*/
         }
+        })
     }
 
     return (
