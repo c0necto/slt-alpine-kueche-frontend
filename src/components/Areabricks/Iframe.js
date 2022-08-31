@@ -23,19 +23,16 @@ const IframeAreabrick = props => {
     const [marketing, setMarketing] = useContext(CookieContext);
 
     if (cookies.agreedtoyoutube) {
-        console.log('agreedtoyoutube cookie is set');
         setMarketing(true)
     }
 
     const isBrowser = () => typeof window !== "undefined"
     const enableYoutube = () => {
-        console.log('enableyoutube')
         setCookie("agreedtoyoutube", true, {path: "/"})
         setMarketing(true)
     }
 
     const disableYoutube = () => {
-        console.log('disableyoutube')
         removeCookie("agreedtoyoutube")
         setMarketing(false)
     }
@@ -50,56 +47,25 @@ const IframeAreabrick = props => {
 
     if ( isBrowser() ) {
         if (typeof window.Cookiebot !== "undefined") {
-
-            /*['CookiebotOnTagsExecuted',/!*'CookiebotOnAccept', 'CookiebotOnDecline'*!/].forEach(event => {
-                window.addEventListener(event, ev => {
-                    console.log(event)
-                    console.log('-----')
-                    if ( window.Cookiebot.consent.marketing ) {
-                        enableYoutube()
-                    } else {
-                        disableYoutube()
-                    }
-                }, false)
-            })
-            */
                 window.addEventListener('CookiebotOnConsentReady', ev => {
-                    console.log('window.Cookiebot.consent.marketing: ', window.Cookiebot.consent.marketing)
-                    console.log('cookies.agreedtoyoutube: ', cookies.agreedtoyoutube)
                     if ( cookies.agreedtoyoutube ) {
-
                         // COOKIE GESETZT
-                        console.log('COOKIE GESETZT')
                         if ( !window.Cookiebot.consent.marketing ) {
                             disableYoutube()
                         } else {
                             enableYoutube()
                         }
-
                     } else {
-
                         // COOKIE NICHT GESETZT
-                        console.log('COOKIE NICHT GESETZT')
                         if ( window.Cookiebot.consent.marketing ) {
                             enableYoutube()
                         } else {
                             disableYoutube()
                         }
-
                     }
-                    /*if ( window.Cookiebot.consent.marketing ) {
-                        enableYoutube()
-                    } else {
-                        /!*if (!cookies.agreedtoyoutube) {*!/
-                        disableYoutube()
-                        /!*}*!/
-                    }*/
                 })
 
 
-            /*window.addEventListener('CookiebotOnDecline', ev => {
-                disableYoutube()
-            })*/
         }
     }
 
@@ -138,9 +104,6 @@ const IframeAreabrick = props => {
                                         wrapperClass='yt-lite' // Default as "yt-lite" for the div wrapping the area, the most important class and needs extra attention, please refer to LiteYouTubeEmbed.css for a reference.
                                         onIframeAdded={() => {
                                             enableYoutube()
-                                            //setMarketing(true)
-                                            //setCookie("agreedtoyoutube", true, {path: "/"})
-                                            //setNotice(!notice)
                                         }}
                                     />
                                 }
