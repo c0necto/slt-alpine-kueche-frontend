@@ -12,15 +12,15 @@ import '@fontsource/prata';
 import React from 'react';
 import { CookiesProvider } from "react-cookie";
 import SimpleReactLightbox from 'simple-react-lightbox';
-import BasicContext from "./src/context/CookieContext";
+import CookieContext from "./src/context/CookieContext";
 
 export const wrapRootElement = ({element}) => {
     return (
-        <BasicContext>
+        <CookieContext>
             <CookiesProvider>
                 <SimpleReactLightbox>{element}</SimpleReactLightbox>
             </CookiesProvider>
-        </BasicContext>
+        </CookieContext>
     )
 }
 

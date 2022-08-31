@@ -12,7 +12,7 @@ import './Iframe.LiteYouTubeEmbed.css'
 // https://www.npmjs.com/package/react-cookie
 import {useCookies} from "react-cookie"
 
-import { BasicContext } from "../../context/CookieContext";
+import { CookieContext } from "../../context/CookieContext";
 
 const IframeAreabrick = props => {
 
@@ -20,19 +20,11 @@ const IframeAreabrick = props => {
     const grey = elements.grey?.checked
 
     const [cookies, setCookie] = useCookies(['agreedtoyoutube']);
-    //const [accepted, setAccepted] = useState(cookies.agreedtoyoutube)
-
-    const [marketing, setMarketing] = useContext(BasicContext);
-
+    const [marketing, setMarketing] = useContext(CookieContext);
     const handleClick = () => {
         setCookie("agreedtoyoutube", true, {path: "/"})
-        //setAccepted(true)
         setMarketing(true)
-
-        console.log(marketing)
     }
-
-    console.log(marketing)
 
     const youtubeParser = url => {
         const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
