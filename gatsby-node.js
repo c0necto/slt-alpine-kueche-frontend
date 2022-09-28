@@ -251,8 +251,9 @@ async function getPageData(page, locale, gatsbyUtilities) {
                                     gatsbyImageData(
                                         placeholder: BLURRED
                                         formats: [AUTO, WEBP]
-                                        layout: FULL_WIDTH
-                                        aspectRatio: 1.77
+                                        layout: CONSTRAINED
+                                        width: 1920
+                                        height: 1280
                                     )
                                 }
                             }
@@ -261,8 +262,9 @@ async function getPageData(page, locale, gatsbyUtilities) {
                                     gatsbyImageData(
                                         placeholder: BLURRED
                                         formats: [AUTO, WEBP]
-                                        layout: FULL_WIDTH
-                                        aspectRatio: 2.95
+                                        layout: CONSTRAINED
+                                        width: 1920
+                                        height: 661
                                     )
                                 }
                             }
