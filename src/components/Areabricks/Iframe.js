@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react"
+import React, { useContext } from "react"
 import ContentArea from '~components/ContentArea/ContentArea'
 import Container from '~components/Container/Container'
 import cn from "classnames"

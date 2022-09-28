@@ -13,10 +13,18 @@ const HeaderMedia = props => {
         portalClass = styles.portal;
     }
 
-    const images = artDirection(
-        props.image.desktop.childImageSharp,
-        props.image.mobile.childImageSharp,
-    );
+
+    let images = artDirection(
+        props.image.desktopWide.childImageSharp,
+        props.image.mobileWide.childImageSharp,
+    )
+    if (props.portal) {
+        images = artDirection(
+            props.image.desktop.childImageSharp,
+            props.image.mobile.childImageSharp,
+        )
+    }
+
 
     const meta = imageAtts(props.alt, props.meta);
 
