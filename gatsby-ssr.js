@@ -3,20 +3,24 @@
  *
  * See: https://www.gatsbyjs.com/docs/ssr-apis/
  */
+import React from 'react';
 
-// You can delete this file if you're not using it
+const HeadComponents = [<script key="usercentrics-key" dangerouslySetInnerHTML={{__html: `    
+    window.addEventListener("load", () => {
+      const script = document.createElement("script")
+      script.src = '//app.usercentrics.eu/browser-ui/latest/loader.js'
+      script.async = true
+      script.id = "usercentrics-cmp"
+      script.setAttribute("data-settings-id", "j0p1oSb5m")
+      document.body.appendChild(script)
+     });
+`}}/>];
 
-/*exports.onRenderBody = ({ setBodyAttributes }) => {
-    setBodyAttributes({
-        className: 'preload',
-    });
-};
-
-exports.onClientEntry = () => {
-    window.addEventListener('load', () => {
-        document.body.className = document.body.className.replace(
-            /\bpreload\b/,
-            '',
-        );
-    });
-};*/
+export const onRenderBody = ({ setBodyAttributes, setHeadComponents }) => {
+    let uc = true
+    if ( uc === true ) {
+        if (process.env.NODE_ENV === 'production') {
+            setHeadComponents(HeadComponents);
+        }
+    }
+}
