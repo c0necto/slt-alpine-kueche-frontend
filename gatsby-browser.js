@@ -28,7 +28,7 @@ export const onClientEntry = () => {
 
     // usercentric handling
     window.addEventListener("load", () => {
-
+        console.log('entry')
         const initGTM = () => {
             const script = document.createElement("script")
             script.type = "text/javascript"
@@ -46,10 +46,13 @@ export const onClientEntry = () => {
             // check if UC_UI exists
             if (typeof window.UC_UI !== "undefined") {
                 let services = window.UC_UI.getServicesBaseInfo()
+                console.log(services)
                 // get all services whose categorySlug is either 'marketing' or 'functional'
                 let filteredServices = services.filter(service => service.categorySlug === "marketing" || service.categorySlug === "functional")
+                console.log(filteredServices)
                 // check if one of the filtered services is accepted
                 let hasConsent = filteredServices.some(service => service.consent.status === true)
+                console.log(hasConsent)
                 if (hasConsent) {
                     localStorage.setItem("GtmLoadable", "true")
                 } else {
