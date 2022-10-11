@@ -78,7 +78,6 @@ const Footer = props => {
                                         </li>
                                     );
                                 })}
-                                <li><a href="javascript: Cookiebot.renew()" target="">Datenschutzeinstellungen</a></li>
                             </ul>
                         </div>
                         {/* <div className={styles.section + ' ' + styles.nav}>
