@@ -134,7 +134,7 @@ module.exports = {
                 includeInDevelopment: false,
             },
         },*/
-        {
+       /* {
             // https://github.com/nitrofi/gatsby-plugin-cookiebot
             resolve: 'gatsby-plugin-cookiebot',
             options: {
@@ -143,6 +143,6 @@ module.exports = {
                 blockGtm: false, //  Optional. Skip blocking of GTM. Defaults to true if manualMode is set to true.
                 includeInDevelopment: false, // Optional. Enables plugin in development. Will cause gatsby-plugin-google-tagmanager to thrown an error when pushing to dataLayer. Defaults to false.
             },
-        }
+        }*/
     ],
 };
