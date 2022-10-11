@@ -11,13 +11,13 @@ const HeadComponents = [<script key="usercentrics-key" dangerouslySetInnerHTML={
       script.src = '//app.usercentrics.eu/browser-ui/latest/loader.js'
       script.async = true
       script.id = "usercentrics-cmp"
-      script.setAttribute("data-settings-id", "j0p1oSb5m")
+      script.setAttribute("data-settings-id", "aPOg73vzE")
       document.body.appendChild(script)
      });
 `}}/>];
 
 export const onRenderBody = ({ setBodyAttributes, setHeadComponents }) => {
-    let uc = false
+    let uc = true
     if ( uc === true ) {
         if (process.env.NODE_ENV === 'production') {
             setHeadComponents(HeadComponents);

@@ -39,7 +39,7 @@ export const onClientEntry = () => {
                     window.dataLayer.push({ event: "gtm.js", "gtm.start": new Date().getTime(), "gtm.uniqueEventId": 0 })
                 }
             }
-            script.src = "https://www.googletagmanager.com/gtm.js?id=GTM-59DJFQW"
+            script.src = "https://www.googletagmanager.com/gtm.js?id=GTM-T6HVCHW"
             document.head.appendChild(script)
         }
         const checkallServices = () => {
