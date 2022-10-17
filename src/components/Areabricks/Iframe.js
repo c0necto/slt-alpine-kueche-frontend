@@ -46,14 +46,16 @@ const IframeAreabrick = props => {
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
     if (isBrowser()) {
-        window.addEventListener('DOMContentLoaded', () => {
+        //window.addEventListener('DOMContentLoaded', () => {
 
+            console.log('blub')
             console.log(window.UC_UI)
 
             /*if (typeof window.UC_UI !== "undefined") {*/
 
                 const checkMarketingServices = () => {
                     let services = UC_UI.getServicesBaseInfo()
+                    console.log(services)
                     let filteredMarketingServices = services.filter(service => service.categorySlug === 'marketing')
                     // check if at least one of filteredMarketingServices has service.status of true
                     let hasMarketingConsent = filteredMarketingServices.some(service => service.consent.status === true)
@@ -96,7 +98,7 @@ const IframeAreabrick = props => {
 
             /*}*/
 
-        })
+       // })
     }
 
     return (
