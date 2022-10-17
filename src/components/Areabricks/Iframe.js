@@ -50,7 +50,7 @@ const IframeAreabrick = props => {
 
             console.log(window.UC_UI)
 
-            if (typeof window.UC_UI !== "undefined") {
+            /*if (typeof window.UC_UI !== "undefined") {*/
 
                 const checkMarketingServices = () => {
                     let services = UC_UI.getServicesBaseInfo()
@@ -94,7 +94,7 @@ const IframeAreabrick = props => {
                  })*/
 
 
-            }
+            /*}*/
 
         })
     }
