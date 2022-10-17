@@ -46,59 +46,28 @@ const IframeAreabrick = props => {
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
     if (isBrowser()) {
-        //window.addEventListener('DOMContentLoaded', () => {
+        const checkMarketingServices = () => {
+            let services = UC_UI.getServicesBaseInfo()
+            console.log(services)
+            let filteredMarketingServices = services.filter(service => service.categorySlug === 'marketing')
+            // check if at least one of filteredMarketingServices has service.status of true
+            let hasMarketingConsent = filteredMarketingServices.some(service => service.consent.status === true)
+            console.log('hasMarketingConsent', hasMarketingConsent)
+            if (hasMarketingConsent || cookies.agreedtoyoutube) {
+                console.log('enableYT')
+                enableYoutube(true)
+            } else {
+                console.log('disableYT')
+                disableYoutube()
+            }
+        }
 
-            console.log('blub')
-            console.log(window.UC_UI)
-
-            /*if (typeof window.UC_UI !== "undefined") {*/
-
-                const checkMarketingServices = () => {
-                    let services = UC_UI.getServicesBaseInfo()
-                    console.log(services)
-                    let filteredMarketingServices = services.filter(service => service.categorySlug === 'marketing')
-                    // check if at least one of filteredMarketingServices has service.status of true
-                    let hasMarketingConsent = filteredMarketingServices.some(service => service.consent.status === true)
-                    console.log('a')
-                    if (hasMarketingConsent || cookies.agreedtoyoutube) {
-                        console.log('b')
-                        enableYoutube(true)
-                    } else {
-                        console.log('c')
-                        disableYoutube()
-                    }
-                }
-
-
-                window.addEventListener("UC_UI_INITIALIZED", ev => {
-                    checkMarketingServices()
-                    window.addEventListener("UC_UI_VIEW_CHANGED", ev => {
-                        checkMarketingServices()
-                    })
-                })
-
-                /* window.addEventListener('CookiebotOnConsentReady', ev => {
-                     if ( cookies.agreedtoyoutube ) {
-                         // COOKIE GESETZT
-                         if ( !window.Cookiebot.consent.marketing ) {
-                             disableYoutube()
-                         } else {
-                             enableYoutube()
-                         }
-                     } else {
-                         // COOKIE NICHT GESETZT
-                         if ( window.Cookiebot.consent.marketing ) {
-                             enableYoutube()
-                         } else {
-                             disableYoutube()
-                         }
-                     }
-                 })*/
-
-
-            /*}*/
-
-       // })
+        window.addEventListener("UC_UI_INITIALIZED", ev => {
+            checkMarketingServices()
+            window.addEventListener("UC_UI_VIEW_CHANGED", ev => {
+                checkMarketingServices()
+            })
+        })
     }
 
     return (
