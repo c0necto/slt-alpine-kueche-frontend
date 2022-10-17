@@ -66,10 +66,12 @@ const IframeAreabrick = props => {
                     }
                 }
 
-                window.addEventListener("UC_UI_INITIALIZED", ev => {
-                    checkMarketingServices()
-                    window.addEventListener("UC_UI_VIEW_CHANGED", ev => {
+                window.addEventListener('DOMContentLoaded', () => {
+                    window.addEventListener("UC_UI_INITIALIZED", ev => {
                         checkMarketingServices()
+                        window.addEventListener("UC_UI_VIEW_CHANGED", ev => {
+                            checkMarketingServices()
+                        })
                     })
                 })
 
