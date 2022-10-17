@@ -47,7 +47,7 @@ const IframeAreabrick = props => {
 
     if ( isBrowser() ) {
 
-        console.log(window)
+        console.log(window.UC_UI)
 
         if (typeof window.UC_UI !== "undefined") {
 
