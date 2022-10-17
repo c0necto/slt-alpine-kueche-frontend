@@ -46,8 +46,31 @@ const IframeAreabrick = props => {
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
     if ( isBrowser() ) {
-        if (typeof window.Cookiebot !== "undefined") {
-                window.addEventListener('CookiebotOnConsentReady', ev => {
+
+        console.log(window)
+
+        if (typeof window.UC_UI !== "undefined") {
+
+                const checkMarketingServices = () => {
+                    let services = UC_UI.getServicesBaseInfo()
+                    let filteredMarketingServices = services.filter(service => service.categorySlug === 'marketing')
+                    // check if at least one of filteredMarketingServices has service.status of true
+                    let hasMarketingConsent = filteredMarketingServices.some(service => service.consent.status === true)
+                    if ( hasMarketingConsent || cookies.agreedtoyoutube ) {
+                        enableYoutube(true)
+                    } else {
+                        disableYoutube()
+                    }
+                }
+
+                window.addEventListener("UC_UI_INITIALIZED", ev => {
+                    checkMarketingServices()
+                    window.addEventListener("UC_UI_VIEW_CHANGED", ev => {
+                        checkMarketingServices()
+                    })
+                })
+
+               /* window.addEventListener('CookiebotOnConsentReady', ev => {
                     if ( cookies.agreedtoyoutube ) {
                         // COOKIE GESETZT
                         if ( !window.Cookiebot.consent.marketing ) {
@@ -63,7 +86,7 @@ const IframeAreabrick = props => {
                             disableYoutube()
                         }
                     }
-                })
+                })*/
 
 
         }
