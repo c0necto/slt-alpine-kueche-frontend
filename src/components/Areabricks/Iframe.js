@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, {useContext} from "react"
 import ContentArea from '~components/ContentArea/ContentArea'
 import Container from '~components/Container/Container'
 import cn from "classnames"
@@ -12,7 +12,7 @@ import './Iframe.LiteYouTubeEmbed.css'
 // https://www.npmjs.com/package/react-cookie
 import {useCookies} from "react-cookie"
 
-import { CookieContext } from "../../context/CookieContext";
+import {CookieContext} from "../../context/CookieContext";
 
 const IframeAreabrick = props => {
 
@@ -45,13 +45,12 @@ const IframeAreabrick = props => {
     const videoId = youtubeParser(elements.iframe_url?.text)
     const isYoutube = elements.iframe_url?.text?.includes('youtube')
 
-    if ( isBrowser() ) {
-
-        console.log(window.UC_UI)
-
+    if (isBrowser()) {
         window.addEventListener('DOMContentLoaded', () => {
 
-        if (typeof window.UC_UI !== "undefined") {
+            console.log(window.UC_UI)
+
+            if (typeof window.UC_UI !== "undefined") {
 
                 const checkMarketingServices = () => {
                     let services = UC_UI.getServicesBaseInfo()
@@ -59,7 +58,7 @@ const IframeAreabrick = props => {
                     // check if at least one of filteredMarketingServices has service.status of true
                     let hasMarketingConsent = filteredMarketingServices.some(service => service.consent.status === true)
                     console.log('a')
-                    if ( hasMarketingConsent || cookies.agreedtoyoutube ) {
+                    if (hasMarketingConsent || cookies.agreedtoyoutube) {
                         console.log('b')
                         enableYoutube(true)
                     } else {
@@ -69,33 +68,33 @@ const IframeAreabrick = props => {
                 }
 
 
-                    window.addEventListener("UC_UI_INITIALIZED", ev => {
+                window.addEventListener("UC_UI_INITIALIZED", ev => {
+                    checkMarketingServices()
+                    window.addEventListener("UC_UI_VIEW_CHANGED", ev => {
                         checkMarketingServices()
-                        window.addEventListener("UC_UI_VIEW_CHANGED", ev => {
-                            checkMarketingServices()
-                        })
                     })
+                })
 
-               /* window.addEventListener('CookiebotOnConsentReady', ev => {
-                    if ( cookies.agreedtoyoutube ) {
-                        // COOKIE GESETZT
-                        if ( !window.Cookiebot.consent.marketing ) {
-                            disableYoutube()
-                        } else {
-                            enableYoutube()
-                        }
-                    } else {
-                        // COOKIE NICHT GESETZT
-                        if ( window.Cookiebot.consent.marketing ) {
-                            enableYoutube()
-                        } else {
-                            disableYoutube()
-                        }
-                    }
-                })*/
+                /* window.addEventListener('CookiebotOnConsentReady', ev => {
+                     if ( cookies.agreedtoyoutube ) {
+                         // COOKIE GESETZT
+                         if ( !window.Cookiebot.consent.marketing ) {
+                             disableYoutube()
+                         } else {
+                             enableYoutube()
+                         }
+                     } else {
+                         // COOKIE NICHT GESETZT
+                         if ( window.Cookiebot.consent.marketing ) {
+                             enableYoutube()
+                         } else {
+                             disableYoutube()
+                         }
+                     }
+                 })*/
 
 
-        }
+            }
 
         })
     }
