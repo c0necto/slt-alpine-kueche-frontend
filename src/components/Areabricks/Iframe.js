@@ -49,6 +49,8 @@ const IframeAreabrick = props => {
 
         console.log(window.UC_UI)
 
+        window.addEventListener('DOMContentLoaded', () => {
+
         if (typeof window.UC_UI !== "undefined") {
 
                 const checkMarketingServices = () => {
@@ -66,14 +68,13 @@ const IframeAreabrick = props => {
                     }
                 }
 
-                window.addEventListener('DOMContentLoaded', () => {
+
                     window.addEventListener("UC_UI_INITIALIZED", ev => {
                         checkMarketingServices()
                         window.addEventListener("UC_UI_VIEW_CHANGED", ev => {
                             checkMarketingServices()
                         })
                     })
-                })
 
                /* window.addEventListener('CookiebotOnConsentReady', ev => {
                     if ( cookies.agreedtoyoutube ) {
@@ -95,6 +96,8 @@ const IframeAreabrick = props => {
 
 
         }
+
+        })
     }
 
     return (
