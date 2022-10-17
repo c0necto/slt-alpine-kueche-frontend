@@ -56,9 +56,12 @@ const IframeAreabrick = props => {
                     let filteredMarketingServices = services.filter(service => service.categorySlug === 'marketing')
                     // check if at least one of filteredMarketingServices has service.status of true
                     let hasMarketingConsent = filteredMarketingServices.some(service => service.consent.status === true)
+                    console.log('a')
                     if ( hasMarketingConsent || cookies.agreedtoyoutube ) {
+                        console.log('b')
                         enableYoutube(true)
                     } else {
+                        console.log('c')
                         disableYoutube()
                     }
                 }
