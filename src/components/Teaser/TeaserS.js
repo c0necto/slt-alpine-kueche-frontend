@@ -51,6 +51,7 @@ const TeaserContent = props => {
                 )}
             </figure>
             <div className={styles.content}>
+                {/*<TitleText {...props} />*/}
                 {props.slider
                     ? <LinkedTitleText {...props} />
                     : <TitleText {...props} />
@@ -65,6 +66,7 @@ const Internal = props => {
     if ( props.internal ) {
         link = props.internal
     }
+
     return (
         <Link to={link} className={styles.teaserS}>
             <TeaserContent {...props} />
@@ -98,7 +100,11 @@ const Teaser = props => {
     }
     // slider teaser element
     if ( props.slider ) {
-        containerComponent = <Slider {...props} targetUrl={targetUrl} />
+        //containerComponent = <Slider {...props} targetUrl={targetUrl} />
+        containerComponent = <Internal {...props} />
+        if ( !props.internal ) {
+            containerComponent = <External {...props} targetUrl={targetUrl} />
+        }
     }
     return containerComponent
 }
