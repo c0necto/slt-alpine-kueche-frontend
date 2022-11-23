@@ -27,7 +27,6 @@ const index = (props) => {
 
     console.log("Mod date: " + document.id + ': ' + modificationDate)
 
-
     const contextValue = { document, pages, rootDocument, snippets }
 
     // Example usage of getPageById

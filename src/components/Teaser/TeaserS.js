@@ -51,11 +51,11 @@ const TeaserContent = props => {
                 )}
             </figure>
             <div className={styles.content}>
-                {/*<TitleText {...props} />*/}
-                {props.slider
+                <TitleText {...props} />
+                {/*{props.slider
                     ? <LinkedTitleText {...props} />
                     : <TitleText {...props} />
-                }
+                }*/}
             </div>
         </>
     )
@@ -90,6 +90,11 @@ const Slider = props => {
     )
 }
 
+// if (props.slider) is undefined
+// if (props.slider) is undefined
+
+
+
 const Teaser = props => {
     const targetUrl = 'https://www.salzburgerland.com' + props.slug
     // standard teaser element, links to internal
@@ -100,9 +105,8 @@ const Teaser = props => {
     }
     // slider teaser element
     if ( props.slider ) {
-        //containerComponent = <Slider {...props} targetUrl={targetUrl} />
         containerComponent = <Internal {...props} />
-        if ( !props.internal ) {
+        if ( props.blank ) {
             containerComponent = <External {...props} targetUrl={targetUrl} />
         }
     }

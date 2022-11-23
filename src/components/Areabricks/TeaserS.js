@@ -11,13 +11,12 @@ const TeaserSAreabrick = props => {
     if ( !elements.teasers.relations )  {
         return false
     }
-
     return (
         <ContentArea className={'paddingTop80MarginBottom100'} color={'grey'}>
             {elements.teasers.relations.length > 4 ? (
                 <Container variant={'mobileFullwidth'}>
                     <Slider noarrows>
-                        {elements.teasers.relations.map((teaser, index) => {
+                        {elements.teasers.relations.map((teaser, index) =>  {
                             return (
                                 <TeaserS
                                     key={teaser.title + '_' + index}

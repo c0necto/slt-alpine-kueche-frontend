@@ -98,8 +98,7 @@ const Slider = props => {
     return (
         <div className={cn(styles.outer, additionalClasses)} >
             <SliderWrap>
-                <Slick {...props} {...settings}
-                       >
+                <Slick {...props} {...settings}>
                     {React.Children.map(props.children, (child, i) => {
                         return (
                             <div className={styles.slide} data-nr={i} onMouseDown={(e) => handleOnMouseDown(e)}
