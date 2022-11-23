@@ -138,3 +138,7 @@
   height: 100%;
   & > div { height: 100%;}
 }
+
+.slick-slide:not(.slick-active) {
+  pointer-events: none;
+}

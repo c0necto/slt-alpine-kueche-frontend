@@ -47,13 +47,15 @@ const Slider = props => {
         largeSettings = 'unslick';
     }
 
+
+
     const settings = {
         dots: true,
         infinite: false,
         speed: 500,
         slidesToShow: props.slidesToShow ? props.slidesToShow : 4,
         slidesToScroll: 4,
-        draggable: false,
+        draggable: true,
         arrows: false,
         fade: false,
         responsive: [
@@ -75,21 +77,33 @@ const Slider = props => {
     };
 
     /* Child Click Behaviour when dragging */
+    const [ClientXonMouseDown, setClientXonMouseDown] = useState();
+    const [ClientYonMouseDown, setClientYonMouseDown] = useState();
+    const handleOnMouseDown = (e) => {
+        e.preventDefault();
+        setClientXonMouseDown(e.clientX);
+        setClientYonMouseDown(e.clientY);
+    };
 
-    const [swiped, setSwiped] = useState(false);
-    const handleSwiped = useCallback(() => {
-        setSwiped(!swiped);
-    }, [setSwiped, swiped]);
+    const handleOnClick = (e) => {
+        e.stopPropagation();
+        if (ClientXonMouseDown !== e.clientX || ClientYonMouseDown !== e.clientY) {
+            e.preventDefault();
+        }
+    };
+
 
     /* Styled components */
 
     return (
-        <div className={cn(styles.outer, additionalClasses)}>
+        <div className={cn(styles.outer, additionalClasses)} >
             <SliderWrap>
-                <Slick onSwipe={handleSwiped} {...props} {...settings}>
+                <Slick {...props} {...settings}
+                       >
                     {React.Children.map(props.children, (child, i) => {
                         return (
-                            <div className={styles.slide} data-nr={i}>
+                            <div className={styles.slide} data-nr={i} onMouseDown={(e) => handleOnMouseDown(e)}
+                                 onClick={(e) => handleOnClick(e)}>
                                 {child}
                             </div>
                         );
