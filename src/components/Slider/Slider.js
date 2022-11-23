@@ -53,7 +53,7 @@ const Slider = props => {
         speed: 500,
         slidesToShow: props.slidesToShow ? props.slidesToShow : 4,
         slidesToScroll: 4,
-        draggable: true,
+        draggable: false,
         arrows: false,
         fade: false,
         responsive: [
