@@ -1228,6 +1228,13 @@ async function fetchDocument(gatsbyUtilities, id) {
  * So see https://www.gatsbyjs.com/docs/node-apis/#createPages for more info!
  */
 
+
+
+function sleep(delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+}
+
 exports.createResolvers = ({
     actions,
     cache,
@@ -1256,6 +1263,8 @@ exports.createResolvers = ({
                     if (!image || typeof image !== 'string') {
                         return null;
                     }
+
+                    //sleep(100)
 
                     // Create a remote file node for the image and return it
                     return createRemoteFileNode({
@@ -1296,6 +1305,9 @@ exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
                 '~images': path.resolve(__dirname, 'src/images'),
                 '~src': path.resolve(__dirname, 'src'),
             },
+            fallback: {
+                process: require.resolve('process/browser')
+            }
         },
     });
     /**
