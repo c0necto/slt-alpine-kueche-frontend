@@ -1,7 +1,7 @@
 const path = require(`path`);
 //const chunk = require(`lodash/chunk`)
 
-const { createRemoteFileNode } = require('gatsby-source-filesystem');
+const {createRemoteFileNode} = require('gatsby-source-filesystem');
 const {graphql} = require("gatsby");
 
 // This is a simple debugging tool
@@ -17,7 +17,7 @@ const {graphql} = require("gatsby");
  * See https://www.gatsbyjs.com/docs/node-apis/#createPages for more info.
  */
 exports.createPages = async gatsbyUtilities => {
-    const { createRedirect } = gatsbyUtilities.actions;
+    const {createRedirect} = gatsbyUtilities.actions;
 
     // Redirect from / to /de
     createRedirect({
@@ -98,7 +98,7 @@ const createIndividualDocumentPages = async (
         console.log('footer', '/' + locale + '/Footer');
         console.log('id', parseInt(document.id));
         console.log('----');*/
-        if(process.env.SHOW_UNPUBLISHED_PAGES == 1 || document.published) {
+        if (process.env.SHOW_UNPUBLISHED_PAGES == 1 || document.published) {
             const pageData = await getPageData(document, locale, gatsbyUtilities);
             gatsbyUtilities.actions.createPage({
                 path: document.fullpath,
@@ -120,7 +120,7 @@ const createIndividualDocumentPages = async (
     }
 
     // Now do the same for all children
-    if(process.env.NODE_ENV === 'development' || process.env.SHOW_UNPUBLISHED_PAGES == 1 || document.published) {
+    if (process.env.NODE_ENV === 'development' || process.env.SHOW_UNPUBLISHED_PAGES == 1 || document.published) {
         return Promise.all(
             document.children.map(
                 async page =>
@@ -136,7 +136,7 @@ const createIndividualDocumentPages = async (
 };
 
 async function getPageData(page, locale, gatsbyUtilities) {
-    const { cache, graphql } = gatsbyUtilities;
+    const {cache, graphql} = gatsbyUtilities;
 
     const cacheKey = `pimcore_page_${page.id}_${locale}_${process.env.SHOW_UNPUBLISHED_PAGES}`;
     const cachedData = await cache.get(cacheKey);
@@ -145,12 +145,12 @@ async function getPageData(page, locale, gatsbyUtilities) {
     const pageData = cachedData ? cachedData?.pimcore?.getDocument : null;
 
 
-    if ( process.env.SHOW_UNPUBLISHED_PAGES != 1 && page.modificationDate <= pageData?.modificationDate ) {
+    if (process.env.SHOW_UNPUBLISHED_PAGES != 1 && page.modificationDate <= pageData?.modificationDate) {
         gatsbyUtilities.reporter.info("Page is up to date: " + page.id + " (" + page.modificationDate + " <= " + pageData?.modificationDate + ")");
 
         return cachedData
     } else {
-        if( process.env.SHOW_UNPUBLISHED_PAGES == 1 ) {
+        if (process.env.SHOW_UNPUBLISHED_PAGES == 1) {
             gatsbyUtilities.reporter.info("Skipping cache for page " + page.id);
         }
         const result = await graphql(`
@@ -1011,7 +1011,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
             footer: '/' + locale + '/Footer',
         })
 
-        if(!result.errors && result.data) {
+        if (!result.errors && result.data) {
             await cache.set(cacheKey, result.data);
             gatsbyUtilities.reporter.info("Updated cache for page " + page.id + " at " + page.modificationDate);
         } else {
@@ -1025,6 +1025,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
 /**
  * This function creates a simple list of all the pages
  */
+
 /*const createListPage = (document, gatsbyUtilities) => {
     // createPage is an action passed to createPages
     // See https://www.gatsbyjs.com/docs/actions#createPage for more info
@@ -1050,7 +1051,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
  * So see https://www.gatsbyjs.com/docs/node-apis/#createPages for more info!
  */
 async function fetchDocument(gatsbyUtilities, id) {
-    const { cache, graphql, reporter } = gatsbyUtilities;
+    const {cache, graphql, reporter} = gatsbyUtilities;
 
     const graphqlResult = await graphql(
         /* GraphQL */ `
@@ -1187,7 +1188,7 @@ async function fetchDocument(gatsbyUtilities, id) {
                 }
             }
         `,
-        { id, unpublished: process.env.SHOW_UNPUBLISHED_PAGES == 1 },
+        {id, unpublished: process.env.SHOW_UNPUBLISHED_PAGES == 1},
     );
 
     if (graphqlResult.errors) {
@@ -1232,18 +1233,18 @@ async function fetchDocument(gatsbyUtilities, id) {
 
 function sleep(delay) {
     var start = new Date().getTime();
-    while (new Date().getTime() < start + delay);
+    while (new Date().getTime() < start + delay) ;
 }
 
 exports.createResolvers = ({
-    actions,
-    cache,
-    createNodeId,
-    createResolvers,
-    store,
-    reporter,
-}) => {
-    const { createNode } = actions;
+                               actions,
+                               cache,
+                               createNodeId,
+                               createResolvers,
+                               store,
+                               reporter,
+                           }) => {
+    const {createNode} = actions;
 
     const resolvers = {
         Pimcore_asset: {
@@ -1256,7 +1257,7 @@ exports.createResolvers = ({
                     },
                 },
                 resolve: (source, args, context, info) => {
-                    const { field } = args;
+                    const {field} = args;
                     const image = source[field ?? 'assetThumb'];
 
                     // Bail out if there is no image
@@ -1288,7 +1289,7 @@ exports.createResolvers = ({
  * @param actions
  * @param getConfig
  */
-exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
+exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
     /**
      * Create aliases for absolute paths when importing components
      */
@@ -1306,7 +1307,7 @@ exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
                 '~src': path.resolve(__dirname, 'src'),
             },
             fallback: {
-                process: require.resolve('process/browser')
+                "process": require.resolve('process/browser')
             }
         },
     });
