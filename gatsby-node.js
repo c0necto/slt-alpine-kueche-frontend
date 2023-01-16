@@ -1307,6 +1307,10 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
                 '~src': path.resolve(__dirname, 'src'),
             }
         },
+        fallback: {
+            "process": false
+        }
+
     });
     /**
      * Silence CSS module order warnings
