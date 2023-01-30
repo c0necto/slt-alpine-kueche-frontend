@@ -9,6 +9,9 @@ const sltQueries = {
 };
 
 module.exports = {
+    flags: {
+       PARALLEL_QUERY_RUNNING: false
+    },
     siteMetadata: {
         title: `Alpine Küche`,
         siteUrl: `https://www.alpine-kueche.com`,
@@ -86,9 +89,9 @@ module.exports = {
                 headers: {
                     'x-api-key': '73a4b2666ddc7b99bea73863d50a84d1',
                 },
-                batch: true,
+                batch: false,
                 dataLoaderOptions: {
-                    maxBatchSize: 10,
+                    maxBatchSize: 2,
                 },
             },
         },

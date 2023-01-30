@@ -8,7 +8,7 @@ import cn from 'classnames';
 
 const SliderWrap = styled.div`
     .slick-track {
-        display: flex;
+        display: flex !important;
     }
     .slick-slide {
         height: inherit;
