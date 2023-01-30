@@ -119,3 +119,18 @@
   }
 
 }
+
+/* Ensure same height of all slides */
+
+.slick-track
+{
+  display: flex !important;
+}
+
+.slick-slide
+{
+  height: inherit !important;
+  & > div {
+    height: 100%;
+  }
+}
