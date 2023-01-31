@@ -8,6 +8,10 @@ const sltQueries = {
     desktop: '(min-width: 1230px)',
 };
 
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
     flags: {
        PARALLEL_QUERY_RUNNING: false
