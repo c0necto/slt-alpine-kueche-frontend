@@ -26,7 +26,7 @@ export const wrapRootElement = ({element}) => {
 
 export const onClientEntry = () => {
 
-    // usercentric handling
+    /*// usercentric handling
     window.addEventListener("load", () => {
         const initGTM = () => {
             const script = document.createElement("script")
@@ -75,7 +75,7 @@ export const onClientEntry = () => {
                 })
             }
         })
-    })
+    })*/
 
 }
 
