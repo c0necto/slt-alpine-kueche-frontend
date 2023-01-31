@@ -19,8 +19,8 @@ const HeadComponents = [<script key="usercentrics-key" dangerouslySetInnerHTML={
 export const onRenderBody = ({ setBodyAttributes, setHeadComponents }) => {
     let uc = true
     if ( uc === true ) {
-        if (process.env.NODE_ENV === 'production') {
+        /*if (process.env.NODE_ENV === 'production') {
             setHeadComponents(HeadComponents);
-        }
+        }*/
     }
 }
