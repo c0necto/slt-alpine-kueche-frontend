@@ -1308,7 +1308,7 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
                 '~src': path.resolve(__dirname, 'src'),
             },
             fallback: {
-                "process": false
+                "process": true
             }
         },
     });
