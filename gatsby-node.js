@@ -1,5 +1,5 @@
 const path = require(`path`);
-const process = require(`process`);
+//const process = require(`process`);
 
 //const chunk = require(`lodash/chunk`)
 
@@ -1310,7 +1310,7 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
                 '~src': path.resolve(__dirname, 'src'),
             },
             fallback: {
-                "process": process
+                "process": require.resolve('process/browser'),
             }
         },
     });
