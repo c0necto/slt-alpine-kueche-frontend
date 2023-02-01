@@ -1308,9 +1308,6 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
                 '~templates': path.resolve(__dirname, 'src/templates'),
                 '~images': path.resolve(__dirname, 'src/images'),
                 '~src': path.resolve(__dirname, 'src'),
-            },
-            fallback: {
-                'process': require.resolve('process/browser'),
             }
         },
     });
@@ -1319,6 +1316,9 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
      */
     if (stage === 'build-javascript' || stage === 'develop') {
         const config = getConfig();
+        config.resolve.fallback = {
+            'process': false,
+        }
         const miniCssExtractPlugin = config.plugins.find(
             plugin => plugin.constructor.name === 'MiniCssExtractPlugin',
         );
