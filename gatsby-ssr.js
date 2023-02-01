@@ -16,7 +16,6 @@ const HeadComponents = [<script key="usercentrics-key" dangerouslySetInnerHTML={
      });
 `}}/>];
 
-/*
 export const onRenderBody = ({ setBodyAttributes, setHeadComponents }) => {
     let uc = true
     if ( uc === true ) {
@@ -24,4 +23,4 @@ export const onRenderBody = ({ setBodyAttributes, setHeadComponents }) => {
             setHeadComponents(HeadComponents);
         }
     }
-}*/
+}

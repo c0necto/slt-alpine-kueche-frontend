@@ -92,14 +92,17 @@ const createIndividualDocumentPages = async (
         !(skipRootPage && document.fullpath === '/')
     ) {
         const locale = document.language ? document.language[0].text : 'de';
-        /*console.log('----');
-        console.log('fullpath', document.fullpath);
-        console.log('folder', '/' + locale);
-        console.log('footer', '/' + locale + '/Footer');
-        console.log('id', parseInt(document.id));
-        console.log('----');*/
         if (process.env.SHOW_UNPUBLISHED_PAGES == 1 || document.published) {
+
+            /*console.log('----');
+            console.log('fullpath', document.fullpath);
+            console.log('folder', '/' + locale);
+            console.log('footer', '/' + locale + '/Footer');
+            console.log('id', parseInt(document.id));
+            console.log('----');*/
+
             const pageData = await getPageData(document, locale, gatsbyUtilities);
+
             gatsbyUtilities.actions.createPage({
                 path: document.fullpath,
                 component: path.resolve(`./src/templates/index.js`),
@@ -143,7 +146,6 @@ async function getPageData(page, locale, gatsbyUtilities) {
 
     gatsbyUtilities.reporter.info("Cached data for " + page.id + ":" + JSON.stringify(Object.keys(cachedData ?? [])))
     const pageData = cachedData ? cachedData?.pimcore?.getDocument : null;
-
 
     if (process.env.SHOW_UNPUBLISHED_PAGES != 1 && page.modificationDate <= pageData?.modificationDate) {
         gatsbyUtilities.reporter.info("Page is up to date: " + page.id + " (" + page.modificationDate + " <= " + pageData?.modificationDate + ")");
@@ -1017,7 +1019,6 @@ async function getPageData(page, locale, gatsbyUtilities) {
         } else {
             gatsbyUtilities.reporter.error("Error updating cache for page " + page.id + " at " + page.modificationDate + ": " + JSON.stringify(result.errors))
         }
-
         return result.data
     }
 }
@@ -1305,9 +1306,6 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
                 '~templates': path.resolve(__dirname, 'src/templates'),
                 '~images': path.resolve(__dirname, 'src/images'),
                 '~src': path.resolve(__dirname, 'src'),
-            },
-            fallback: {
-                "process": false
             }
         },
     });
