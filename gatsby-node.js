@@ -1318,7 +1318,7 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
         const config = getConfig();
         console.log(config);
         config.resolve.fallback = {
-            'process': 'process/browser',
+            'process': require.resolve('process/browser'),
         }
         console.log(config);
         const miniCssExtractPlugin = config.plugins.find(
