@@ -1,4 +1,6 @@
 const path = require(`path`);
+const process = require(`process`);
+
 //const chunk = require(`lodash/chunk`)
 
 const {createRemoteFileNode} = require('gatsby-source-filesystem');
@@ -1308,7 +1310,7 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
                 '~src': path.resolve(__dirname, 'src'),
             },
             fallback: {
-                "process": "./node_modules/node-process/index.js"
+                "process": process
             }
         },
     });
