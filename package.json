@@ -29,7 +29,6 @@
     "node-sass": "^6.0.1",
     "preact": "^10.5.14",
     "react": "^17.0.1",
-    "react-cookie": "^4.1.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-is": "^17.0.2",
@@ -47,8 +46,8 @@
   ],
   "license": "0BSD",
   "scripts": {
-    "build": "GATSBY_ENV=production gatsby build",
-    "develop": "GATSBY_ENV=development gatsby develop",
+    "build": "gatsby build",
+    "develop": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

@@ -10,16 +10,16 @@ import '@fontsource/eb-garamond/500.css';
 import '@fontsource/prata';
 
 import React from 'react';
-import { CookiesProvider } from "react-cookie";
+//import { CookiesProvider } from "react-cookie";
 import SimpleReactLightbox from 'simple-react-lightbox';
 import CookieContext from "./src/context/CookieContext";
 
 export const wrapRootElement = ({element}) => {
     return (
         <CookieContext>
-            <CookiesProvider>
+            {/*<CookiesProvider>*/}
                 <SimpleReactLightbox>{element}</SimpleReactLightbox>
-            </CookiesProvider>
+            {/*</CookiesProvider>*/}
         </CookieContext>
     )
 }
