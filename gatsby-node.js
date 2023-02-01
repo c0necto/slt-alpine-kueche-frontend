@@ -1316,9 +1316,11 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
      */
     if (stage === 'build-javascript' || stage === 'develop') {
         const config = getConfig();
+        console.log(config);
         config.resolve.fallback = {
             'process': false,
         }
+        console.log(config);
         const miniCssExtractPlugin = config.plugins.find(
             plugin => plugin.constructor.name === 'MiniCssExtractPlugin',
         );
