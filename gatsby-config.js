@@ -8,10 +8,6 @@ const sltQueries = {
     desktop: '(min-width: 1230px)',
 };
 
-require("dotenv").config({
-    path: `.env.${process.env.NODE_ENV}`,
-})
-
 module.exports = {
     siteMetadata: {
         title: `Alpine Küche`,
@@ -77,7 +73,7 @@ module.exports = {
                 //enable: process.env.NODE_ENV === 'production',
                 enable: false,
                 prefix: '',
-                sufix: '',
+                suffix: '',
             },
         },
         'gatsby-plugin-optimize-svgs',
@@ -90,9 +86,9 @@ module.exports = {
                 headers: {
                     'x-api-key': '73a4b2666ddc7b99bea73863d50a84d1',
                 },
-                batch: true,
+                batch: false,
                 dataLoaderOptions: {
-                    maxBatchSize: 10,
+                    maxBatchSize: 1,
                 },
             },
         },
