@@ -1306,6 +1306,9 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
                 '~templates': path.resolve(__dirname, 'src/templates'),
                 '~images': path.resolve(__dirname, 'src/images'),
                 '~src': path.resolve(__dirname, 'src'),
+            },
+            fallback: {
+                "process": false
             }
         },
     });
