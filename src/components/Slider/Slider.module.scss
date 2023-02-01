@@ -134,14 +134,28 @@
 
 /* Make all slides same height */
 
-/*.slide {
+.slide {
   height: 100%;
 
   & > div {
     height: 100%;
   }
-}*/
+}
 
 .slick-slide:not(.slick-active) {
   pointer-events: none;
+}
+
+/* New definitions to ensure same height of all slides */
+
+.slick-track {
+  display: flex !important;
+}
+
+.slick-slide {
+  height: inherit !important;
+
+  & > div {
+    height: 100%;
+  }
 }
