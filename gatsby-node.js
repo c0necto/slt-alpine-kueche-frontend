@@ -1310,7 +1310,6 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
                 "process": false
             }
         },
-
     });
     /**
      * Silence CSS module order warnings
