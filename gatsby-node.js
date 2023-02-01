@@ -1309,9 +1309,6 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
                 '~images': path.resolve(__dirname, 'src/images'),
                 '~src': path.resolve(__dirname, 'src'),
             },
-            fallback: {
-                "process": 'process/browser'
-            }
         },
     });
     /**
