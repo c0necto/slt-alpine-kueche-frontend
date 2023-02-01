@@ -1310,7 +1310,7 @@ exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
                 '~src': path.resolve(__dirname, 'src'),
             },
             fallback: {
-                "process": require.resolve('process/browser'),
+                "process": 'process/browser'
             }
         },
     });
