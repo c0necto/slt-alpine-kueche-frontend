@@ -10,7 +10,7 @@ import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import './Iframe.LiteYouTubeEmbed.css'
 
 // https://www.npmjs.com/package/react-cookie
-import {useCookies} from "react-cookie"
+//import {useCookies} from "react-cookie"
 
 import {CookieContext} from "../../context/CookieContext";
 
@@ -19,12 +19,12 @@ const IframeAreabrick = props => {
     const {elements} = props
     const grey = elements.grey?.checked
 
-    const [cookies, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
+    //const [cookies, setCookie, removeCookie] = useCookies(['agreedtoyoutube']);
     const [marketing, setMarketing] = useContext(CookieContext);
 
-    if (cookies.agreedtoyoutube) {
+    /*if (cookies.agreedtoyoutube) {
         setMarketing(true)
-    }
+    }*/
 
     const isBrowser = () => typeof window !== "undefined"
     const enableYoutube = () => {
@@ -52,7 +52,7 @@ const IframeAreabrick = props => {
             // check if at least one of filteredMarketingServices has service.status of true
             let hasMarketingConsent = filteredMarketingServices.some(service => service.consent.status === true)
 
-            if (hasMarketingConsent || cookies.agreedtoyoutube) {
+            if (hasMarketingConsent/* || cookies.agreedtoyoutube*/) {
                 enableYoutube(true)
             } else {
                 disableYoutube()
