@@ -39,6 +39,15 @@ exports.createPages = async gatsbyUtilities => {
         toPath: '/de/anmeldung',
     })
 
+    // Redirect from /de/festspiele-der-alpinen-kueche-2023 to /de/festspiele-der-alpinen-kueche
+    createRedirect({
+        fromPath: '/de/festspiele-der-alpinen-kueche-2023',
+        exactPath: true,
+        isPermanent: true,
+        redirectInBrowser: true,
+        toPath: '/de/festspiele-der-alpinen-kueche',
+    })
+
     // Query our documents from the GraphQL server
     const rootDocument = await fetchDocument(gatsbyUtilities, 1);
 
