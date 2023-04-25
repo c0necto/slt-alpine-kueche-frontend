@@ -15,6 +15,7 @@ import TeaserMVariantAreabrick from '~components/Areabricks/TeaserMVariant'
 import TeaserSAreabrick from '~components/Areabricks/TeaserS'
 import TeaserXLAreabrick from '~components/Areabricks/TeaserXL'
 import TextAreabrick from '~components/Areabricks/Text'
+import TicketsbuttonAreabrick from '~components/Areabricks/Ticketsbutton'
 import UnknownAreabrick from '~components/Areabricks/Unknown'
 
 /**
@@ -49,6 +50,7 @@ let brickComponents = {
     unknown: UnknownAreabrick,
     cluster: ClusterAreabrick,
     separator: SeparatorAreabrick,
+    ticketsbutton: TicketsbuttonAreabrick,
 }
 
 brickComponents['teaser-s'] = TeaserSAreabrick

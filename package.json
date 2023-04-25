@@ -6,6 +6,7 @@
   "author": "CONECTO Business Communication GmbH",
   "dependencies": {
     "@fontsource/eb-garamond": "^4.5.1",
+    "@fontsource/metropolis": "^4.5.3",
     "@fontsource/prata": "^4.5.0",
     "classnames": "^2.3.1",
     "gatsby": "^3.10.2",
@@ -31,6 +32,7 @@
     "preact": "^10.5.14",
     "process": "^0.11.10",
     "react": "^17.0.1",
+    "react-cookie": "^4.1.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-is": "^17.0.2",
@@ -41,8 +43,7 @@
     "react-tooltip": "^4.2.21",
     "simple-react-lightbox": "^3.6.9-0",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^5.3.3",
-    "react-cookie": "^4.1.1"
+    "styled-components": "^5.3.3"
   },
   "keywords": [
     "gatsby"

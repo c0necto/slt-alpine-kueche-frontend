@@ -1,0 +1,111 @@
+@import "src/global";
+
+.ticketsbutton {
+
+  display: inline-grid;
+  grid-template-columns: 90px auto;
+  @include everything_until(tablet) {
+    grid-template-columns: 50px auto;
+  }
+
+  align-items: center;
+  background-color: #00a651;
+  color: $white;
+  text-align: left;
+  @include fluid2(padding-top, 10px, 20px);
+  @include fluid2(padding-bottom, 10px, 20px);
+  font-family: 'Metropolis', sans-serif;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: $white;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+
+    i {
+      img {
+        filter: brightness(0) saturate(100%) invert(40%) sepia(62%) saturate(6326%) hue-rotate(353deg) brightness(93%) contrast(94%);
+      }
+    }
+
+    .ticketsbutton-text {
+      border-left-color: rgba(95,95,95,0.4);
+      strong {
+        color: $colorGreen;
+        @include everything_until(tablet) {
+          border-right-color: rgba(95,95,95,0.4);
+        }
+      }
+      div {
+        color: #5F5F5F;
+      }
+    }
+
+  }
+
+  i {
+    display: grid;
+    text-align: center;
+    align-items: center;
+    @include fluid2(margin-right, 0, 30px);
+    @include fluid2(margin-left, 0, 30px);
+    position: relative;
+    @include fluid2(width, 30px, 40px);
+    @include fluid2(height, 30px, 40px);
+    margin: 0 auto;
+
+    img {
+      @include filled-content;
+    }
+
+  }
+
+  @include everything_until(tablet) {
+    margin-bottom: 35px;
+  }
+
+  &-text {
+
+    border-left: 1px solid rgba($white, 0.4);
+    @include fluid2(padding-left, 0px, 15px);
+    @include fluid2(padding-right, 20px, 35px);
+
+    @include everything_until(tablet) {
+      border-left: none;
+      display: grid;
+      grid-template-columns: 35fr 65fr;
+      word-break: unset;
+      hyphens: none;
+      align-items: center;
+
+      strong {
+        font-weight: 500;
+        border-right: 1px solid rgba(255,255,255,0.4);
+      }
+
+    }
+
+    strong {
+      @include fluid2(font-size, 15px, 25px);
+      @include fluid2(line-height, 17px, 25px);
+      text-transform: uppercase;
+      font-weight: 700;
+      @include everything_until(tablet) {
+        padding-right: 12px;
+      }
+    }
+
+    div {
+      @include fluid2(font-size, 13px, 15px);
+      @include fluid2(line-height, 15px, 18px);
+      font-weight: 300;
+      @include everything_until(tablet) {
+        padding-left: 12px;
+      }
+    }
+
+  }
+
+  display: none;
+
+}

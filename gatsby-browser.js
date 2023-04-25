@@ -7,6 +7,9 @@
 import '@fontsource/eb-garamond/400-italic.css';
 import '@fontsource/eb-garamond/400.css';
 import '@fontsource/eb-garamond/500.css';
+import '@fontsource/metropolis/300.css';
+import '@fontsource/metropolis/500.css';
+import '@fontsource/metropolis/700.css';
 import '@fontsource/prata';
 
 import React from 'react';
