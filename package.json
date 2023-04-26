@@ -6,7 +6,6 @@
   "author": "CONECTO Business Communication GmbH",
   "dependencies": {
     "@fontsource/eb-garamond": "^4.5.1",
-    "@fontsource/metropolis": "^4.5.3",
     "@fontsource/prata": "^4.5.0",
     "classnames": "^2.3.1",
     "gatsby": "^3.10.2",
