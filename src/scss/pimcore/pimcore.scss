@@ -49,3 +49,9 @@ body {
 @import "components/TeaserS.module";
 @import "components/TeaserXL.module";
 @import "components/Separator.module";
+
+@import "components/Ticketsbutton.module";
+
+.header-strip {
+  display: none;
+}

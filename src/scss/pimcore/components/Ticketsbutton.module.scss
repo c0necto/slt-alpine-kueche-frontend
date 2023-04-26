@@ -108,7 +108,7 @@
       }
     }
 
-    div {
+    & > div {
       @include fluid2(font-size, 13px, 15px);
       @include fluid2(line-height, 15px, 18px);
       font-family: 'Gotham Light', sans-serif;
