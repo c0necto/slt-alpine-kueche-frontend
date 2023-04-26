@@ -19,9 +19,9 @@
 .ticketsbutton {
 
   display: inline-grid;
-  grid-template-columns: 90px auto;
+  grid-template-columns: pxToVw(90px) auto;
   @include everything_until(tablet) {
-    grid-template-columns: 50px auto;
+    grid-template-columns: pxToVwMobile(50px) auto;
   }
 
   align-items: center;
