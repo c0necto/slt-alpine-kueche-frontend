@@ -14,7 +14,7 @@
     }
   }
   @include everything_from(tablet) {
-    aspect-ratio: 1920/1085;
+    aspect-ratio: 1920/650;
     //height: 56.25vw;
   }
   //max-height: 650px;
@@ -26,7 +26,8 @@
     height: 109.33333vw;
     //max-height: 109.33333vw;
   }
-  @include everything_from(tablet) {;
+  @include everything_from(tablet) {
+    aspect-ratio: 1920/1085;
     //max-height: calc(100vh - #{pxToVw($stripHeightDesktop)});
   }
   @include everything_from(desktop) {
