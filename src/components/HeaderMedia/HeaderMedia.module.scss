@@ -7,34 +7,35 @@
   overflow: hidden;
   z-index: 1;
   @include everything_until(tablet) {
-    height: pxToVwMobile(192px);
-    min-height: pxToVwMobile(192px);
+    /*height: pxToVwMobile(192px);a
+    min-height: pxToVwMobile(192px);*/
     img {
       object-fit: contain !important;
     }
   }
   @include everything_from(tablet) {
-    aspect-ratio: 1920/650;
+    //aspect-ratio: 1920/650;
     //height: 56.25vw;
   }
   //max-height: 650px;
-
-}
-
-.portal {
-
   @include everything_until(tablet) {
     height: 109.33333vw;
     //max-height: 109.33333vw;
   }
   @include everything_from(tablet) {
-    aspect-ratio: 1920/1085;
+    aspect-ratio: 1920/1090;
     //max-height: calc(100vh - #{pxToVw($stripHeightDesktop)});
   }
   @include everything_from(desktop) {
     //max-height: calc(100vh - #{$stripHeightDesktop});
   }
 }
+/*.portal {*/
+
+
+
+
+/*}*/
 
 
 /* Image */
