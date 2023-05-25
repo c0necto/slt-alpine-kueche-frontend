@@ -41,7 +41,7 @@ const HeaderMedia = props => {
                 ) : null}
             </div>
 
-            <div className={styles.containerInner}>
+            {/*<div className={styles.containerInner}>
                 <Container>
                     {!!props.title && (
                         <Cta
@@ -54,7 +54,7 @@ const HeaderMedia = props => {
                         />
                     )}
                 </Container>
-            </div>
+            </div>*/}
         </div>
     );
 };
