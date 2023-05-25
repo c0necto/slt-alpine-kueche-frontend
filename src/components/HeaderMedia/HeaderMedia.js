@@ -41,12 +41,13 @@ const HeaderMedia = props => {
                 ) : null}
             </div>
 
-            {/*<div className={styles.containerInner}>
+            <div className={`${styles.containerInner} ${styles.centeredContainer} ${styles.centeredBottom}`}>
                 <Container>
                     {!!props.title && (
+
                         <Cta
-                            title={props.title}
-                            subtitle={props.subtitle}
+                            //title={props.title}
+                            //subtitle={props.subtitle}
                             buttonlink={props.buttonlink}
                             buttontext={props.buttontext}
                             buttoncolor={props.buttoncolor}
@@ -54,7 +55,7 @@ const HeaderMedia = props => {
                         />
                     )}
                 </Container>
-            </div>*/}
+            </div>
         </div>
     );
 };

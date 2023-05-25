@@ -137,3 +137,13 @@
     //animation: kenburns-top 35s ease-out both;
   }
 }
+
+.centeredContainer {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.centeredBottom {
+  //margin-bottom: 30px;
+}
