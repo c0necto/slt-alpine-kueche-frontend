@@ -9,24 +9,28 @@
   @include everything_until(tablet) {
     height: pxToVwMobile(192px);
     min-height: pxToVwMobile(192px);
+    img {
+      object-fit: contain !important;
+    }
   }
   @include everything_from(tablet) {
-    height: 56.25vw;
+    aspect-ratio: 1920/1085;
+    //height: 56.25vw;
   }
-  max-height: 650px;
+  //max-height: 650px;
 }
 
 .portal {
 
   @include everything_until(tablet) {
     height: 109.33333vw;
-    max-height: 109.33333vw;
+    //max-height: 109.33333vw;
   }
   @include everything_from(tablet) {;
-    max-height: calc(100vh - #{pxToVw($stripHeightDesktop)});
+    //max-height: calc(100vh - #{pxToVw($stripHeightDesktop)});
   }
   @include everything_from(desktop) {
-    max-height: calc(100vh - #{$stripHeightDesktop});
+    //max-height: calc(100vh - #{$stripHeightDesktop});
   }
 }
 
