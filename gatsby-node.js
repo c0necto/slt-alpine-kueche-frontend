@@ -212,7 +212,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
                             id
                             filename
                             assetThumb: fullpath(thumbnail: "cover")
-                            assetThumbWide: fullpath(thumbnail: "cover_wide")
+                            assetThumbWide: fullpath(thumbnail: "cover")
                             metadata {
                                 name
                                 data
@@ -266,7 +266,7 @@ async function getPageData(page, locale, gatsbyUtilities) {
                                         formats: [AUTO, WEBP]
                                         layout: CONSTRAINED
                                         width: 1920
-                                        height: 1280
+                                        height: 1080
                                     )
                                 }
                             }
