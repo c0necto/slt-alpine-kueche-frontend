@@ -128,6 +128,13 @@ const OverviewTemplate = props => {
                     onPageChange={page => setCurrentPage(page)}
                 />
             </main>
+
+            {process.env.DEPLOY_STATUS_BADGE_URL && (
+                <div style={{ position: 'fixed', bottom: '3em', left: '3em', zIndex: 9999, background: 'white' }}>
+                    <strong>Preview mode</strong><br />
+                    <img src={process.env.DEPLOY_STATUS_BADGE_URL} alt='Netlify Status' />
+                </div>
+            )}
         </>
     )
 }
