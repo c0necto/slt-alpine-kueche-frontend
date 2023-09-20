@@ -45,7 +45,23 @@ module.exports = {
                 icon: `static/apple-touch-icon_alpine_kueche.png`,
             },
         },
-        `gatsby-plugin-netlify`,
+        {
+            resolve: `gatsby-plugin-netlify`,
+            options: {
+                headers: (
+                    process.env.SHOW_UNPUBLISHED_PAGES == 1 ?
+                    {
+                        // Preview build
+                        '/*': [
+                        'X-Frame-Options: SAMEORIGIN',
+                        'Content-Security-Policy: frame-ancestors \'self\' https://alpine-kueche.conecto.rocks',
+                        ],
+                    } : {
+                        // Default build
+                    }
+                )
+            }
+        },
         `gatsby-plugin-react-helmet`,
 
         {
