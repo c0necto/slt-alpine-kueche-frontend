@@ -1281,7 +1281,7 @@ exports.createResolvers = ({
 
                     // Create a remote file node for the image and return it
                     return createRemoteFileNode({
-                        url: 'https://alpine-kueche.conecto.rocks' + image,
+                        url: 'https://alpine-kueche.salzburgerland.com' + image,
                         store,
                         cache,
                         createNode,

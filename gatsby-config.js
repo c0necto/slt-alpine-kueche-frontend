@@ -54,7 +54,7 @@ module.exports = {
                         // Preview build
                         '/*': [
                         'X-Frame-Options: SAMEORIGIN',
-                        'Content-Security-Policy: frame-ancestors \'self\' https://alpine-kueche.conecto.rocks',
+                        'Content-Security-Policy: frame-ancestors \'self\' https://alpine-kueche.salzburgerland.com',
                         ],
                     } : {
                         // Default build
@@ -98,7 +98,7 @@ module.exports = {
             options: {
                 typeName: 'Pimcore',
                 fieldName: 'pimcore',
-                url: 'https://alpine-kueche.conecto.rocks/pimcore-graphql-webservices/unique',
+                url: 'https://alpine-kueche.salzburgerland.com/pimcore-graphql-webservices/unique',
                 headers: {
                     'x-api-key': '73a4b2666ddc7b99bea73863d50a84d1',
                 },
